@@ -16,5 +16,5 @@ interface AngleBuilder
 
     public function calcSign($data);
 
-    public function fetchData();
+    public function fetchData(): array;
 }

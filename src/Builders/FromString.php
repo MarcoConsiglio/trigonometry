@@ -145,7 +145,7 @@ class FromString implements AngleBuilder
      *
      * @return array
      */
-    public function fetchData()
+    public function fetchData(): array
     {
         return [
             $this->degrees,

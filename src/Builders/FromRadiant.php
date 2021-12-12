@@ -11,33 +11,6 @@ use MarcoConsiglio\Trigonometry\Tests\TestCase;
  */
 class FromRadiant implements AngleBuilder
 {
-    /**
-     * Degrees
-     *
-     * @var integer
-     */
-    protected int $degrees;
-
-    /**
-     * Minutes
-     *
-     * @var integer
-     */
-    protected int $minutes;
-
-    /**
-     * Seconds
-     *
-     * @var integer
-     */
-    protected int $seconds;
-
-    /**
-     * Rotation direction.
-     *
-     * @var integer
-     */
-    protected int $sign;
 
     /**
      * Another builder.
@@ -142,7 +115,7 @@ class FromRadiant implements AngleBuilder
      *
      * @return array
      */
-    public function fetchData()
+    public function fetchData(): array
     {
         return $this->builder->fetchData();
     }
