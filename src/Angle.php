@@ -1,6 +1,7 @@
 <?php 
 namespace MarcoConsiglio\Trigonometry;
 
+use InvalidArgumentException;
 use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
 use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
@@ -212,6 +213,55 @@ class Angle implements AngleInteface
     public function toRadiant(): float
     {
         return deg2rad($this->toDecimal());
+    }
+
+    /**
+     * Check if this angle is greater than $angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function isGreaterThan($angle): bool
+    {
+        if (is_numeric($angle)) {
+            return $this->toDecimal() > $angle;
+        } elseif ($angle instanceof AngleInteface) {
+            return $this->toDecimal() > $angle->toDecimal();
+        }
+        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+    }
+
+    /**
+     * Alias of isGreaterThan method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function gt($angle): bool
+    {
+        return $this->isGreaterThan($angle);
+    }
+
+    /**
+     * Check if this angle is greater than or equal to $angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function isGreaterThanOrEqual($angle): bool
+    {
+        if (is_numeric($angle)) {
+            if ($this->toDecimal() == $angle) {
+                return true;
+            }
+            return $this->isGreaterThan($angle);
+        } elseif ($angle instanceof AngleInteface) {
+            if ($this->toDecimal() == $angle->toDecimal()) {
+                return true;
+            }
+            return $this->isGreaterThan($angle);
+        }
+        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
     }
 
     /**

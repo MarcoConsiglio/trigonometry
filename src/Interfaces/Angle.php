@@ -25,4 +25,10 @@ interface Angle
     public function toDecimal(): float;
 
     public function toRadiant(): float;
+
+    public function isGreaterThan($angle): bool;
+
+    public function gt($angle): bool;
+
+    public function isGreaterThanOrEqual($angle): bool;
 }

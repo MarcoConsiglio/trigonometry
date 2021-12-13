@@ -1,6 +1,7 @@
 <?php
 namespace MarcoConsiglio\Trigonometry\Tests\Unit;
 
+use InvalidArgumentException;
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 use MarcoConsiglio\Trigonometry\Tests\TestCase;
@@ -468,6 +469,52 @@ class AngleTest extends TestCase
         // Assert
         $this->assertTrue($angle->isClockwise(), $failure_message);
 
+    }
+
+    /**
+     * @testdox can be or not greater than another.
+     */
+    public function test_greater_than_comparison()
+    {
+        // Arrange
+        $alfa = Angle::createFromDecimal(90);
+        $beta = Angle::createFromDecimal(180);
+        $gamma = Angle::createFromDecimal(-90);
+        $delta = Angle::createFromDecimal(-180);
+        
+        // Act & Assert
+        $this->assertEquals(false, $alfa->isGreaterThan(180),       "{$alfa->__toString()} > 180°");
+        $this->assertEquals(false, $alfa->isGreaterThan("180"),       "{$alfa->__toString()} > '180°'");
+        $this->assertEquals(false, $alfa->isGreaterThan($beta),     "{$alfa->__toString()} > {$beta->__toString()}");
+        $this->assertEquals(false, $alfa->gt(180),                  "{$alfa->__toString()} > 180°");
+        $this->assertEquals(false, $alfa->gt($beta),                "{$alfa->__toString()} > 180°");
+        $this->assertEquals(true, $beta->isGreaterThan(90),         "{$beta->__toString()} > 90°");
+        $this->assertEquals(true, $beta->isGreaterThan($alfa),      "{$beta->__toString()} > {$alfa->__toString()}");
+        $this->assertEquals(true, $gamma->isGreaterThan(-180),      "{$gamma->__toString()} > -180°");
+        $this->assertEquals(true, $gamma->isGreaterThan($delta),    "{$gamma->__toString()} > {$delta->__toString()}");
+        $this->assertEquals(false, $delta->isGreaterThan(-90),      "{$delta->__toString()} > -90°");
+        $this->assertEquals(false, $delta->isGreaterThan($gamma),   "{$delta->__toString()} > {$gamma->__toString()}");
+        $this->assertEquals(false, $alfa->isGreaterThan(90),        "{$alfa->__toString()} > 90°");
+        $this->expectException(InvalidArgumentException::class);
+        $alfa->isGreaterThan(true);
+    }
+
+    /**
+     * @testdox can be or not greater than or equal another angle.
+     */
+    public function test_greater_than_or_equal_comparison()
+    {
+        // Arrange
+        $alfa = Angle::createFromDecimal(90);
+        $beta = Angle::createFromDecimal(180);
+
+        // Act & Assert
+        $this->assertEquals(false, $alfa->isGreaterThanOrEqual(180),    "{$alfa->__toString()} > 180°");
+        $this->assertEquals(false, $alfa->isGreaterThanOrEqual($beta),  "{$alfa->__toString()} > {$beta->__toString()}");
+        $this->assertEquals(true, $beta->isGreaterThanOrEqual(180),     "{$alfa->__toString()} > {$beta->__toString()}");
+        $this->assertEquals(true, $beta->isGreaterThanOrEqual($beta),   "{$alfa->__toString()} > {$beta->__toString()}");
+        $this->expectException(InvalidArgumentException::class);
+        $alfa->isGreaterThanOrEqual(true);
     }
 
     /**

@@ -20,12 +20,12 @@ use MarcoConsiglio\Trigonometry\Operations\Sum;
 ### Degrees, minutes and seconds
 This creates an angle from its values in degrees, minutes and seconds:
 ```php
-$alfa = Angle::createAngleFromValues(180, 12, 43); // 180° 12' 43"
+$alfa = Angle::createFromValues(180, 12, 43); // 180° 12' 43"
 ```
 ### Parse a string
 This creates an angle from its textual representation:
 ```php
-$beta = Angle::createAngleFromString("180° 12' 43\""); // Input from the user
+$beta = Angle::createFromString("180° 12' 43\""); // Input from the user
 ```
 
 This is possible thank to the regular expression
@@ -76,11 +76,21 @@ echo (string) $alfa->toRadiant(); // 3.1452910063
 ## Negative angles
 You can create negative angles too!
 ```php
-$alfa = Angle::createAngleFromValues(180, 12, 43, Angle::COUNTER_CLOCKWISE);
-$beta = Angle::createAngleFromString("-180° 12' 43\"");
+$alfa = Angle::createFromValues(180, 12, 43, Angle::COUNTER_CLOCKWISE);
+$beta = Angle::createFromString("-180° 12' 43\"");
 $gamma = Angle::createFromDecimal(-180.2119); 
 $delta = Angle::createFromRadiant(-3.1452910063);
 ```
+
+## Comparison
+You can compare an angle with a float decimal or another `Angle` object.
+```php
+$alfa = Angle::createFromDecimal(180);
+$beta = Angle::createFromDecimal(90);
+$alfa->isGreaterThan(90); // true
+$alfa->isGreaterThan($beta); // false
+```
+
 ### Direction
 Positive angle are represented by the class constant
 ```php
