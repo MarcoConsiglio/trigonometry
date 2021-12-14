@@ -84,11 +84,43 @@ $delta = Angle::createFromRadiant(-3.1452910063);
 
 ## Comparison
 You can compare an angle with a float decimal or another `Angle` object.
+### $\alpha > \beta$
 ```php
 $alfa = Angle::createFromDecimal(180);
 $beta = Angle::createFromDecimal(90);
-$alfa->isGreaterThan(90); // true
-$alfa->isGreaterThan($beta); // false
+$alfa->isGreaterThan(90);       // true
+$alfa->gt(90);                  // true
+$alfa->isGreaterThan($beta);    // true
+$alfa->gt($beta);               // true
+```
+
+### $\alpha \ge \beta$
+```php
+$alfa = Angle::createFromDecimal(180);
+$beta = Angle::createFromDecimal(90);
+$alfa->isGreaterThanOrEqual(90);        // true
+$alfa->gte(180);                        // true
+$alfa->isGreaterThanOrEqual($beta);     // true
+$alfa->gte($beta);                      // true
+```
+
+### $\alpha < \beta$
+```php
+$alfa = Angle::createFromDecimal(90);
+$beta = Angle::createFromDecimal(180);
+$alfa->isLessThan(180);     // true
+$alfa->lt(180);             // true
+$alfa->isLessThan($beta);   // true
+$alfa->lt($beta);           // true
+```
+### $\alpha \le \beta$
+```php
+$alfa = Angle::createFromDecimal(90);
+$beta = Angle::createFromDecimal(180);
+$alfa->isLessThanOrEqual(180);      // true
+$alfa->lte(90);                     // true
+$alfa->isLessThanOrEqual($beta);    // true
+$alfa->lte($beta);                  // true
 ```
 
 ### Direction
