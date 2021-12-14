@@ -21,6 +21,10 @@
 - [x] _creates_angle_from_radiant (💚 1)
 - [x] _cast_to_radian (💚 1)
 - [x] _toggle_rotation (💚 1)
+- [x] _greater_than_comparison (💚 1)
+- [x] _greater_than_or_equal_comparison (💚 1)
+- [x] _less_than_comparison (💚 1)
+- [x] _less_than_or_equal_comperison (💚 1)
 
 ---
 
@@ -31,4 +35,4 @@
 
 ---
 
-Report created at 2021-12-12 18:59:26 (UTC)
+Report created at 2021-12-14 09:17:31 (UTC)

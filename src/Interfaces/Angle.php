@@ -25,4 +25,20 @@ interface Angle
     public function toDecimal(): float;
 
     public function toRadiant(): float;
+
+    public function isGreaterThan($angle): bool;
+
+    public function gt($angle): bool;
+
+    public function isGreaterThanOrEqual($angle): bool;
+
+    public function gte($angle): bool;
+
+    public function isLessThan($angle): bool;
+
+    public function lt($angle): bool;
+
+    public function isLessThanOrEqual($angle): bool;
+
+    public function lte($angle): bool;
 }

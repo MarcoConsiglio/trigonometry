@@ -3,3 +3,4 @@ composer.phar
 /public/
 .phpunit.result.cache
 src/index.php
+.phpdoc

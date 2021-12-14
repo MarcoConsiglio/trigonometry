@@ -1,6 +1,7 @@
 <?php 
 namespace MarcoConsiglio\Trigonometry;
 
+use InvalidArgumentException;
 use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
 use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
@@ -8,17 +9,17 @@ use MarcoConsiglio\Trigonometry\Builders\FromString;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
 use MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException;
-use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInteface;
+use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
 use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
 
 /**
- * Represent an angle.
+ * Represents an angle.
  */
-class Angle implements AngleInteface
+class Angle implements AngleInterface
 {
     /**
      *  Angle regular expression used to parse degrees, minutes and seconds values.
-     * @see https://regex101.com/r/zGugsl/1
+     * @see https://regex101.com/r/OQCxIV/1
      */
     public const ANGLE_REGEX = '/^(?:(-?360(*ACCEPT))|(-?[1-3]?[0-9]?[0-9]?))°?\s?([0-5]?[0-9])?\'?\s?([0-5]?[0-9](?:.{1}[0-9])?)?"?$/';
    
@@ -97,6 +98,7 @@ class Angle implements AngleInteface
      * @param integer $minutes
      * @param float $seconds
      * @return Angle
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException when creating an angle greater than 360°.
      */
     public static function createFromValues(int $degrees, int $minutes, float $seconds, int $direction = self::CLOCKWISE): Angle
     {
@@ -108,6 +110,8 @@ class Angle implements AngleInteface
      *
      * @param string $angle
      * @return Angle
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\NoMatchException when $angle has no match.
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException when there's a failure in regex parser engine.
      */
     public static function createFromString(string $angle): Angle
     {
@@ -119,7 +123,7 @@ class Angle implements AngleInteface
      *
      * @param float $decimal_degrees
      * @return Angle
-     * @throws \MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException when creating an angle greater than 360°.
      */
     public static function createFromDecimal(float $decimal_degrees): Angle
     {
@@ -131,6 +135,7 @@ class Angle implements AngleInteface
      *
      * @param float $radiant
      * @return Angle
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException when creating an angle greater than 360°.
      */
     public static function createFromRadiant(float $radiant): Angle
     {
@@ -212,6 +217,134 @@ class Angle implements AngleInteface
     public function toRadiant(): float
     {
         return deg2rad($this->toDecimal());
+    }
+
+    /**
+     * Check if this angle is greater than $angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type.
+     */
+    public function isGreaterThan($angle): bool
+    {
+        if (is_numeric($angle)) {
+            return $this->toDecimal() > $angle;
+        } elseif ($angle instanceof AngleInterface) {
+            return $this->toDecimal() > $angle->toDecimal();
+        }
+        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+    }
+
+    /**
+     * Alias of isGreaterThan method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type.
+     */
+    public function gt($angle): bool
+    {
+        return $this->isGreaterThan($angle);
+    }
+
+    /**
+     * Check if this angle is greater than or equal to $angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type.
+     */
+    public function isGreaterThanOrEqual($angle): bool
+    {
+        if (is_numeric($angle)) {
+            if ($this->toDecimal() == $angle) {
+                return true;
+            }
+            return $this->isGreaterThan($angle);
+        } elseif ($angle instanceof AngleInterface) {
+            if ($this->toDecimal() == $angle->toDecimal()) {
+                return true;
+            }
+            return $this->isGreaterThan($angle);
+        }
+        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+    }
+
+    /**
+     * Alias of isGreaterThanOrEqual method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type.
+     */
+    public function gte($angle): bool
+    {
+        return $this->isGreaterThanOrEqual($angle);
+    }
+
+    /**
+     * Check if this angle is less than another angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type.
+     */
+    public function isLessThan($angle): bool
+    {
+        if (is_numeric($angle)) {
+            return $this->toDecimal() < $angle;
+        } elseif ($angle instanceof AngleInterface) {
+            return $this->toDecimal() < $angle->toDecimal();
+        }
+        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+    }
+
+    /**
+     * Alias of isLessThan method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type.
+     */
+    public function lt($angle): bool
+    {
+        return $this->isLessThan($angle);
+    }
+
+    /**
+     * Check if this angle is less than or equal to $angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type.
+     */
+    public function isLessThanOrEqual($angle): bool
+    {
+        if (is_numeric($angle)) {
+            if ($this->toDecimal() == $angle) {
+                return true;
+            }
+            return $this->isLessThan($angle);
+        } elseif ($angle instanceof AngleInterface) {
+            if ($this->toDecimal() == $angle->toDecimal()) {
+                return true;
+            }
+            return $this->isLessThan($angle);
+        }
+        throw new InvalidArgumentException("");
+    }
+
+    /**
+     * Alias of isLessThanOrEqual method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type.
+     */
+    public function lte($angle): bool
+    {
+        return $this->isLessThanOrEqual($angle);
     }
 
     /**
