@@ -9,13 +9,13 @@ use MarcoConsiglio\Trigonometry\Builders\FromString;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
 use MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException;
-use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInteface;
+use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
 use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
 
 /**
  * Represent an angle.
  */
-class Angle implements AngleInteface
+class Angle implements AngleInterface
 {
     /**
      *  Angle regular expression used to parse degrees, minutes and seconds values.
@@ -225,7 +225,7 @@ class Angle implements AngleInteface
     {
         if (is_numeric($angle)) {
             return $this->toDecimal() > $angle;
-        } elseif ($angle instanceof AngleInteface) {
+        } elseif ($angle instanceof AngleInterface) {
             return $this->toDecimal() > $angle->toDecimal();
         }
         throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
@@ -247,6 +247,7 @@ class Angle implements AngleInteface
      *
      * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
      * @return boolean
+     * @throws \InvalidArgumentException when $angle type is not expected.
      */
     public function isGreaterThanOrEqual($angle): bool
     {
@@ -255,13 +256,85 @@ class Angle implements AngleInteface
                 return true;
             }
             return $this->isGreaterThan($angle);
-        } elseif ($angle instanceof AngleInteface) {
+        } elseif ($angle instanceof AngleInterface) {
             if ($this->toDecimal() == $angle->toDecimal()) {
                 return true;
             }
             return $this->isGreaterThan($angle);
         }
         throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+    }
+
+    /**
+     * Alias of isGreaterThanOrEqual method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function gte($angle): bool
+    {
+        return $this->isGreaterThanOrEqual($angle);
+    }
+
+    /**
+     * Check if this angle is less than another angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     * @throws \InvalidArgumentException when $angle type is not expected.
+     */
+    public function isLessThan($angle): bool
+    {
+        if (is_numeric($angle)) {
+            return $this->toDecimal() < $angle;
+        } elseif ($angle instanceof AngleInterface) {
+            return $this->toDecimal() < $angle->toDecimal();
+        }
+        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+    }
+
+    /**
+     * Alias of isLessThan method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function lt($angle): bool
+    {
+        return $this->isLessThan($angle);
+    }
+
+    /**
+     * Check if this angle is less than or equal to $angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function isLessThanOrEqual($angle): bool
+    {
+        if (is_numeric($angle)) {
+            if ($this->toDecimal() == $angle) {
+                return true;
+            }
+            return $this->isLessThan($angle);
+        } elseif ($angle instanceof AngleInterface) {
+            if ($this->toDecimal() == $angle->toDecimal()) {
+                return true;
+            }
+            return $this->isLessThan($angle);
+        }
+        throw new InvalidArgumentException("");
+    }
+
+    /**
+     * Alias of isLessThanOrEqual method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function lte($angle): bool
+    {
+        return $this->isLessThanOrEqual($angle);
     }
 
     /**

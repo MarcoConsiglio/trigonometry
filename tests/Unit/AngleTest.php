@@ -53,6 +53,7 @@ class AngleTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->angle = $this->randomAngle();
         $this->degrees = $this->faker->numberBetween(0, 360);
         if ($this->degrees == 360) {
             $this->minutes = 0;
@@ -509,12 +510,54 @@ class AngleTest extends TestCase
         $beta = Angle::createFromDecimal(180);
 
         // Act & Assert
-        $this->assertEquals(false, $alfa->isGreaterThanOrEqual(180),    "{$alfa->__toString()} > 180°");
-        $this->assertEquals(false, $alfa->isGreaterThanOrEqual($beta),  "{$alfa->__toString()} > {$beta->__toString()}");
-        $this->assertEquals(true, $beta->isGreaterThanOrEqual(180),     "{$alfa->__toString()} > {$beta->__toString()}");
-        $this->assertEquals(true, $beta->isGreaterThanOrEqual($beta),   "{$alfa->__toString()} > {$beta->__toString()}");
+        $this->assertEquals(false, $alfa->isGreaterThanOrEqual(180),    "{$alfa->__toString()} >= 180°");
+        $this->assertEquals(false, $alfa->isGreaterThanOrEqual($beta),  "{$alfa->__toString()} >= {$beta->__toString()}");
+        $this->assertEquals(false, $alfa->gte(180),    "{$alfa->__toString()} >= 180°");
+        $this->assertEquals(false, $alfa->gte($beta),  "{$alfa->__toString()} >= {$beta->__toString()}");
+        $this->assertEquals(true, $beta->isGreaterThanOrEqual(180),     "{$alfa->__toString()} >= {$beta->__toString()}");
+        $this->assertEquals(true, $beta->isGreaterThanOrEqual($beta),   "{$beta->__toString()} >= {$beta->__toString()}");
         $this->expectException(InvalidArgumentException::class);
         $alfa->isGreaterThanOrEqual(true);
+    }
+
+    /**
+     * @testdox can be or not less than another angle.
+     */
+    public function test_less_than_comparison()
+    {
+        // Arrange
+        $alfa = Angle::createFromDecimal(90);
+        $beta = Angle::createFromDecimal(180);
+
+        // Act & Assert
+        $this->assertEquals(true, $alfa->isLessThan(180),   "{$alfa->__toString()} < 180°");
+        $this->assertEquals(true, $alfa->isLessThan($beta), "{$alfa->__toString()} < {$beta->__toString()}");
+        $this->assertEquals(false, $beta->isLessThan(90),   "{$beta->__toString()} < 90");
+        $this->assertEquals(false, $beta->isLessThan($alfa), "{$beta->__toString()} < {$alfa->__toString()}");
+        $this->assertEquals(true, $alfa->lt(180));
+        $this->assertEquals(true, $alfa->lt($beta));
+        $this->expectException(InvalidArgumentException::class);
+        $alfa->isLessThan("hello");
+    }
+
+    /**
+     * @testdox can be or not greater than or equal another angle.
+     */
+    public function test_less_than_or_equal_comperison()
+    {
+        // Arrange
+        $alfa = Angle::createFromDecimal(90);
+        $beta = Angle::createFromDecimal(180);
+
+        // Act & Assert
+        $this->assertEquals(true, $alfa->isLessThanOrEqual(180),    "{$alfa->__toString()} < 180°");
+        $this->assertEquals(true, $alfa->isLessThanOrEqual($beta),  "{$alfa->__toString()} < {$beta->__toString()}");
+        $this->assertEquals(false, $beta->isLessThanOrEqual(90),    "{$beta->__toString()} < 90");
+        $this->assertEquals(false, $beta->isLessThanOrEqual($alfa), "{$beta->__toString()} < {$alfa->__toString()}");
+        $this->assertEquals(true, $alfa->lte(180));
+        $this->assertEquals(true, $alfa->lte($beta));
+        $this->expectException(InvalidArgumentException::class);
+        $alfa->isLessThanOrEqual("hello");
     }
 
     /**

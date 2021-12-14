@@ -23,6 +23,8 @@
 - [x] _toggle_rotation (💚 1)
 - [x] _greater_than_comparison (💚 1)
 - [x] _greater_than_or_equal_comparison (💚 1)
+- [x] _less_than_comparison (💚 1)
+- [x] _less_than_or_equal_comperison (💚 1)
 
 ---
 
@@ -33,4 +35,4 @@
 
 ---
 
-Report created at 2021-12-13 11:33:36 (UTC)
+Report created at 2021-12-14 09:17:31 (UTC)
