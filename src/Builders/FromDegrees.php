@@ -3,44 +3,14 @@ namespace MarcoConsiglio\Trigonometry\Builders;
 
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
-use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
 use MarcoConsiglio\Trigonometry\Tests\TestCase;
 use MarcoConsiglio\Trigonometry\Traits\WithRounding;
 
 /**
  * Can build Angle objects from degrees values.
  */
-class FromDegrees implements AngleBuilder
+class FromDegrees extends AngleBuilder
 {
-
-    /**
-     * Degrees
-     *
-     * @var integer
-     */
-    protected int $degrees;
-
-    /**
-     * Minutes
-     *
-     * @var integer
-     */
-    protected int $minutes;
-
-    /**
-     * Seconds
-     *
-     * @var float
-     */
-    protected float $seconds;
-
-    /**
-     * Rotation direction.
-     *
-     * @var integer
-     */
-    protected int $sign;
-
     /**
      * Builder constructor
      *
@@ -117,6 +87,7 @@ class FromDegrees implements AngleBuilder
     public function calcSeconds($data)
     {
        $this->seconds = round($data, 1, PHP_ROUND_HALF_DOWN); 
+       $this->overflow();
     }
 
     /**

@@ -3,38 +3,9 @@ namespace MarcoConsiglio\Trigonometry\Builders;
 
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
-use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
 
-class FromDecimal implements AngleBuilder
+class FromDecimal extends AngleBuilder
 {
-    /**
-     * Degrees
-     *
-     * @var integer
-     */
-    protected int $degrees;
-
-    /**
-     * Minutes
-     *
-     * @var integer
-     */
-    protected int $minutes;
-
-    /**
-     * Seconds
-     *
-     * @var float
-     */
-    protected float $seconds;
-
-    /**
-     * Rotation direction.
-     *
-     * @var integer
-     */
-    protected int $sign;   
-
     /**
      * Builder constructor.
      *
@@ -84,7 +55,7 @@ class FromDecimal implements AngleBuilder
      */
     public function calcDegrees($data)
     {
-        $this->degrees = intval(abs($data));
+        $this->degrees = intval(abs($data),);
     }
 
     /**
@@ -111,6 +82,7 @@ class FromDecimal implements AngleBuilder
             1,
             PHP_ROUND_HALF_DOWN
         );
+        $this->overflow();
     }
 
     /**
