@@ -3,13 +3,11 @@ namespace MarcoConsiglio\Trigonometry\Builders;
 
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
-use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
-use MarcoConsiglio\Trigonometry\Tests\TestCase;
 
 /**
  * Can build Angle objects from degrees values.
  */
-class FromRadiant implements AngleBuilder
+class FromRadiant extends AngleBuilder
 {
 
     /**

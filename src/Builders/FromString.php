@@ -2,40 +2,11 @@
 namespace MarcoConsiglio\Trigonometry\Builders;
 
 use MarcoConsiglio\Trigonometry\Angle;
-use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
 use MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException;
 use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
 
-class FromString implements AngleBuilder
+class FromString extends AngleBuilder
 {
-    /**
-     * Degrees
-     *
-     * @var integer
-     */
-    protected int $degrees;
-
-    /**
-     * Minutes
-     *
-     * @var integer
-     */
-    protected int $minutes;
-
-    /**
-     * Seconds
-     *
-     * @var integer
-     */
-    protected float $seconds;
-
-    /**
-     * Rotation direction.
-     *
-     * @var integer
-     */
-    protected int $sign;
-
     /**
      * The parsing status.
      *
