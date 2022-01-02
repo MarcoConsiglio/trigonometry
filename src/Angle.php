@@ -233,7 +233,7 @@ class Angle implements AngleInterface
         } elseif ($angle instanceof AngleInterface) {
             return $this->toDecimal() > $angle->toDecimal();
         }
-        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
     }
 
     /**
@@ -262,13 +262,14 @@ class Angle implements AngleInterface
                 return true;
             }
             return $this->isGreaterThan($angle);
-        } elseif ($angle instanceof AngleInterface) {
+        } 
+        if ($angle instanceof AngleInterface) {
             if ($this->toDecimal() == $angle->toDecimal()) {
                 return true;
             }
             return $this->isGreaterThan($angle);
         }
-        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
     }
 
     /**
@@ -297,7 +298,7 @@ class Angle implements AngleInterface
         } elseif ($angle instanceof AngleInterface) {
             return $this->toDecimal() < $angle->toDecimal();
         }
-        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
     }
 
     /**
@@ -326,13 +327,14 @@ class Angle implements AngleInterface
                 return true;
             }
             return $this->isLessThan($angle);
-        } elseif ($angle instanceof AngleInterface) {
+        }
+        if ($angle instanceof AngleInterface) {
             if ($this->toDecimal() == $angle->toDecimal()) {
                 return true;
             }
             return $this->isLessThan($angle);
         }
-        throw new InvalidArgumentException("");
+        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
     }
 
     /**
@@ -356,5 +358,28 @@ class Angle implements AngleInterface
     {
         $sign = $this->isCounterClockwise() ? "-" : "";
         return $sign.$this->degrees."° ".$this->minutes."' ".$this->seconds."\"";
+    }
+
+    /**
+     * Throws an InvalidArgumentException specifing the expected argument types and
+     * the actual argument type.
+     *
+     * @param mixed   $argument The actual argument throwing the exception.
+     * @param array   $expected_types A list of expected types.
+     * @param string  $method The method throwing the exception. Use __METHOD__ constant as argument.
+     * @param integer $parameter_position The parameter position.
+     * @return void
+     * @throws \InvalidArgumentException when calling this method.
+     */
+    private function throwInvalidArgumentException(mixed $argument, array $expected_types, string $method, int $parameter_position)
+    {
+        $last_type = "";
+        $total_types = count($expected_types);
+        if ($total_types >= 2) {
+            $last_type = " or ".$expected_types[$total_types - 1];
+            unset($expected_types[$total_types - 1]);
+        }
+        $message = "$method method expects parameter $parameter_position to be ".implode(", ", $expected_types).$last_type.", but found ".gettype($argument);
+        throw new InvalidArgumentException($message);
     }
 }

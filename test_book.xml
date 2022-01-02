@@ -1,76 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_creates_angle_from_degrees" prettifiedClassName="An angle" prettifiedMethodName="can be created from values." status="0" time="0.035612936" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_can_obtain_values" prettifiedClassName="An angle" prettifiedMethodName="can have degrees, minutes and seconds." status="0" time="0.031938066" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_creates_angle_from_string" prettifiedClassName="An angle" prettifiedMethodName="can be created from string." status="0" time="0.028276672" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_can_print_angle" prettifiedClassName="An angle" prettifiedMethodName="can be printed in a textual representation." status="0" time="0.023135009" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_can_obtain_values" prettifiedClassName="An angle" prettifiedMethodName="can have degrees, minutes and seconds." status="0" time="0.02449442" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_cast_to_decimal" prettifiedClassName="An angle" prettifiedMethodName="can be casted to decimal." status="0" time="0.030873429" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_can_print_angle" prettifiedClassName="An angle" prettifiedMethodName="can be printed in a textual representation." status="0" time="0.024022575" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_cast_to_radiant" prettifiedClassName="An angle" prettifiedMethodName="can be casted to radiant." status="0" time="0.026813737" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_cannot_create_with_exceding_degrees" prettifiedClassName="An angle" prettifiedMethodName="cannot be created from exciding degrees." status="0" time="0.030139702" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_toggle_rotation" prettifiedClassName="An angle" prettifiedMethodName="can be rotated in the opposite direction." status="0" time="0.032121295" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_cannot_create_with_exceding_decimal" prettifiedClassName="An angle" prettifiedMethodName="cannot be created from exceding decimal." status="0" time="0.03166636" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_greater_than_comparison" prettifiedClassName="An angle" prettifiedMethodName="can be or not greater than another." status="0" time="0.035305845" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_cannot_create_with_exceding_radiant" prettifiedClassName="An angle" prettifiedMethodName="cannot be created from exceding radiant." status="0" time="0.029885994" size="-1" groups="default">
-    <group name="default"/>
-    <covers target="\MarcoConsiglio\Trigonometry\Builders\FromRadiant::checkOverflow"/>
-    <covers target="\MarcoConsiglio\Trigonometry\Builders\FromRadiant::exceedsRoundAngle"/>
-  </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_cannot_create_with_exceding_string" prettifiedClassName="An angle" prettifiedMethodName="cannot be created if it is a string major than 360°." status="0" time="0.028281866" size="-1" groups="default">
-    <group name="default"/>
-    <covers target="\MarcoConsiglio\Trigonometry\Builders\FromString::checkOverflow"/>
-    <covers target="\MarcoConsiglio\Trigonometry\Exceptions\NoMatchException"/>
-  </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_can_create_negative_angles" prettifiedClassName="An angle" prettifiedMethodName="can be negative." status="0" time="0.027983397" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_greater_than_or_equal_comparison" prettifiedClassName="An angle" prettifiedMethodName="can be or not greater than or equal another angle." status="0" time="0.038834091" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_cast_to_decimal" prettifiedClassName="An angle" prettifiedMethodName="can be casted to decimal." status="0" time="0.024306202" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_less_than_comparison" prettifiedClassName="An angle" prettifiedMethodName="can be or not less than another angle." status="0" time="0.02771451" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_creates_angle_from_decimal" prettifiedClassName="An angle" prettifiedMethodName="can be created from decimal." status="0" time="0.024903034" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_less_than_or_equal_comparison" prettifiedClassName="An angle" prettifiedMethodName="can be or not greater than or equal another angle." status="0" time="0.028554648" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_creates_angle_from_radiant" prettifiedClassName="An angle" prettifiedMethodName="can be created from radiant." status="0" time="0.023898278" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_invalid_argument_exception" prettifiedClassName="An angle" prettifiedMethodName="can throw InvalidArgumentException." status="0" time="0.032553216" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_cast_to_radian" prettifiedClassName="An angle" prettifiedMethodName="can be casted to radiant." status="0" time="0.024827796" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\AngleTest" methodName="test_60_seconds_overflow_correctly" prettifiedClassName="Angle (MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\Angle)" prettifiedMethodName="60 seconds overflow correctly" status="0" time="0.028910106" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_toggle_rotation" prettifiedClassName="An angle" prettifiedMethodName="can be rotated in the opposite direction." status="0" time="0.02548822" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\AngleTest" methodName="test_60_minutes_overflow_correctly" prettifiedClassName="Angle (MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\Angle)" prettifiedMethodName="60 minutes overflow correctly" status="0" time="0.036063115" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_greater_than_comparison" prettifiedClassName="An angle" prettifiedMethodName="can be or not greater than another." status="0" time="0.026574451" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromDecimalTest" methodName="test_cannot_create_with_positive_excess_degrees" prettifiedClassName="The FromDecimal builder" prettifiedMethodName="cannot create an angle with more than +360°." status="0" time="0.032515008" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_greater_than_or_equal_comparison" prettifiedClassName="An angle" prettifiedMethodName="can be or not greater than or equal another angle." status="0" time="0.026225321" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromDecimalTest" methodName="test_cannot_create_with_negative_excess_degrees" prettifiedClassName="The FromDecimal builder" prettifiedMethodName="cannot create an angle with less than -360°." status="0" time="0.029831789" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_less_than_comparison" prettifiedClassName="An angle" prettifiedMethodName="can be or not less than another angle." status="0" time="0.025198585" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromDegreesTest" methodName="test_cannot_create_with_positive_excess_degrees" prettifiedClassName="The FromDegrees builder" prettifiedMethodName="cannot create an angle with more than +360°." status="0" time="0.026728613" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\AngleTest" methodName="test_less_than_or_equal_comperison" prettifiedClassName="An angle" prettifiedMethodName="can be or not greater than or equal another angle." status="0" time="0.024776929" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromDegreesTest" methodName="test_cannot_create_with_negative_excess_degrees" prettifiedClassName="The FromDegrees builder" prettifiedMethodName="cannot create an angle with less than -360°." status="0" time="0.034563621" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\AngleTest" methodName="test_60_seconds_overflow_correctly" prettifiedClassName="Angle (MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\Angle)" prettifiedMethodName="60 seconds overflow correctly" status="0" time="0.027729646" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromRadiantTest" methodName="test_cannot_create_with_positive_excess_degrees" prettifiedClassName="From Radiant (MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromRadiant)" prettifiedMethodName="cannot create an angle with more than +360°." status="0" time="0.032543043" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\AngleTest" methodName="test_60_minutes_overflow_correctly" prettifiedClassName="Angle (MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\Angle)" prettifiedMethodName="60 minutes overflow correctly" status="0" time="0.033031192" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromRadiantTest" methodName="test_cannot_create_with_negative_excess_degrees" prettifiedClassName="From Radiant (MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromRadiant)" prettifiedMethodName="cannot create an angle with less than -360°." status="0" time="0.028942756" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegExFailureExceptionTest" methodName="test_regex_failure_exception" prettifiedClassName="Reg Ex Failure Exception (MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegExFailureException)" prettifiedMethodName="Regex failure exception" status="0" time="0.029248848" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromStringTest" methodName="test_cannot_create_with_positive_excess_degrees" prettifiedClassName="From String (MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromString)" prettifiedMethodName="cannot create an angle with more than +360°." status="0" time="0.032641945" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\SumTest" methodName="test_positive_sum" prettifiedClassName="A sum operation" prettifiedMethodName="can sum two positive angles." status="0" time="0.031974585" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromStringTest" methodName="test_cannot_create_with_negative_excess_degrees" prettifiedClassName="From String (MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromString)" prettifiedMethodName="cannot create an angle with less than -360°." status="0" time="0.033404478" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\SumTest" methodName="test_negative_sum" prettifiedClassName="A sum operation" prettifiedMethodName="can sum two negative angles." status="0" time="0.031547467" size="-1" groups="default">
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegExFailureExceptionTest" methodName="test_regex_failure_exception" prettifiedClassName="Reg Ex Failure Exception (MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegExFailureException)" prettifiedMethodName="Regex failure exception" status="0" time="0.035379824" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\SumTest" methodName="test_positive_sum" prettifiedClassName="A sum operation" prettifiedMethodName="can sum two positive angles." status="0" time="0.036882802" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="MarcoConsiglio\Trigonometry\Tests\Unit\SumTest" methodName="test_negative_sum" prettifiedClassName="A sum operation" prettifiedMethodName="can sum two negative angles." status="0" time="0.024859091" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

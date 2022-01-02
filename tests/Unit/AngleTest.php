@@ -7,6 +7,8 @@ use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 use MarcoConsiglio\Trigonometry\Tests\TestCase;
 use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
 use Laracasts\TestDummy\Factory;
+use ReflectionClass;
+
 /**
  * @testdox An angle
  */
@@ -72,87 +74,6 @@ class AngleTest extends TestCase
     }
 
     /**
-     * @testdox can be created from values.
-     */
-    public function test_creates_angle_from_degrees()
-    {
-        // Arrange in setUp()
-
-        // Act
-        $angle = Angle::createFromValues(
-            $this->degrees, 
-            $this->minutes, 
-            $this->seconds
-        );
-
-        // Assert
-        [$degrees, $minutes, $seconds] = $angle->getDegrees();
-        $failure_message = "Cannot create angle from values {$angle->__toString()}.";
-        $this->assertEquals($this->degrees, $degrees, $failure_message);
-        $this->assertEquals($this->minutes, $minutes, $failure_message);
-        $this->assertEquals($this->seconds, $seconds, $failure_message);
-        $this->assertTrue($angle->isClockwise(), $failure_message);
-    }
-
-    /**
-     * @testdox can be created from string.
-     */
-    public function test_creates_angle_from_string()
-    {
-        // Arrange in setUp()
-        
-        // Act
-        $angle = Angle::createFromString($this->expected_string);
-        [$actual_degrees, $actual_minutes, $actual_seconds] = $angle->getDegrees();
-
-        // Assert
-        $failure_message = "Cannot create angle from string.";
-        $this->assertEquals($this->degrees, $actual_degrees, $failure_message);
-        $this->assertEquals($this->minutes, $actual_minutes, $failure_message);
-        $this->assertEquals($this->seconds, $actual_seconds, $failure_message);
-        $this->assertTrue($angle->isClockwise(), $failure_message);
-    }
-
-    /**
-     * @testdox can be created from decimal.
-     * @depends test_cast_to_decimal
-     */
-    public function test_creates_angle_from_decimal()
-    {
-        // Arrange in setUp()
-
-        // Act
-        $angle = Angle::createFromDecimal($decimal = $this->angle->toDecimal());
-
-        // Assert
-        [$degrees, $minutes, $seconds] = $angle->getDegrees();
-        $failure_message = "Cannot create angle from decimal $decimal.";
-        $this->assertEquals($this->degrees, $degrees, $failure_message);
-        $this->assertEquals($this->minutes, $minutes, $failure_message);
-        $this->assertEquals($this->seconds, $seconds, $failure_message);
-        $this->assertTrue($angle->isClockwise(), $failure_message);
-    }
-
-    /**
-     * @testdox can be created from radiant.
-     * @depends test_creates_angle_from_decimal
-     */
-    public function test_creates_angle_from_radiant()
-    {
-        // Arrange in setUp()
-
-        // Act
-        $test_angle = Angle::createFromRadiant($radiant = $this->angle->toRadiant());
-
-        // Assert
-        [$degrees, $minutes, $seconds] = $test_angle->getDegrees();
-        $failure_message = "Cannot create angle from radiant $radiant.";
-        $this->assertEquals($this->degrees, $degrees, $failure_message);
-        $this->assertEquals($this->minutes, $minutes, $failure_message);
-        $this->assertEquals($this->seconds, $seconds, $failure_message);        
-    }
-
-    /**
      * @testdox can have degrees, minutes and seconds.
      */
     public function test_can_obtain_values()
@@ -202,182 +123,6 @@ class AngleTest extends TestCase
     }
 
     /**
-     * @testdox cannot be created from exciding degrees.
-     */
-    public function test_cannot_create_with_exceding_degrees()
-    {
-        /**
-         * Positive angle
-         */
-        // Arrange in setUp
-        [$degrees, $minutes, $seconds] = $this->getOverflowDegrees();
-        
-        // Act & Assert
-        $this->expectException(AngleOverflowException::class);
-        $angle = Angle::createFromValues($degrees, $minutes, $seconds);
-        
-        /**
-         * Negative angle
-         */
-        // Arrange
-        [$degrees, $minutes, $seconds] = $this->getOverflowDegrees();
-        $degrees *= Angle::COUNTER_CLOCKWISE;
-
-        // Act & Assert
-        $this->expectException(AngleOverflowException::class);
-        $angle = Angle::createFromValues($degrees, $minutes, $seconds);
-    }
-
-    /**
-     * @testdox cannot be created from exceding decimal.
-     */
-    public function test_cannot_create_with_exceding_decimal()
-    {
-        /**
-         * Positive angle
-         */
-        // Act & Assert
-        $this->expectException(AngleOverflowException::class);
-        $angle = Angle::createFromDecimal($this->getOverflowDecimal());
-
-        /**
-         * Negative angle
-         */
-        // Act & Assert
-        $this->expectException(AngleOverflowException::class);
-        $angle = Angle::createFromDecimal(-$this->getOverflowDecimal());
-    }
-
-    /**
-     * @testdox cannot be created from exceding radiant.
-     * @covers \MarcoConsiglio\Trigonometry\Builders\FromRadiant::checkOverflow
-     * @covers \MarcoConsiglio\Trigonometry\Builders\FromRadiant::exceedsRoundAngle
-     */
-    public function test_cannot_create_with_exceding_radiant()
-    {
-        /**
-         * Positive angle
-         */
-        // Act & Assert
-        $this->expectException(AngleOverflowException::class);
-        $angle = Angle::createFromRadiant($this->getOverflowRadiant());
-
-        /**
-         * Negative angle
-         */
-        $this->expectException(AngleOverflowException::class);
-        $angle = Angle::createFromRadiant(-$this->getOverflowRadiant());
-    }
-
-    /**
-     * @testdox cannot be created if it is a string major than 360°.
-     * @covers \MarcoConsiglio\Trigonometry\Builders\FromString::checkOverflow
-     * @covers \MarcoConsiglio\Trigonometry\Exceptions\NoMatchException
-     */
-    public function test_cannot_create_with_exceding_string()
-    {
-        /**
-         * Positive angle.
-         */
-        // Arrange
-        [$degrees, $minutes, $seconds] = $this->getOverflowDegrees();
-        $string = $degrees."° ".$minutes."' ".$seconds."\"";
-        
-        // Act & Assert
-        $this->expectException(NoMatchException::class);
-        $angle = Angle::createFromString($string);
-
-        /**
-         * Negative angle.
-         */
-        // Arrange
-        [$degrees, $minutes, $seconds] = $this->getOverflowDegrees();
-        $degrees *= Angle::COUNTER_CLOCKWISE;
-        $string = "-".$degrees."° ".$minutes."' ".$seconds."\"";
-
-        // Act & Assert
-        $this->expectException(NoMatchException::class);
-        $angle = Angle::createFromString($string);
-    }
-
-    /**
-     * @testdox can be negative.
-     */
-    public function test_can_create_negative_angles()
-    {
-        /**
-         * Creates from values.
-         */
-        // Arrange in setUp()
-
-        // Act
-        $angle = Angle::createFromValues(
-            $this->degrees, 
-            $this->minutes, 
-            $this->seconds, 
-            Angle::COUNTER_CLOCKWISE
-        );
-
-        // Assert
-        $failure_message = "Cannot create negative angle from values.";
-        [$degrees, $minutes, $seconds] = $angle->getDegrees();
-        $this->assertEquals($this->degrees, $degrees, $failure_message);
-        $this->assertEquals($this->minutes, $minutes, $failure_message);
-        $this->assertEquals($this->seconds, $seconds, $failure_message);
-        $this->assertTrue($angle->isCounterClockwise(), $failure_message);
-
-        /**
-         * Creates from string.
-         */
-        // Arrange
-        $this->setUp();
-
-        // Act
-        $angle = Angle::createFromString("-".$this->expected_string);
-        
-        // Assert
-        $failure_message = "Cannot create negative angle from string.";
-        [$degrees, $minutes, $seconds] = $angle->getDegrees();
-        $this->assertEquals($this->degrees, $degrees, $failure_message);
-        $this->assertEquals($this->minutes, $minutes, $failure_message);
-        $this->assertEquals($this->seconds, $seconds, $failure_message);
-        $this->assertTrue($angle->isCounterClockwise(), $failure_message);
-
-        /**
-         * Creates from decimal.
-         */
-        // Arrange
-        $this->setUp();
-
-        // Act
-        $angle = Angle::createFromDecimal($decimal = -$this->angle->toDecimal());
-
-        // Assert
-        $failure_message = "Cannot create negative angle from decimal $decimal.";
-        [$degrees, $minutes, $seconds] = $angle->getDegrees();
-        $this->assertEquals($this->degrees, $degrees, $failure_message);
-        $this->assertEquals($this->minutes, $minutes, $failure_message);
-        $this->assertEquals($this->seconds, $seconds, $failure_message);
-
-        /**
-         * Creates from radiant.
-         */
-        // Arrange
-        $this->setUp();
-
-        // Act
-        $angle = Angle::createFromRadiant($radiant = -$this->angle->toRadiant());
-
-        // Assert
-        $failure_message = "Cannot create negative angle from radiant $radiant.";
-        [$degrees, $minutes, $seconds] = $angle->getDegrees();
-        $this->assertEquals($this->degrees, $degrees, $failure_message);
-        $this->assertEquals($this->minutes, $minutes, $failure_message);
-        $this->assertEquals($this->seconds, $seconds, $failure_message);
-
-    }
-
-    /**
      * @testdox can be casted to decimal.
      */
     public function test_cast_to_decimal()
@@ -423,7 +168,7 @@ class AngleTest extends TestCase
      * @testdox can be casted to radiant.
      * @depends test_cast_to_decimal
      */
-    public function test_cast_to_radian()
+    public function test_cast_to_radiant()
     {
         // Arrange in setUp()
 
@@ -482,21 +227,26 @@ class AngleTest extends TestCase
         $beta = Angle::createFromDecimal(180);
         $gamma = Angle::createFromDecimal(-90);
         $delta = Angle::createFromDecimal(-180);
-        
+        $alfa_str = (string) $alfa;
+        $beta_str = (string) $beta;
+        $gamma_str = (string) $gamma;
+        $delta_str = (string) $delta;
+
         // Act & Assert
-        $this->assertEquals(false, $alfa->isGreaterThan(180),       "{$alfa->__toString()} > 180°");
-        $this->assertEquals(false, $alfa->isGreaterThan("180"),       "{$alfa->__toString()} > '180°'");
-        $this->assertEquals(false, $alfa->isGreaterThan($beta),     "{$alfa->__toString()} > {$beta->__toString()}");
-        $this->assertEquals(false, $alfa->gt(180),                  "{$alfa->__toString()} > 180°");
-        $this->assertEquals(false, $alfa->gt($beta),                "{$alfa->__toString()} > 180°");
-        $this->assertEquals(true, $beta->isGreaterThan(90),         "{$beta->__toString()} > 90°");
-        $this->assertEquals(true, $beta->isGreaterThan($alfa),      "{$beta->__toString()} > {$alfa->__toString()}");
-        $this->assertEquals(true, $gamma->isGreaterThan(-180),      "{$gamma->__toString()} > -180°");
-        $this->assertEquals(true, $gamma->isGreaterThan($delta),    "{$gamma->__toString()} > {$delta->__toString()}");
-        $this->assertEquals(false, $delta->isGreaterThan(-90),      "{$delta->__toString()} > -90°");
-        $this->assertEquals(false, $delta->isGreaterThan($gamma),   "{$delta->__toString()} > {$gamma->__toString()}");
-        $this->assertEquals(false, $alfa->isGreaterThan(90),        "{$alfa->__toString()} > 90°");
+        $this->assertFalse($alfa->isGreaterThan(180),       "{$alfa_str} > 180°");
+        $this->assertFalse($alfa->isGreaterThan("180"),     "{$alfa_str} > '180°'");
+        $this->assertFalse($alfa->isGreaterThan($beta),     "{$alfa_str} > {$beta_str}");
+        $this->assertFalse($alfa->gt(180),                  "{$alfa_str} > 180°");
+        $this->assertFalse($alfa->gt($beta),                "{$alfa_str} > 180°");
+        $this->assertTrue($beta->isGreaterThan(90),         "{$beta_str} > 90°");
+        $this->assertTrue($beta->isGreaterThan($alfa),      "{$beta_str} > {$alfa_str}");
+        $this->assertTrue($gamma->isGreaterThan(-180),      "{$gamma_str} > -180°");
+        $this->assertTrue($gamma->isGreaterThan($delta),    "{$gamma_str} > {$delta_str}");
+        $this->assertFalse($delta->isGreaterThan(-90),      "{$delta_str} > -90°");
+        $this->assertFalse($delta->isGreaterThan($gamma),   "{$delta_str} > {$gamma_str}");
+        $this->assertFalse($alfa->isGreaterThan(90),        "{$alfa_str} > 90°");
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($this->getInvalidArgumentMessage(true, ["int", "float", "string", Angle::class], Angle::class."::isGreaterThan", 1));
         $alfa->isGreaterThan(true);
     }
 
@@ -508,15 +258,18 @@ class AngleTest extends TestCase
         // Arrange
         $alfa = Angle::createFromDecimal(90);
         $beta = Angle::createFromDecimal(180);
+        $alfa_str = (string) $alfa;
+        $beta_str = (string) $beta;
 
         // Act & Assert
-        $this->assertEquals(false, $alfa->isGreaterThanOrEqual(180),    "{$alfa->__toString()} >= 180°");
-        $this->assertEquals(false, $alfa->isGreaterThanOrEqual($beta),  "{$alfa->__toString()} >= {$beta->__toString()}");
-        $this->assertEquals(false, $alfa->gte(180),    "{$alfa->__toString()} >= 180°");
-        $this->assertEquals(false, $alfa->gte($beta),  "{$alfa->__toString()} >= {$beta->__toString()}");
-        $this->assertEquals(true, $beta->isGreaterThanOrEqual(180),     "{$alfa->__toString()} >= {$beta->__toString()}");
-        $this->assertEquals(true, $beta->isGreaterThanOrEqual($beta),   "{$beta->__toString()} >= {$beta->__toString()}");
+        $this->assertFalse($alfa->isGreaterThanOrEqual(180),    "{$alfa_str} >= 180°");
+        $this->assertFalse($alfa->isGreaterThanOrEqual($beta),  "{$alfa_str} >= {$beta_str}");
+        $this->assertFalse($alfa->gte(180),                     "{$alfa_str} >= 180°");
+        $this->assertFalse($alfa->gte($beta),                   "{$alfa_str} >= {$beta_str}");
+        $this->assertTrue($beta->isGreaterThanOrEqual(180),     "{$alfa_str} >= {$beta_str}");
+        $this->assertTrue($beta->isGreaterThanOrEqual($beta),   "{$beta_str} >= {$beta_str}");
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($this->getInvalidArgumentMessage(true, ["int", "float", "string", Angle::class], Angle::class."::isGreaterThanOrEqual", 1));
         $alfa->isGreaterThanOrEqual(true);
     }
 
@@ -528,69 +281,82 @@ class AngleTest extends TestCase
         // Arrange
         $alfa = Angle::createFromDecimal(90);
         $beta = Angle::createFromDecimal(180);
+        $alfa_str = (string) $alfa;
+        $beta_str = (string) $beta;
 
         // Act & Assert
-        $this->assertEquals(true, $alfa->isLessThan(180),   "{$alfa->__toString()} < 180°");
-        $this->assertEquals(true, $alfa->isLessThan($beta), "{$alfa->__toString()} < {$beta->__toString()}");
-        $this->assertEquals(false, $beta->isLessThan(90),   "{$beta->__toString()} < 90");
-        $this->assertEquals(false, $beta->isLessThan($alfa), "{$beta->__toString()} < {$alfa->__toString()}");
-        $this->assertEquals(true, $alfa->lt(180));
-        $this->assertEquals(true, $alfa->lt($beta));
+        $this->assertTrue($alfa->isLessThan(180),       "{$alfa_str} < 180°");
+        $this->assertTrue($alfa->isLessThan($beta),     "{$alfa_str} < {$beta_str}");
+        $this->assertFalse($beta->isLessThan(90),       "{$beta_str} < 90");
+        $this->assertFalse($beta->isLessThan($alfa),    "{$beta_str} < {$alfa_str}");
+        $this->assertTrue($alfa->lt(180),               "{$alfa_str} < 180°");
+        $this->assertTrue($alfa->lt($beta),             "{$alfa_str} < {$beta_str}");
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($this->getInvalidArgumentMessage("hello", ["int", "float", "string", Angle::class], Angle::class."::isLessThan", 1));
         $alfa->isLessThan("hello");
     }
 
     /**
      * @testdox can be or not greater than or equal another angle.
      */
-    public function test_less_than_or_equal_comperison()
+    public function test_less_than_or_equal_comparison()
     {
         // Arrange
         $alfa = Angle::createFromDecimal(90);
         $beta = Angle::createFromDecimal(180);
+        $alfa_str = (string) $alfa;
+        $beta_str = (string) $beta;
 
         // Act & Assert
-        $this->assertEquals(true, $alfa->isLessThanOrEqual(180),    "{$alfa->__toString()} < 180°");
-        $this->assertEquals(true, $alfa->isLessThanOrEqual($beta),  "{$alfa->__toString()} < {$beta->__toString()}");
-        $this->assertEquals(false, $beta->isLessThanOrEqual(90),    "{$beta->__toString()} < 90");
-        $this->assertEquals(false, $beta->isLessThanOrEqual($alfa), "{$beta->__toString()} < {$alfa->__toString()}");
-        $this->assertEquals(true, $alfa->lte(180));
-        $this->assertEquals(true, $alfa->lte($beta));
+        $this->assertTrue($alfa->isLessThanOrEqual(180),        "{$alfa_str} <= 180°");
+        $this->assertTrue($alfa->isLessThanOrEqual($beta),      "{$alfa_str} <= {$beta_str}");
+        $this->assertFalse($beta->isLessThanOrEqual(90),        "{$beta_str} <= 90°");
+        $this->assertFalse($beta->isLessThanOrEqual($alfa),     "{$beta_str} <= {$alfa_str}");
+        $this->assertTrue($alfa->lte(180),                      "{$alfa_str} <= 180°");
+        $this->assertTrue($alfa->lte($beta),                    "{$alfa_str} <= {$beta_str}");
+        $this->assertTrue($alfa->isLessThanOrEqual(90),         "{$alfa_str} <= 90°");
+        $this->assertTrue($alfa->isLessThanOrEqual($alfa),      "{$alfa_str} <= {$alfa_str}");
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($this->getInvalidArgumentMessage("hello", ["int", "float", "string", Angle::class], Angle::class."::isLessThanOrEqual", 1));
         $alfa->isLessThanOrEqual("hello");
     }
 
     /**
-     * Gets the angle values whose major than 360°.
-     *
-     * @return array
+     * @testdox can throw InvalidArgumentException.
      */
-    protected function getOverflowDegrees(): array
+    public function test_invalid_argument_exception()
     {
-        return [
-            $this->faker->numberBetween(361, 999),
-            $this->faker->numberBetween(61, 100),
-            $this->faker->numberBetween(61, 100)
-        ];
+        // Arrange
+        $expected_type = "int";
+        $argument = "shabadula";
+        $angle = $this->randomAngle();
+        $class = new ReflectionClass($angle);
+        $method = $class->getMethod("throwInvalidArgumentException");
+        $method->setAccessible(true);
+        
+        // Act & Assert
+        ;       $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($this->getInvalidArgumentMessage($argument, [$expected_type], "<the_method>", 1));
+        $method->invoke($angle, $argument, [$expected_type], "<the_method>", 1);
     }
 
     /**
-     * Gets the angle decimal major than 360°.
+     * An invalid argument message fixture.
      *
-     * @return float
+     * @param mixed   $argument
+     * @param array   $expected_types
+     * @param string  $method
+     * @param integer $parameter_position
+     * @return string
      */
-    protected function getOverflowDecimal(): float
+    protected function getInvalidArgumentMessage(mixed $argument, array $expected_types, string $method, int $parameter_position): string
     {
-        return $this->faker->randomFloat(1, 360.1, 999.0);
-    }
-
-    /**
-     * Gets the angle radiant major than 360°.
-     *
-     * @return float
-     */
-    protected function getOverflowRadiant(): float
-    {
-        return $this->faker->randomFloat(1, Angle::MAX_RADIANT + 0.1, 10);
+        $last_type = "";
+        $total_types = count($expected_types);
+        if ($total_types >= 2) {
+            $last_type = " or ".$expected_types[$total_types - 1];
+            unset($expected_types[$total_types - 1]);
+        }
+        return "$method method expects parameter $parameter_position to be ".implode(", ", $expected_types).$last_type.", but found ".gettype($argument);
     }
 }

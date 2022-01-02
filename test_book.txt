@@ -1,26 +1,34 @@
 An angle
- [x] can be created from values.
- [x] can be created from string.
  [x] can have degrees, minutes and seconds.
  [x] can be printed in a textual representation.
- [x] cannot be created from exciding degrees.
- [x] cannot be created from exceding decimal.
- [x] cannot be created from exceding radiant.
- [x] cannot be created if it is a string major than 360°.
- [x] can be negative.
  [x] can be casted to decimal.
- [x] can be created from decimal.
- [x] can be created from radiant.
  [x] can be casted to radiant.
  [x] can be rotated in the opposite direction.
  [x] can be or not greater than another.
  [x] can be or not greater than or equal another angle.
  [x] can be or not less than another angle.
  [x] can be or not greater than or equal another angle.
+ [x] can throw InvalidArgumentException.
 
 Angle (MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\Angle)
  [x] 60 seconds overflow correctly
  [x] 60 minutes overflow correctly
+
+The FromDecimal builder
+ [x] cannot create an angle with more than +360°.
+ [x] cannot create an angle with less than -360°.
+
+The FromDegrees builder
+ [x] cannot create an angle with more than +360°.
+ [x] cannot create an angle with less than -360°.
+
+From Radiant (MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromRadiant)
+ [x] cannot create an angle with more than +360°.
+ [x] cannot create an angle with less than -360°.
+
+From String (MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromString)
+ [x] cannot create an angle with more than +360°.
+ [x] cannot create an angle with less than -360°.
 
 Reg Ex Failure Exception (MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegExFailureException)
  [x] Regex failure exception

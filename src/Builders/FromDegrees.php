@@ -29,7 +29,7 @@ class FromDegrees extends AngleBuilder
     }
 
     /**
-     * Check for overflow above 360°.
+     * Check for overflow above +/-360°.
      *
      * @param mixed $data
      * @return void
@@ -50,7 +50,7 @@ class FromDegrees extends AngleBuilder
      */
     protected final function exceedsRoundAngle(float $data): bool
     {
-        if ($data > Angle::MAX_SECONDS) {
+        if (abs($data) > Angle::MAX_SECONDS) {
             return true;
         }
         return false;
