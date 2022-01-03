@@ -11,9 +11,14 @@ Search.appendIndex(
             "summary": "Construct\u0020an\u0020angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Angle.html#method___construct"
         },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Angle\u003A\u003A__get\u0028\u0029",
+            "name": "__get",
+            "summary": "Getters.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Angle.html#method___get"
+        },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Angle\u003A\u003AcreateFromValues\u0028\u0029",
             "name": "createFromValues",
-            "summary": "Creates\u0020an\u0020angle\u0020from\u0020its\u0020values\u0020in\u0020degrees.",
+            "summary": "Creates\u0020an\u0020angle\u0020from\u0020its\u0020values.",
             "url": "classes/MarcoConsiglio-Trigonometry-Angle.html#method_createFromValues"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Angle\u003A\u003AcreateFromString\u0028\u0029",
@@ -53,12 +58,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Angle\u003A\u003AtoDecimal\u0028\u0029",
             "name": "toDecimal",
-            "summary": "Get\u0020the\u0020decimal\u0020degrees\u0020representation\u0020of\u0020this\u0020angle.",
+            "summary": "Gets\u0020the\u0020decimal\u0020degrees\u0020representation\u0020of\u0020this\u0020angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Angle.html#method_toDecimal"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Angle\u003A\u003AtoRadiant\u0028\u0029",
             "name": "toRadiant",
-            "summary": "Get\u0020the\u0020radiant\u0020representation\u0020of\u0020this\u0020angle.",
+            "summary": "Gets\u0020the\u0020radiant\u0020representation\u0020of\u0020this\u0020angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Angle.html#method_toRadiant"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Angle\u003A\u003AisGreaterThan\u0028\u0029",
@@ -105,6 +110,11 @@ Search.appendIndex(
             "name": "__toString",
             "summary": "Get\u0020a\u0020textual\u0020representation\u0020of\u0020this\u0020angle\u0020in\u0020degrees.",
             "url": "classes/MarcoConsiglio-Trigonometry-Angle.html#method___toString"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Angle\u003A\u003AthrowInvalidArgumentException\u0028\u0029",
+            "name": "throwInvalidArgumentException",
+            "summary": "Throws\u0020an\u0020InvalidArgumentException\u0020specifing\u0020the\u0020expected\u0020argument\u0020types\u0020and\nthe\u0020actual\u0020argument\u0020type.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Angle.html#method_throwInvalidArgumentException"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Angle\u003A\u003AANGLE_REGEX",
             "name": "ANGLE_REGEX",
@@ -161,9 +171,69 @@ Search.appendIndex(
             "summary": "The\u0020angle\u0020direction.",
             "url": "classes/MarcoConsiglio-Trigonometry-Angle.html#property_direction"
         },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder",
+            "name": "AngleBuilder",
+            "summary": "Represents\u0020an\u0020angle\u0020builder.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003AcheckOverflow\u0028\u0029",
+            "name": "checkOverflow",
+            "summary": "Check\u0020for\u0020overflow\u0020above\/below\u0020\u002B\/\u002D360\u00B0.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_checkOverflow"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003AcalcDegrees\u0028\u0029",
+            "name": "calcDegrees",
+            "summary": "Calc\u0020degrees.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcDegrees"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003AcalcMinutes\u0028\u0029",
+            "name": "calcMinutes",
+            "summary": "Calc\u0020minutes.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcMinutes"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003AcalcSeconds\u0028\u0029",
+            "name": "calcSeconds",
+            "summary": "Calc\u0020seconds.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcSeconds"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003AcalcSign\u0028\u0029",
+            "name": "calcSign",
+            "summary": "Calc\u0020sign.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcSign"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003AfetchData\u0028\u0029",
+            "name": "fetchData",
+            "summary": "Fetch\u0020the\u0020data\u0020that\u0020will\u0020bee\u0020used\u0020for\u0020an\u0020angle.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_fetchData"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003Aoverflow\u0028\u0029",
+            "name": "overflow",
+            "summary": "Correct\u0020the\u0020properties\u0020overflow.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_overflow"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003A\u0024degrees",
+            "name": "degrees",
+            "summary": "Degrees",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_degrees"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003A\u0024minutes",
+            "name": "minutes",
+            "summary": "Minutes",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_minutes"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003A\u0024seconds",
+            "name": "seconds",
+            "summary": "Seconds",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_seconds"
+        },                {
+            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\AngleBuilder\u003A\u003A\u0024sign",
+            "name": "sign",
+            "summary": "Rotation\u0020direction.",
+            "url": "classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_sign"
+        },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDecimal",
             "name": "FromDecimal",
-            "summary": "",
+            "summary": "Builds\u0020an\u0020angle\u0020starting\u0020from\u0020a\u0020decimal\u0020value.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDecimal\u003A\u003A__construct\u0028\u0029",
@@ -173,7 +243,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDecimal\u003A\u003AcheckOverflow\u0028\u0029",
             "name": "checkOverflow",
-            "summary": "Check\u0020for\u0020overflow\u0020above\u0020360\u00B0.",
+            "summary": "Check\u0020for\u0020overflow\u0020above\/below\u0020\u002B\/\u002D360\u00B0.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_checkOverflow"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDecimal\u003A\u003AexceedsRoundAngle\u0028\u0029",
@@ -206,29 +276,9 @@ Search.appendIndex(
             "summary": "Fetch\u0020data\u0020for\u0020building.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_fetchData"
         },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDecimal\u003A\u003A\u0024degrees",
-            "name": "degrees",
-            "summary": "Degrees",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#property_degrees"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDecimal\u003A\u003A\u0024minutes",
-            "name": "minutes",
-            "summary": "Minutes",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#property_minutes"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDecimal\u003A\u003A\u0024seconds",
-            "name": "seconds",
-            "summary": "Seconds",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#property_seconds"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDecimal\u003A\u003A\u0024sign",
-            "name": "sign",
-            "summary": "Rotation\u0020direction.",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#property_sign"
-        },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDegrees",
             "name": "FromDegrees",
-            "summary": "Can\u0020build\u0020Angle\u0020objects\u0020from\u0020degrees\u0020values.",
+            "summary": "Builds\u0020an\u0020angle\u0020starting\u0020from\u0020degrees,\u0020minutes\u0020and\u0020seconds.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDegrees.html"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDegrees\u003A\u003A__construct\u0028\u0029",
@@ -238,7 +288,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDegrees\u003A\u003AcheckOverflow\u0028\u0029",
             "name": "checkOverflow",
-            "summary": "Check\u0020for\u0020overflow\u0020above\u0020360\u00B0.",
+            "summary": "Check\u0020for\u0020overflow\u0020above\/below\u0020\u002B\/\u002D360\u00B0.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDegrees.html#method_checkOverflow"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDegrees\u003A\u003AexceedsRoundAngle\u0028\u0029",
@@ -271,29 +321,9 @@ Search.appendIndex(
             "summary": "Fetch\u0020data\u0020for\u0020building.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDegrees.html#method_fetchData"
         },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDegrees\u003A\u003A\u0024degrees",
-            "name": "degrees",
-            "summary": "Degrees",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDegrees.html#property_degrees"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDegrees\u003A\u003A\u0024minutes",
-            "name": "minutes",
-            "summary": "Minutes",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDegrees.html#property_minutes"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDegrees\u003A\u003A\u0024seconds",
-            "name": "seconds",
-            "summary": "Seconds",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDegrees.html#property_seconds"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromDegrees\u003A\u003A\u0024sign",
-            "name": "sign",
-            "summary": "Rotation\u0020direction.",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromDegrees.html#property_sign"
-        },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromRadiant",
             "name": "FromRadiant",
-            "summary": "Can\u0020build\u0020Angle\u0020objects\u0020from\u0020degrees\u0020values.",
+            "summary": "Builds\u0020an\u0020angle\u0020starting\u0020from\u0020a\u0020radiant\u0020value.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromRadiant\u003A\u003A__construct\u0028\u0029",
@@ -303,7 +333,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromRadiant\u003A\u003AcheckOverflow\u0028\u0029",
             "name": "checkOverflow",
-            "summary": "Check\u0020for\u0020overflow\u0020above\u0020360\u00B0.",
+            "summary": "Check\u0020for\u0020overflow\u0020above\/below\u0020\u002B\/\u002D360\u00B0.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method_checkOverflow"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromRadiant\u003A\u003AexceedsRoundAngle\u0028\u0029",
@@ -343,7 +373,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString",
             "name": "FromString",
-            "summary": "",
+            "summary": "Builds\u0020an\u0020angle\u0020starting\u0020from\u0020a\u0020string\u0020value.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromString.html"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString\u003A\u003A__construct\u0028\u0029",
@@ -358,7 +388,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString\u003A\u003AcheckOverflow\u0028\u0029",
             "name": "checkOverflow",
-            "summary": "",
+            "summary": "Check\u0020for\u0020overflow\u0020above\/below\u0020\u002B\/\u002D360\u00B0.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromString.html#method_checkOverflow"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString\u003A\u003AcalcDegrees\u0028\u0029",
@@ -385,26 +415,6 @@ Search.appendIndex(
             "name": "fetchData",
             "summary": "Fetch\u0020data\u0020for\u0020building.",
             "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromString.html#method_fetchData"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString\u003A\u003A\u0024degrees",
-            "name": "degrees",
-            "summary": "Degrees",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromString.html#property_degrees"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString\u003A\u003A\u0024minutes",
-            "name": "minutes",
-            "summary": "Minutes",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromString.html#property_minutes"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString\u003A\u003A\u0024seconds",
-            "name": "seconds",
-            "summary": "Seconds",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromString.html#property_seconds"
-        },                {
-            "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString\u003A\u003A\u0024sign",
-            "name": "sign",
-            "summary": "Rotation\u0020direction.",
-            "url": "classes/MarcoConsiglio-Trigonometry-Builders-FromString.html#property_sign"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Builders\\FromString\u003A\u003A\u0024parsing_status",
             "name": "parsing_status",
@@ -433,7 +443,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Exceptions\\NoMatchException",
             "name": "NoMatchException",
-            "summary": "",
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020non\u0020string\u0020angle\u0020is\u0020matched.",
             "url": "classes/MarcoConsiglio-Trigonometry-Exceptions-NoMatchException.html"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Exceptions\\NoMatchException\u003A\u003A__construct\u0028\u0029",
@@ -443,12 +453,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Exceptions\\RegExFailureException",
             "name": "RegExFailureException",
-            "summary": "",
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020the\u0020angle\u0020regex\u0020fails\u0020to\u0020find\u0020a\u0020string\u0020angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Exceptions-RegExFailureException.html"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Exceptions\\RegExFailureException\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructs\u0020the\u0020exception.",
             "url": "classes/MarcoConsiglio-Trigonometry-Exceptions-RegExFailureException.html#method___construct"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle",
@@ -458,92 +468,92 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AcreateFromValues\u0028\u0029",
             "name": "createFromValues",
-            "summary": "",
+            "summary": "Creates\u0020an\u0020angle\u0020from\u0020its\u0020values.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_createFromValues"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AcreateFromString\u0028\u0029",
             "name": "createFromString",
-            "summary": "",
+            "summary": "Creates\u0020an\u0020angle\u0020from\u0020its\u0020textual\u0020representation.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_createFromString"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AcreateFromDecimal\u0028\u0029",
             "name": "createFromDecimal",
-            "summary": "",
+            "summary": "Creates\u0020an\u0020angle\u0020from\u0020its\u0020decimal\u0020representation.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_createFromDecimal"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AcreateFromRadiant\u0028\u0029",
             "name": "createFromRadiant",
-            "summary": "",
+            "summary": "Creates\u0020an\u0020angle\u0020from\u0020its\u0020radiant\u0020representation.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_createFromRadiant"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AtoggleDirection\u0028\u0029",
             "name": "toggleDirection",
-            "summary": "",
+            "summary": "Reverse\u0020the\u0020direction\u0020of\u0020rotation.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_toggleDirection"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AgetDegrees\u0028\u0029",
             "name": "getDegrees",
-            "summary": "",
+            "summary": "Return\u0020an\u0020array\u0020containing\u0020the\u0020values\nof\u0020degrees,\u0020minutes\u0020and\u0020seconds.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_getDegrees"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AisClockwise\u0028\u0029",
             "name": "isClockwise",
-            "summary": "",
+            "summary": "Check\u0020if\u0020this\u0020angle\u0020is\u0020clockwise\u0020or\u0020positive.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_isClockwise"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AisCounterClockwise\u0028\u0029",
             "name": "isCounterClockwise",
-            "summary": "",
+            "summary": "Check\u0020if\u0020this\u0020angle\u0020is\u0020counterclockwise\u0020or\u0020negative.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_isCounterClockwise"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AtoDecimal\u0028\u0029",
             "name": "toDecimal",
-            "summary": "",
+            "summary": "Gets\u0020the\u0020decimal\u0020degrees\u0020representation\u0020of\u0020this\u0020angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_toDecimal"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AtoRadiant\u0028\u0029",
             "name": "toRadiant",
-            "summary": "",
+            "summary": "Gets\u0020the\u0020radiant\u0020representation\u0020of\u0020this\u0020angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_toRadiant"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AisGreaterThan\u0028\u0029",
             "name": "isGreaterThan",
-            "summary": "",
+            "summary": "Check\u0020if\u0020this\u0020angle\u0020is\u0020greater\u0020than\u0020\u0024angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_isGreaterThan"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003Agt\u0028\u0029",
             "name": "gt",
-            "summary": "",
+            "summary": "Alias\u0020of\u0020isGreaterThan\u0020method.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_gt"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AisGreaterThanOrEqual\u0028\u0029",
             "name": "isGreaterThanOrEqual",
-            "summary": "",
+            "summary": "Check\u0020if\u0020this\u0020angle\u0020is\u0020greater\u0020than\u0020or\u0020equal\u0020to\u0020\u0024angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_isGreaterThanOrEqual"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003Agte\u0028\u0029",
             "name": "gte",
-            "summary": "",
+            "summary": "Alias\u0020of\u0020isGreaterThanOrEqual\u0020method.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_gte"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AisLessThan\u0028\u0029",
             "name": "isLessThan",
-            "summary": "",
+            "summary": "Check\u0020if\u0020this\u0020angle\u0020is\u0020less\u0020than\u0020another\u0020angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_isLessThan"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003Alt\u0028\u0029",
             "name": "lt",
-            "summary": "",
+            "summary": "Alias\u0020of\u0020isLessThan\u0020method.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_lt"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003AisLessThanOrEqual\u0028\u0029",
             "name": "isLessThanOrEqual",
-            "summary": "",
+            "summary": "Check\u0020if\u0020this\u0020angle\u0020is\u0020less\u0020than\u0020or\u0020equal\u0020to\u0020\u0024angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_isLessThanOrEqual"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\Angle\u003A\u003Alte\u0028\u0029",
             "name": "lte",
-            "summary": "",
+            "summary": "Alias\u0020of\u0020isLessThanOrEqual\u0020method.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html#method_lte"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\AngleBuilder",
@@ -553,32 +563,32 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\AngleBuilder\u003A\u003AcheckOverflow\u0028\u0029",
             "name": "checkOverflow",
-            "summary": "",
+            "summary": "Check\u0020for\u0020overflow\u0020above\/below\u0020\u002B\/\u002D360\u00B0.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html#method_checkOverflow"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\AngleBuilder\u003A\u003AcalcDegrees\u0028\u0029",
             "name": "calcDegrees",
-            "summary": "",
+            "summary": "Calc\u0020degrees.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html#method_calcDegrees"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\AngleBuilder\u003A\u003AcalcMinutes\u0028\u0029",
             "name": "calcMinutes",
-            "summary": "",
+            "summary": "Calc\u0020minutes.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html#method_calcMinutes"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\AngleBuilder\u003A\u003AcalcSeconds\u0028\u0029",
             "name": "calcSeconds",
-            "summary": "",
+            "summary": "Calc\u0020seconds.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html#method_calcSeconds"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\AngleBuilder\u003A\u003AcalcSign\u0028\u0029",
             "name": "calcSign",
-            "summary": "",
+            "summary": "Calc\u0020sign.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html#method_calcSign"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Interfaces\\AngleBuilder\u003A\u003AfetchData\u0028\u0029",
             "name": "fetchData",
-            "summary": "",
+            "summary": "Fetch\u0020the\u0020data\u0020that\u0020will\u0020bee\u0020used\u0020for\u0020an\u0020angle.",
             "url": "classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html#method_fetchData"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Operations\\Sum",
@@ -588,7 +598,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Operations\\Sum\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "Constructs\u0020the\u0020Sum.",
             "url": "classes/MarcoConsiglio-Trigonometry-Operations-Sum.html#method___construct"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Operations\\Sum\u003A\u003AcalcDegrees\u0028\u0029",
@@ -608,7 +618,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Operations\\Sum\u003A\u003AcalcSign\u0028\u0029",
             "name": "calcSign",
-            "summary": "",
+            "summary": "Calcs\u0020sign.",
             "url": "classes/MarcoConsiglio-Trigonometry-Operations-Sum.html#method_calcSign"
         },                {
             "fqsen": "\\MarcoConsiglio\\Trigonometry\\Operations\\Sum\u003A\u003AcalcDecimalSum\u0028\u0029",

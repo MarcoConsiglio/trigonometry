@@ -4,7 +4,7 @@ namespace MarcoConsiglio\Trigonometry\Builders;
 use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder as AngleBuilderInterface;
 
 /**
- * Represents the concept of an angle builder.
+ * Represents an angle builder.
  */
 abstract class AngleBuilder implements AngleBuilderInterface
 {

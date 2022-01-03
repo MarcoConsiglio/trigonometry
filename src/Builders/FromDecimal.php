@@ -4,12 +4,16 @@ namespace MarcoConsiglio\Trigonometry\Builders;
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 
+/**
+ * Builds an angle starting from a decimal value.
+ */
 class FromDecimal extends AngleBuilder
 {
     /**
      * Builder constructor.
      *
      * @param float $decimal
+     * @return void
      */
     public function __construct(float $decimal)
     {

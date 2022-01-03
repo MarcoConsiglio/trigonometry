@@ -7,7 +7,7 @@ use MarcoConsiglio\Trigonometry\Tests\TestCase;
 use MarcoConsiglio\Trigonometry\Traits\WithRounding;
 
 /**
- * Can build Angle objects from degrees values.
+ *  Builds an angle starting from degrees, minutes and seconds.
  */
 class FromDegrees extends AngleBuilder
 {
@@ -18,6 +18,7 @@ class FromDegrees extends AngleBuilder
      * @param integer $minutes
      * @param float $seconds
      * @param integer $sign
+     * @return void
      */
     public function __construct(int $degrees, int $minutes, float $seconds, int $sign = Angle::CLOCKWISE)
     {

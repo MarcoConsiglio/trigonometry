@@ -30,10 +30,11 @@ class Sum extends Angle
     private float $decimal_sum;
 
     /**
-     * Constructor.
+     * Constructs the Sum.
      *
      * @param Angle $first
      * @param Angle $second
+     * @return void
      */
     public function __construct(Angle $first, Angle $second)
     {
@@ -80,6 +81,11 @@ class Sum extends Angle
         );
     }
 
+    /**
+     * Calcs sign.
+     *
+     * @return void
+     */
     public function calcSign()
     {
         $this->direction = $this->decimal_sum >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation</title>
+            <title>Documentation</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -54,10 +55,12 @@
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
-                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/marcoconsiglio.html">MarcoConsiglio</a></h4>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/marcoconsiglio.html" class="">MarcoConsiglio</a>
+</h4>
     <ul class="phpdocumentor-list">
                     <li>
-                <a href="namespaces/marcoconsiglio-trigonometry.html">Trigonometry</a>
+                <a href="namespaces/marcoconsiglio-trigonometry.html" class="">Trigonometry</a>
                 
             </li>
             </ul>
@@ -65,7 +68,9 @@
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
-                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/Application.html">Application</a></h4>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
 
                         </section>
             
@@ -93,6 +98,9 @@
         <h2 class="phpdocumentor-content__title">
     FromRadiant
 
+        <span class="phpdocumentor-element__extends">
+        extends <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Builders\AngleBuilder">AngleBuilder</abbr></a>
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -101,20 +109,17 @@
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <a href="classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder">AngleBuilder</abbr></a>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">10</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Can build Angle objects from degrees values.</p>
+            <p class="phpdocumentor-summary">Builds an angle starting from a radiant value.</p>
 
 
 
@@ -122,17 +127,6 @@
 
 
 
-<h3 id="interfaces_class_traits">
-    Interfaces, Classes and Traits
-    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
-</h3>
-
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder">AngleBuilder</abbr></a></dt>
-        <dd>How an angle should be constructed.</dd>
-    
-    
-    </dl>
 
 
 <h3 id="toc">
@@ -141,68 +135,103 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#property_builder">$builder</a>
     <span>
-                &nbsp;: <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html"><abbr title="\MarcoConsiglio\Trigonometry\Builders\FromDecimal">FromDecimal</abbr></a>            </span>
+                        &nbsp;: <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html"><abbr title="\MarcoConsiglio\Trigonometry\Builders\FromDecimal">FromDecimal</abbr></a>            </span>
 </dt>
 <dd>Another builder.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_degrees">$degrees</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Degrees</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_minutes">$minutes</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Minutes</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_seconds">$seconds</a>
+    <span>
+                        &nbsp;: float            </span>
+</dt>
+<dd>Seconds</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_sign">$sign</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Rotation direction.</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method___construct">__construct()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Builder constructor</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method_calcDegrees">calcDegrees()</a>
     <span>
-                        &nbsp;: void    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Calc degrees.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method_calcMinutes">calcMinutes()</a>
     <span>
-                        &nbsp;: void    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Calc minutes.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method_calcSeconds">calcSeconds()</a>
     <span>
-                        &nbsp;: void    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Calc seconds.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method_calcSign">calcSign()</a>
     <span>
-                        &nbsp;: void    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Calc sign.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method_checkOverflow">checkOverflow()</a>
     <span>
-                        &nbsp;: void    </span>
+                                &nbsp;: void    </span>
 </dt>
-<dd>Check for overflow above 360°.</dd>
+<dd>Check for overflow above/below +/-360°.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method_fetchData">fetchData()</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd>Fetch data for building.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromRadiant.html#method_exceedsRoundAngle">exceedsRoundAngle()</a>
     <span>
-                        &nbsp;: bool    </span>
+                                &nbsp;: bool    </span>
 </dt>
 <dd>Tells if the radiant is more than 2 * PI.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_overflow">overflow()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Correct the properties overflow.</dd>
 
         </dl>
 
@@ -232,7 +261,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -242,6 +271,138 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type"><a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html"><abbr title="\MarcoConsiglio\Trigonometry\Builders\FromDecimal">FromDecimal</abbr></a></span>
     <span class="phpdocumentor-signature__name">$builder</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_degrees">
+        $degrees
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_degrees" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Degrees</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$degrees</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_minutes">
+        $minutes
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_minutes" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Minutes</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$minutes</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_seconds">
+        $seconds
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_seconds" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">30</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Seconds</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">$seconds</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_sign">
+        $sign
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#property_sign" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Rotation direction.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$sign</span>
     </code>
 
     
@@ -269,7 +430,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -277,7 +438,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$radiant</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$radiant</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -295,7 +456,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     
@@ -313,7 +474,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -369,7 +530,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -425,7 +586,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">96</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
@@ -481,7 +642,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
@@ -537,11 +698,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Check for overflow above 360°.</p>
+        <p class="phpdocumentor-summary">Check for overflow above/below +/-360°.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -580,7 +741,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">117</span>
 
     </aside>
 
@@ -613,7 +774,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromRadiant.php"><a href="files/src-builders-fromradiant.html"><abbr title="src/Builders/FromRadiant.php">FromRadiant.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -639,6 +800,39 @@
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_overflow">
+        overflow()
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_overflow" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">86</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Correct the properties overflow.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__name">overflow</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     

@@ -96,11 +96,8 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    FromDecimal
+    AngleBuilder
 
-        <span class="phpdocumentor-element__extends">
-        extends <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Builders\AngleBuilder">AngleBuilder</abbr></a>
-    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -109,17 +106,20 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <a href="classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder">AngleBuilder</abbr></a>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">9</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Builds an angle starting from a decimal value.</p>
+            <p class="phpdocumentor-summary">Represents an angle builder.</p>
 
 
 
@@ -127,6 +127,18 @@
 
 
 
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes, Traits and Enums
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder">AngleBuilder</abbr></a></dt>
+        <dd>How an angle should be constructed.</dd>
+    
+    
+    
+    </dl>
 
 
 <h3 id="toc">
@@ -164,60 +176,46 @@
 <dd>Rotation direction.</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method___construct">__construct()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Builder constructor.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_calcDegrees">calcDegrees()</a>
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcDegrees">calcDegrees()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Calc degrees.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_calcMinutes">calcMinutes()</a>
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcMinutes">calcMinutes()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Calc minutes.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_calcSeconds">calcSeconds()</a>
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcSeconds">calcSeconds()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Calc seconds.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_calcSign">calcSign()</a>
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcSign">calcSign()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Calc sign.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_checkOverflow">checkOverflow()</a>
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_checkOverflow">checkOverflow()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Check for overflow above/below +/-360°.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_fetchData">fetchData()</a>
+    <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_fetchData">fetchData()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd>Fetch data for building.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_exceedsRoundAngle">exceedsRoundAngle()</a>
-    <span>
-                                &nbsp;: bool    </span>
-</dt>
-<dd>Tells if decimal is more than 360.</dd>
+<dd>Fetch the data that will bee used for an angle.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_overflow">overflow()</a>
@@ -236,7 +234,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="
@@ -375,65 +373,22 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
             -method
             -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">18</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Builder constructor.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$decimal</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$decimal</span>
-                : <span class="phpdocumentor-signature__argument__return-type">float</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
+                        -abstract                                "
 >
     <h4 class="phpdocumentor-element__name" id="method_calcDegrees">
         calcDegrees()
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_calcDegrees" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcDegrees" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -441,7 +396,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">calcDegrees</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>            <span class="phpdocumentor-signature__name">calcDegrees</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -467,16 +422,16 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                        -abstract                                "
 >
     <h4 class="phpdocumentor-element__name" id="method_calcMinutes">
         calcMinutes()
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_calcMinutes" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcMinutes" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
@@ -484,14 +439,14 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">calcMinutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>            <span class="phpdocumentor-signature__name">calcMinutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -510,16 +465,16 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                        -abstract                                "
 >
     <h4 class="phpdocumentor-element__name" id="method_calcSeconds">
         calcSeconds()
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_calcSeconds" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcSeconds" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -527,7 +482,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">calcSeconds</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>            <span class="phpdocumentor-signature__name">calcSeconds</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -553,16 +508,16 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                        -abstract                                "
 >
     <h4 class="phpdocumentor-element__name" id="method_calcSign">
         calcSign()
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_calcSign" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_calcSign" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -570,7 +525,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">calcSign</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>            <span class="phpdocumentor-signature__name">calcSign</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -596,16 +551,16 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                        -abstract                                "
 >
     <h4 class="phpdocumentor-element__name" id="method_checkOverflow">
         checkOverflow()
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_checkOverflow" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_checkOverflow" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -613,7 +568,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">checkOverflow</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>            <span class="phpdocumentor-signature__name">checkOverflow</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -639,24 +594,24 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                        -abstract                                "
 >
     <h4 class="phpdocumentor-element__name" id="method_fetchData">
         fetchData()
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_fetchData" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#method_fetchData" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/AngleBuilder.php"><a href="files/src-builders-anglebuilder.html"><abbr title="src/Builders/AngleBuilder.php">AngleBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetch data for building.</p>
+        <p class="phpdocumentor-summary">Fetch the data that will bee used for an angle.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">fetchData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>            <span class="phpdocumentor-signature__name">fetchData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     
     
@@ -664,49 +619,6 @@
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                                -final        "
->
-    <h4 class="phpdocumentor-element__name" id="method_exceedsRoundAngle">
-        exceedsRoundAngle()
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#method_exceedsRoundAngle" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Builders/FromDecimal.php"><a href="files/src-builders-fromdecimal.html"><abbr title="src/Builders/FromDecimal.php">FromDecimal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">46</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Tells if decimal is more than 360.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__final">final</span>        <span class="phpdocumentor-signature__name">exceedsRoundAngle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">float</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
         
     
@@ -822,7 +734,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/MarcoConsiglio-Trigonometry-Builders-FromDecimal.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

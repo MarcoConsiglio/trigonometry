@@ -90,6 +90,7 @@ class Angle implements AngleInterface
      * Construct an angle.
      *
      * @param \MarcoConsiglio\Trigonometry\Builders\AngleBuilder $builder
+     * @return void
      */
     protected function __construct(AngleBuilder $builder)
     {

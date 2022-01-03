@@ -11,6 +11,7 @@ class AngleOverflowException extends Exception
 {
     /**
      * Default constructor.
+     * @return void
      */
     public function __construct()
     {

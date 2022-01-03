@@ -5,6 +5,9 @@ use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException;
 use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
 
+/**
+ *  Builds an angle starting from a string value.
+ */
 class FromString extends AngleBuilder
 {
     /**
@@ -32,6 +35,7 @@ class FromString extends AngleBuilder
      * Builder constructor
      *
      * @param string $measure
+     * @return void
      */
     public function __construct(string $measure)
     {    

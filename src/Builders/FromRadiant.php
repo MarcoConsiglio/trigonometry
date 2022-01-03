@@ -5,7 +5,7 @@ use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 
 /**
- * Can build Angle objects from degrees values.
+ *  Builds an angle starting from a radiant value.
  */
 class FromRadiant extends AngleBuilder
 {
@@ -24,6 +24,7 @@ class FromRadiant extends AngleBuilder
      * @param integer $minutes
      * @param integer $seconds
      * @param integer $sign
+     * @return void
      */
     public function __construct(float $radiant)
     {
