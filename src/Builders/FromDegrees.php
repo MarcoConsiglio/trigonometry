@@ -101,19 +101,4 @@ class FromDegrees extends AngleBuilder
     {
         $this->sign = $data >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
     }
-
-    /**
-     * Fetch data for building.
-     *
-     * @return array
-     */
-    public function fetchData(): array
-    {
-        return [
-            $this->degrees,
-            $this->minutes,
-            $this->seconds,
-            $this->sign
-        ];
-    }
 }

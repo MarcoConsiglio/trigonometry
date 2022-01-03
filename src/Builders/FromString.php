@@ -120,19 +120,4 @@ class FromString extends AngleBuilder
     {
         $this->sign = strpos($data[2], '-') === 0 ? Angle::COUNTER_CLOCKWISE : Angle::CLOCKWISE;
     }
-
-    /**
-     * Fetch data for building.
-     *
-     * @return array
-     */
-    public function fetchData(): array
-    {
-        return [
-            $this->degrees,
-            $this->minutes,
-            $this->seconds,
-            $this->sign
-        ];
-    }
 }

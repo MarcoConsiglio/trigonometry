@@ -76,7 +76,20 @@ abstract class AngleBuilder implements AngleBuilderInterface
      */
     abstract public function calcSign($data);
 
-    abstract public function fetchData(): array;
+    /**
+     * Fetch data to build.
+     *
+     * @return array
+     */
+    public function fetchData(): array
+    {
+        return [
+            $this->degrees,
+            $this->minutes,
+            $this->seconds,
+            $this->sign
+        ];
+    }
 
     /**
      * Correct the properties overflow.

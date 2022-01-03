@@ -6,9 +6,6 @@ use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
 use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
 use MarcoConsiglio\Trigonometry\Builders\FromString;
-use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
-use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
-use MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException;
 use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
 use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
 
@@ -89,10 +86,10 @@ class Angle implements AngleInterface
     /**
      * Construct an angle.
      *
-     * @param \MarcoConsiglio\Trigonometry\Builders\AngleBuilder $builder
+     * @param \MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder $builder
      * @return void
      */
-    protected function __construct(AngleBuilder $builder)
+    public function __construct(AngleBuilder $builder)
     {
         [$this->degrees, $this->minutes, $this->seconds, $this->direction] = $builder->fetchData();
     }

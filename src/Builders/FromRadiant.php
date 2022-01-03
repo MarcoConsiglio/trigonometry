@@ -110,7 +110,7 @@ class FromRadiant extends AngleBuilder
     }
 
     /**
-     * Fetch data for building.
+     * Fetch data to build.
      *
      * @return array
      */

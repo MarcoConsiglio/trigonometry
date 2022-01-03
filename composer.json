@@ -22,6 +22,7 @@
     "minimum-stability": "stable",
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "fakerphp/faker": "~1.16"
+        "fakerphp/faker": "~1.16",
+        "phpspec/prophecy-phpunit": "^2.0"
     }
 }
