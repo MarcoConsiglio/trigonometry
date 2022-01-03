@@ -112,7 +112,6 @@ interface Angle
      *
      * @param mixed $angle
      * @return boolean
-     * @
      */ 
     public function gte($angle): bool;
 

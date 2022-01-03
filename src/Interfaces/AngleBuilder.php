@@ -31,7 +31,7 @@ interface AngleBuilder
     public function calcMinutes($data);
 
     /**
-     * Calc seconds.     *
+     * Calc seconds.
      * @param mixed $data
      * @return void
      */
