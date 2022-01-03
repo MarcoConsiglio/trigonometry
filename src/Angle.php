@@ -14,6 +14,11 @@ use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
 
 /**
  * Represents an angle.
+ * 
+ * @property-read int $degrees
+ * @property-read int $minutes
+ * @property-read float $seconds
+ * @property-read int $direction
  */
 class Angle implements AngleInterface
 {
@@ -92,7 +97,20 @@ class Angle implements AngleInterface
     }
 
     /**
-     * Creates an angle from its values in degrees.
+     * Getters.
+     *
+     * @param string $property
+     * @return mixed
+     */
+    public function __get(string $property)
+    {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+
+    /**
+     * Creates an angle from its values.
      *
      * @param integer $degrees
      * @param integer $minutes
@@ -198,7 +216,7 @@ class Angle implements AngleInterface
     }
 
     /**
-     * Get the decimal degrees representation of this angle.
+     * Gets the decimal degrees representation of this angle.
      *
      * @return float
      */
@@ -210,7 +228,7 @@ class Angle implements AngleInterface
     }
 
     /**
-     * Get the radiant representation of this angle.
+     * Gets the radiant representation of this angle.
      *
      * @return float
      */

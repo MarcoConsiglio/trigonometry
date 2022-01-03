@@ -21,7 +21,7 @@ class FromDecimal extends AngleBuilder
     }
 
     /**
-     * Check for overflow above 360°.
+     * Check for overflow above/below +/-360°.
      *
      * @param mixed $data
      * @return void
@@ -55,7 +55,7 @@ class FromDecimal extends AngleBuilder
      */
     public function calcDegrees($data)
     {
-        $this->degrees = intval(abs($data),);
+        $this->degrees = intval(abs($data));
     }
 
     /**
@@ -66,7 +66,7 @@ class FromDecimal extends AngleBuilder
      */
     public function calcMinutes($data)
     {
-        $this->minutes = intval((abs($data) - $this->degrees) * 60);
+        $this->minutes = intval(round((abs($data) - $this->degrees) * 60, 1, PHP_ROUND_HALF_DOWN));
     }
 
     /**
@@ -77,11 +77,7 @@ class FromDecimal extends AngleBuilder
      */
     public function calcSeconds($data)
     {
-        $this->seconds = round(
-            (abs($data) - $this->degrees - $this->minutes / 60) * 3600, 
-            1,
-            PHP_ROUND_HALF_DOWN
-        );
+        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
         $this->overflow();
     }
 

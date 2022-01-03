@@ -9,9 +9,12 @@ use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
 use MarcoConsiglio\Trigonometry\Builders\FromString;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
+use MarcoConsiglio\Trigonometry\Tests\Traits\WithFailureMessage;
 
 class BuilderTestCase extends TestCase
 {
+    use WithFailureMessage;
+
     protected function getExcessValues(string $builder_class, bool $negative = false): mixed
     {
         if (!$negative) {
@@ -59,6 +62,7 @@ class BuilderTestCase extends TestCase
      *
      * @param boolean $negative Specifies to test a positive or negative overflow.
      * @param string  $builder The class builder to test.
+     * @param bool  $negative Specifies tif to test a negative angle.
      * @return void
      */
     protected function testAngleCreationException(string $builder, string $exception, bool $negative = false)
@@ -80,6 +84,145 @@ class BuilderTestCase extends TestCase
                     Angle::createFromString($value);
                     break;
             }         
+        }
+    }
+
+    /**
+     * Test the Angle creation with a specified AngleBuilder.
+     *
+     * @param mixed   $value   The value used to create the angle.
+     * @param string  $builder The builder that extends AngleBuilder.
+     * @param boolean $negative Specifies if to test a negative angle.
+     * @return void
+     */
+    protected function testAngleCreation(string $builder, bool $negative = false)
+    {
+        if(class_exists($builder) && is_subclass_of($builder, AngleBuilder::class)) {
+            $value = $this->getAngleValue($builder, $negative);
+            switch ($builder) {
+                case FromDegrees::class:
+                    $angle = Angle::createFromValues($value[0], $value[1], $value[2]);
+                    break;
+                case FromDecimal::class:
+                    $angle = Angle::createFromDecimal($value);
+                    break;
+                case FromRadiant::class:
+                    $angle = Angle::createFromRadiant($value);
+                    break;
+                case FromString::class:
+                    $angle = Angle::createFromString($value);
+                    break;
+            }
+            $this->assertAngle($builder, $value, $angle);
+        }
+    }
+
+    /**
+     * Assert that an $object property $name equals $expected_value and its type is $expected_type.
+     *
+     * @param string $expected_type The type you expect from the property.
+     * @param string $name  The name of the property.
+     * @param object $object    The object to test.
+     * @param mixed  $expected_value The value you expect from the property.
+     * @return void
+     */
+    public function assertProperty(string $expected_type, string $name, object $object, mixed $expected_value)
+    {
+        $this->assertEquals($expected_value, $object->$name, $this->getterFail($name));
+        if (class_exists($expected_type)) {
+            $this->assertInstanceOf($expected_type, $object, $this->typeFail($name));
+        }
+        if ($expected_type == "int") {
+            $this->assertIsInt($object->$name, $this->typeFail($name));
+        }
+        if ($expected_type == "float") {
+            $this->assertIsFloat($object->$name, $this->typeFail($name));
+        }
+        if ($expected_type == "string") {
+            $this->assertIsString($object->$name, $this->typeFail($name));
+        }
+        if ($expected_type == "boolean") {
+            $this->assertIsBool($object->$name, $this->typeFail($name));
+        }
+    }
+
+    /**
+     * Assert that $angle has the $expected_values.
+     *
+     * @param array                              $values
+     * @param \MarcoConsiglio\Trigonometry\Angle $angle
+     * @return void
+     */
+    public function assertAngleDegrees(array $expected_values, Angle $angle)
+    {
+        $this->assertProperty("int", "degrees", $angle, $expected_values[0]);
+        $this->assertProperty("int", "minutes", $angle, $expected_values[1]);
+        $this->assertProperty("float", "seconds", $angle, $expected_values[2]);
+    }
+
+    /**
+     * Assert that $angle->toDecimal() equals $expected_values.
+     *
+     * @param float                              $expected_value The decimal value you expect from the $angle.
+     * @param \MarcoConsiglio\Trigonometry\Angle $angle The angle to test.
+     * @return void
+     */
+    public function assertAngleDecimal(float $expected_value, Angle $angle)
+    {
+        $expected = round($expected_value, 1, PHP_ROUND_HALF_DOWN);
+        $actual = round($angle->toDecimal(), 1, PHP_ROUND_HALF_DOWN);
+        $this->assertEquals($expected, $actual, $this->methodFail(Angle::class."::toDecimal"));
+    }
+
+    /**
+     * Assert that $angle->toRadiant() equals $expected_values.
+     *
+     * @param float                              $expected_value The radiant value you expect from the $angle.
+     * @param \MarcoConsiglio\Trigonometry\Angle $angle The angle to test.
+     * @return void
+     */
+    public function assertAngleRadiant(float $expected_value, Angle $angle)
+    {
+        $expected = round($expected_value, 1, PHP_ROUND_HALF_DOWN);
+        $actual = round($angle->toRadiant(), 1, PHP_ROUND_HALF_DOWN);
+        $this->assertEquals($expected, $actual, $this->methodFail(Angle::class."::toRadiant"));
+    }
+
+    /**
+     * Assert that $angle->__toString() equals $expected_value.
+     *
+     * @param string                             $expected_value The string value you expect from the $angle.
+     * @param \MarcoConsiglio\Trigonometry\Angle $angle The angle to test.
+     * @return void
+     */
+    public function assertAngleString(string $expected_value, Angle $angle)
+    {
+        $this->assertEquals($expected_value, $angle->__toString(), $this->methodFail(Angle::class."::__toString"));
+    }
+
+    /**
+     * Assert that an $angle equals the $expected_value(s).
+     *
+     * @param string                             $builder
+     * @param mixed                              $expected_value
+     * @param \MarcoConsiglio\Trigonometry\Angle $angle
+     * @return void
+     */
+    public function assertAngle(string $builder, mixed $expected_value, Angle $angle)
+    {
+        switch ($builder) {
+            case FromDegrees::class:
+                $this->assertAngleDegrees($expected_value, $angle);
+                break;
+            case FromDecimal::class:
+                $this->assertAngleDecimal($expected_value, $angle);
+                break;
+            case FromRadiant::class:
+                $this->assertAngleRadiant($expected_value, $angle);
+                break;
+            case FromString::class:
+                $this->assertAngleString($expected_value, $angle);
+                break;
         }
     }
 }

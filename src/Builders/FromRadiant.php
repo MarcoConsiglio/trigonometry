@@ -32,7 +32,7 @@ class FromRadiant extends AngleBuilder
     }
 
     /**
-     * Check for overflow above 360°.
+     * Check for overflow above/below +/-360°.
      *
      * @param mixed $data
      * @return void

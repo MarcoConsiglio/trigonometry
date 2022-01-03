@@ -8,6 +8,22 @@ use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 class FromRadiantTest extends BuilderTestCase
 {
     /**
+     * @testdox can create a positive angle from a radiant value.
+     */
+    public function test_can_create_positive_angle()
+    {
+        $this->testAngleCreation(FromRadiant::class);
+    }
+
+    /**
+     * @testdox can create a negative angle from a radiant value.
+     */
+    public function test_can_create_negative_angle()
+    {
+        $this->testAngleCreation(FromRadiant::class, negative: true);
+    }
+
+    /**
      * @testdox cannot create an angle with more than +360°.
      */
     public function test_cannot_create_with_positive_excess_degrees()

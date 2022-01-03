@@ -1,0 +1,844 @@
+Escaped mutants:
+================
+
+1) /home/vagrant/code/packages/trigonometry/src/Angle.php:170    [M] FalseValue
+
+--- Original
++++ New
+@@ @@
+      * @param bool $associative Gets an associative array.
+      * @return array
+      */
+-    public function getDegrees(bool $associative = false) : array
++    public function getDegrees(bool $associative = true) : array
+     {
+         if ($associative) {
+             return ["degrees" => $this->degrees, "minutes" => $this->minutes, "seconds" => $this->seconds];
+
+
+2) /home/vagrant/code/packages/trigonometry/src/Angle.php:214    [M] MulEqual
+
+--- Original
++++ New
+@@ @@
+      */
+     public final function toggleDirection() : Angle
+     {
+-        $this->direction *= self::COUNTER_CLOCKWISE;
++        $this->direction /= self::COUNTER_CLOCKWISE;
+         return $this;
+     }
+     /**
+
+
+3) /home/vagrant/code/packages/trigonometry/src/Angle.php:226    [M] MulEqual
+
+--- Original
++++ New
+@@ @@
+     public final function toDecimal() : float
+     {
+         $decimal = $this->degrees + $this->minutes / 60 + $this->seconds / 3600;
+-        $decimal *= $this->direction;
++        $decimal /= $this->direction;
+         return $decimal;
+     }
+     /**
+
+
+4) /home/vagrant/code/packages/trigonometry/src/Angle.php:252    [M] GreaterThan
+
+--- Original
++++ New
+@@ @@
+         if (is_numeric($angle)) {
+             return $this->toDecimal() > $angle;
+         } elseif ($angle instanceof AngleInterface) {
+-            return $this->toDecimal() > $angle->toDecimal();
++            return $this->toDecimal() >= $angle->toDecimal();
+         }
+         $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+     }
+
+
+5) /home/vagrant/code/packages/trigonometry/src/Angle.php:315    [M] LessThan
+
+--- Original
++++ New
+@@ @@
+     public function isLessThan($angle) : bool
+     {
+         if (is_numeric($angle)) {
+-            return $this->toDecimal() < $angle;
++            return $this->toDecimal() <= $angle;
+         } elseif ($angle instanceof AngleInterface) {
+             return $this->toDecimal() < $angle->toDecimal();
+         }
+
+
+6) /home/vagrant/code/packages/trigonometry/src/Angle.php:317    [M] LessThan
+
+--- Original
++++ New
+@@ @@
+         if (is_numeric($angle)) {
+             return $this->toDecimal() < $angle;
+         } elseif ($angle instanceof AngleInterface) {
+-            return $this->toDecimal() < $angle->toDecimal();
++            return $this->toDecimal() <= $angle->toDecimal();
+         }
+         $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+     }
+
+
+7) /home/vagrant/code/packages/trigonometry/src/Builders/AngleBuilder.php:88    [M] RoundingFamily
+
+--- Original
++++ New
+@@ @@
+      */
+     protected function overflow()
+     {
+-        if (round($this->seconds, 0) >= 60) {
++        if (ceil($this->seconds) >= 60) {
+             $this->seconds = 0;
+             $this->minutes += 1;
+         }
+
+
+8) /home/vagrant/code/packages/trigonometry/src/Builders/AngleBuilder.php:88    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     protected function overflow()
+     {
+-        if (round($this->seconds, 0) >= 60) {
++        if (round($this->seconds, -1) >= 60) {
+             $this->seconds = 0;
+             $this->minutes += 1;
+         }
+
+
+9) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:69    [M] RoundingFamily
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcMinutes($data)
+     {
+-        $this->minutes = intval(round((abs($data) - $this->degrees) * 60, 1, PHP_ROUND_HALF_DOWN));
++        $this->minutes = intval(floor((abs($data) - $this->degrees) * 60));
+     }
+     /**
+      * Calc seconds.
+
+
+10) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:69    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcMinutes($data)
+     {
+-        $this->minutes = intval(round((abs($data) - $this->degrees) * 60, 1, PHP_ROUND_HALF_DOWN));
++        $this->minutes = intval(round((abs($data) - $this->degrees) * 60, 0, PHP_ROUND_HALF_DOWN));
+     }
+     /**
+      * Calc seconds.
+
+
+11) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:80    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds($data)
+     {
+-        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
++        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3599, 1, PHP_ROUND_HALF_DOWN));
+         $this->overflow();
+     }
+     /**
+
+
+12) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:80    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds($data)
+     {
+-        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
++        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3601, 1, PHP_ROUND_HALF_DOWN));
+         $this->overflow();
+     }
+     /**
+
+
+13) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:80    [M] Multiplication
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds($data)
+     {
+-        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
++        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) / 3600, 1, PHP_ROUND_HALF_DOWN));
+         $this->overflow();
+     }
+     /**
+
+
+14) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:80    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds($data)
+     {
+-        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
++        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 0, PHP_ROUND_HALF_DOWN));
+         $this->overflow();
+     }
+     /**
+
+
+15) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:80    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds($data)
+     {
+-        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
++        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 2, PHP_ROUND_HALF_DOWN));
+         $this->overflow();
+     }
+     /**
+
+
+16) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:80    [M] RoundingFamily
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds($data)
+     {
+-        $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
++        $this->seconds = abs(ceil((abs($data) - $this->degrees - $this->minutes / 60) * 3600));
+         $this->overflow();
+     }
+     /**
+
+
+17) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:81    [M] MethodCallRemoval
+
+--- Original
++++ New
+@@ @@
+     public function calcSeconds($data)
+     {
+         $this->seconds = abs(round((abs($data) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
+-        $this->overflow();
++        
+     }
+     /**
+      * Calc sign.
+
+
+18) /home/vagrant/code/packages/trigonometry/src/Builders/FromDecimal.php:92    [M] GreaterThanOrEqualTo
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSign($data)
+     {
+-        $this->sign = $data >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
++        $this->sign = $data > 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
+     }
+     /**
+      * Fetch data for building.
+
+
+19) /home/vagrant/code/packages/trigonometry/src/Builders/FromDegrees.php:39    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function checkOverflow($data = null)
+     {
+-        $seconds = $this->degrees * 60 * 60 + $this->minutes * 60 + $this->seconds;
++        $seconds = $this->degrees * 59 * 60 + $this->minutes * 60 + $this->seconds;
+         if ($this->exceedsRoundAngle($seconds)) {
+             throw new AngleOverflowException();
+         }
+
+
+20) /home/vagrant/code/packages/trigonometry/src/Builders/FromDegrees.php:39    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function checkOverflow($data = null)
+     {
+-        $seconds = $this->degrees * 60 * 60 + $this->minutes * 60 + $this->seconds;
++        $seconds = $this->degrees * 60 * 59 + $this->minutes * 60 + $this->seconds;
+         if ($this->exceedsRoundAngle($seconds)) {
+             throw new AngleOverflowException();
+         }
+
+
+21) /home/vagrant/code/packages/trigonometry/src/Builders/FromDegrees.php:39    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function checkOverflow($data = null)
+     {
+-        $seconds = $this->degrees * 60 * 60 + $this->minutes * 60 + $this->seconds;
++        $seconds = $this->degrees * 60 * 60 + $this->minutes * 59 + $this->seconds;
+         if ($this->exceedsRoundAngle($seconds)) {
+             throw new AngleOverflowException();
+         }
+
+
+22) /home/vagrant/code/packages/trigonometry/src/Builders/FromDegrees.php:39    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function checkOverflow($data = null)
+     {
+-        $seconds = $this->degrees * 60 * 60 + $this->minutes * 60 + $this->seconds;
++        $seconds = $this->degrees * 60 * 60 + $this->minutes * 61 + $this->seconds;
+         if ($this->exceedsRoundAngle($seconds)) {
+             throw new AngleOverflowException();
+         }
+
+
+23) /home/vagrant/code/packages/trigonometry/src/Builders/FromDegrees.php:39    [M] Multiplication
+
+--- Original
++++ New
+@@ @@
+      */
+     public function checkOverflow($data = null)
+     {
+-        $seconds = $this->degrees * 60 * 60 + $this->minutes * 60 + $this->seconds;
++        $seconds = $this->degrees * 60 * 60 + $this->minutes / 60 + $this->seconds;
+         if ($this->exceedsRoundAngle($seconds)) {
+             throw new AngleOverflowException();
+         }
+
+
+24) /home/vagrant/code/packages/trigonometry/src/Builders/FromDegrees.php:53    [M] GreaterThan
+
+--- Original
++++ New
+@@ @@
+      */
+     protected final function exceedsRoundAngle(float $data) : bool
+     {
+-        if (abs($data) > Angle::MAX_SECONDS) {
++        if (abs($data) >= Angle::MAX_SECONDS) {
+             return true;
+         }
+         return false;
+
+
+25) /home/vagrant/code/packages/trigonometry/src/Builders/FromDegrees.php:101    [M] GreaterThanOrEqualTo
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSign($data)
+     {
+-        $this->sign = $data >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
++        $this->sign = $data > 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
+     }
+     /**
+      * Fetch data for building.
+
+
+26) /home/vagrant/code/packages/trigonometry/src/Builders/FromRadiant.php:30    [M] MethodCallRemoval
+
+--- Original
++++ New
+@@ @@
+      */
+     public function __construct(float $radiant)
+     {
+-        $this->checkOverflow($radiant);
++        
+         $this->builder = new FromDecimal(rad2deg($radiant));
+     }
+     /**
+
+
+27) /home/vagrant/code/packages/trigonometry/src/Builders/FromRadiant.php:43    [M] Throw_
+
+--- Original
++++ New
+@@ @@
+     public function checkOverflow($data)
+     {
+         if ($this->exceedsRoundAngle($data)) {
+-            throw new AngleOverflowException();
++            new AngleOverflowException();
+         }
+     }
+     /**
+
+
+28) /home/vagrant/code/packages/trigonometry/src/Builders/FromRadiant.php:56    [M] GreaterThan
+
+--- Original
++++ New
+@@ @@
+      */
+     protected final function exceedsRoundAngle(float $data) : bool
+     {
+-        if (abs($data) > Angle::MAX_RADIANT) {
++        if (abs($data) >= Angle::MAX_RADIANT) {
+             return true;
+         }
+         return false;
+
+
+29) /home/vagrant/code/packages/trigonometry/src/Builders/FromRadiant.php:57    [M] TrueValue
+
+--- Original
++++ New
+@@ @@
+     protected final function exceedsRoundAngle(float $data) : bool
+     {
+         if (abs($data) > Angle::MAX_RADIANT) {
+-            return true;
++            return false;
+         }
+         return false;
+     }
+
+
+30) /home/vagrant/code/packages/trigonometry/src/Builders/FromString.php:54    [M] ProtectedVisibility
+
+--- Original
++++ New
+@@ @@
+      * @throws \MarcoConsiglio\Trigonometry\Exceptions\NoMatchException No angle measure is found.
+      * @throws \MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException Error while parsing with a regular expression.
+      */
+-    protected function parseDegreesString(string $angle)
++    private function parseDegreesString(string $angle)
+     {
+         $this->parsing_status = preg_match(Angle::ANGLE_REGEX, $angle, $this->matches);
+         $this->angle_string = $angle;
+
+
+31) /home/vagrant/code/packages/trigonometry/src/Builders/FromString.php:71    [M] FalseValue
+
+--- Original
++++ New
+@@ @@
+         if ($this->parsing_status === 0) {
+             throw new NoMatchException($this->angle_string);
+         }
+-        if ($this->parsing_status === false) {
++        if ($this->parsing_status === true) {
+             throw new RegExFailureException(preg_last_error_msg());
+         }
+     }
+
+
+32) /home/vagrant/code/packages/trigonometry/src/Builders/FromString.php:84    [M] CastInt
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcDegrees($data)
+     {
+-        $this->degrees = abs((int) $data[2]);
++        $this->degrees = abs($data[2]);
+     }
+     /**
+      * Calc minutes.
+
+
+33) /home/vagrant/code/packages/trigonometry/src/Builders/FromString.php:95    [M] CastInt
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcMinutes($data)
+     {
+-        $this->minutes = (int) $data[3];
++        $this->minutes = $data[3];
+     }
+     /**
+      * Calc seconds.
+
+
+34) /home/vagrant/code/packages/trigonometry/src/Exceptions/AngleOverflowException.php:17    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function __construct()
+     {
+-        parent::__construct("The angle can't be major than 360°.", 0, $this->getPrevious());
++        parent::__construct("The angle can't be major than 360°.", -1, $this->getPrevious());
+     }
+ }
+
+
+35) /home/vagrant/code/packages/trigonometry/src/Exceptions/AngleOverflowException.php:17    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function __construct()
+     {
+-        parent::__construct("The angle can't be major than 360°.", 0, $this->getPrevious());
++        parent::__construct("The angle can't be major than 360°.", 1, $this->getPrevious());
+     }
+ }
+
+
+36) /home/vagrant/code/packages/trigonometry/src/Exceptions/AngleOverflowException.php:17    [M] MethodCallRemoval
+
+--- Original
++++ New
+@@ @@
+      */
+     public function __construct()
+     {
+-        parent::__construct("The angle can't be major than 360°.", 0, $this->getPrevious());
++        
+     }
+ }
+
+
+37) /home/vagrant/code/packages/trigonometry/src/Exceptions/NoMatchException.php:18    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function __construct(string $subject_string)
+     {
+-        parent::__construct("The string '{$subject_string}' does not match an angle measure.", 0, $this->getPrevious());
++        parent::__construct("The string '{$subject_string}' does not match an angle measure.", -1, $this->getPrevious());
+     }
+ }
+
+
+38) /home/vagrant/code/packages/trigonometry/src/Exceptions/NoMatchException.php:18    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function __construct(string $subject_string)
+     {
+-        parent::__construct("The string '{$subject_string}' does not match an angle measure.", 0, $this->getPrevious());
++        parent::__construct("The string '{$subject_string}' does not match an angle measure.", 1, $this->getPrevious());
+     }
+ }
+
+
+39) /home/vagrant/code/packages/trigonometry/src/Exceptions/NoMatchException.php:18    [M] MethodCallRemoval
+
+--- Original
++++ New
+@@ @@
+      */
+     public function __construct(string $subject_string)
+     {
+-        parent::__construct("The string '{$subject_string}' does not match an angle measure.", 0, $this->getPrevious());
++        
+     }
+ }
+
+
+40) /home/vagrant/code/packages/trigonometry/src/Exceptions/RegExFailureException.php:13    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+ {
+     public function __construct(string $failure_message)
+     {
+-        parent::__construct($failure_message, 0, $this->getPrevious());
++        parent::__construct($failure_message, 1, $this->getPrevious());
+     }
+ }
+
+
+41) /home/vagrant/code/packages/trigonometry/src/Exceptions/RegExFailureException.php:13    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+ {
+     public function __construct(string $failure_message)
+     {
+-        parent::__construct($failure_message, 0, $this->getPrevious());
++        parent::__construct($failure_message, -1, $this->getPrevious());
+     }
+ }
+
+
+42) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:54    [M] ProtectedVisibility
+
+--- Original
++++ New
+@@ @@
+      *
+      * @return void
+      */
+-    protected function calcDegrees()
++    private function calcDegrees()
+     {
+         $this->degrees = intval(abs($this->decimal_sum));
+     }
+
+
+43) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:64    [M] ProtectedVisibility
+
+--- Original
++++ New
+@@ @@
+      *
+      * @return void
+      */
+-    protected function calcMinutes()
++    private function calcMinutes()
+     {
+         $this->minutes = intval((abs($this->decimal_sum) - $this->degrees) * 60);
+     }
+
+
+44) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:66    [M] Minus
+
+--- Original
++++ New
+@@ @@
+      */
+     protected function calcMinutes()
+     {
+-        $this->minutes = intval((abs($this->decimal_sum) - $this->degrees) * 60);
++        $this->minutes = intval((abs($this->decimal_sum) + $this->degrees) * 60);
+     }
+     /**
+      * Calcs seconds.
+
+
+45) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:66    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     protected function calcMinutes()
+     {
+-        $this->minutes = intval((abs($this->decimal_sum) - $this->degrees) * 60);
++        $this->minutes = intval((abs($this->decimal_sum) - $this->degrees) * 59);
+     }
+     /**
+      * Calcs seconds.
+
+
+46) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:66    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     protected function calcMinutes()
+     {
+-        $this->minutes = intval((abs($this->decimal_sum) - $this->degrees) * 60);
++        $this->minutes = intval((abs($this->decimal_sum) - $this->degrees) * 61);
+     }
+     /**
+      * Calcs seconds.
+
+
+47) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:66    [M] Multiplication
+
+--- Original
++++ New
+@@ @@
+      */
+     protected function calcMinutes()
+     {
+-        $this->minutes = intval((abs($this->decimal_sum) - $this->degrees) * 60);
++        $this->minutes = intval((abs($this->decimal_sum) - $this->degrees) / 60);
+     }
+     /**
+      * Calcs seconds.
+
+
+48) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:74    [M] PublicVisibility
+
+--- Original
++++ New
+@@ @@
+      *
+      * @return void
+      */
+-    public function calcSeconds()
++    protected function calcSeconds()
+     {
+         $this->seconds = round((abs($this->decimal_sum) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN);
+     }
+
+
+49) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:77    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds()
+     {
+-        $this->seconds = round((abs($this->decimal_sum) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN);
++        $this->seconds = round((abs($this->decimal_sum) - $this->degrees - $this->minutes / 60) * 3601, 1, PHP_ROUND_HALF_DOWN);
+     }
+     public function calcSign()
+     {
+
+
+50) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:77    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds()
+     {
+-        $this->seconds = round((abs($this->decimal_sum) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN);
++        $this->seconds = round((abs($this->decimal_sum) - $this->degrees - $this->minutes / 60) * 3599, 1, PHP_ROUND_HALF_DOWN);
+     }
+     public function calcSign()
+     {
+
+
+51) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:78    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+      */
+     public function calcSeconds()
+     {
+-        $this->seconds = round((abs($this->decimal_sum) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN);
++        $this->seconds = round((abs($this->decimal_sum) - $this->degrees - $this->minutes / 60) * 3600, 2, PHP_ROUND_HALF_DOWN);
+     }
+     public function calcSign()
+     {
+
+
+52) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:83    [M] PublicVisibility
+
+--- Original
++++ New
+@@ @@
+     {
+         $this->seconds = round((abs($this->decimal_sum) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN);
+     }
+-    public function calcSign()
++    protected function calcSign()
+     {
+         $this->direction = $this->decimal_sum >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
+     }
+
+
+53) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:85    [M] GreaterThanOrEqualTo
+
+--- Original
++++ New
+@@ @@
+     }
+     public function calcSign()
+     {
+-        $this->direction = $this->decimal_sum >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
++        $this->direction = $this->decimal_sum > 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
+     }
+     /**
+      * Sum the decimal representation of the two addend.
+
+
+54) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:107    [M] GreaterThan
+
+--- Original
++++ New
+@@ @@
+      */
+     protected final function cutOverflow(float $sum) : float
+     {
+-        if ($sum > Angle::MAX_DEGREES) {
++        if ($sum >= Angle::MAX_DEGREES) {
+             $sum -= Angle::MAX_DEGREES;
+         } elseif ($sum < -Angle::MAX_DEGREES) {
+             $sum += Angle::MAX_DEGREES;
+
+
+55) /home/vagrant/code/packages/trigonometry/src/Operations/Sum.php:109    [M] LessThan
+
+--- Original
++++ New
+@@ @@
+     {
+         if ($sum > Angle::MAX_DEGREES) {
+             $sum -= Angle::MAX_DEGREES;
+-        } elseif ($sum < -Angle::MAX_DEGREES) {
++        } elseif ($sum <= -Angle::MAX_DEGREES) {
+             $sum += Angle::MAX_DEGREES;
+         }
+         return $sum;
+     }
+ }
+
+
+Timed Out mutants:
+==================
+
+Skipped mutants:
+================
+
+Not Covered mutants:
+====================
+
+1) /home/vagrant/code/packages/trigonometry/src/Builders/FromString.php:72    [M] Throw_
+
+--- Original
++++ New
+@@ @@
+             throw new NoMatchException($this->angle_string);
+         }
+         if ($this->parsing_status === false) {
+-            throw new RegExFailureException(preg_last_error_msg());
++            new RegExFailureException(preg_last_error_msg());
+         }
+     }
+     /**

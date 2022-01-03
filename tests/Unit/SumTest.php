@@ -41,8 +41,8 @@ class SumTest extends TestCase
     public function test_positive_sum()
     {
         // Arrange
-        $this->first_angle = $this->randomAngleGreaterThanFlat(Angle::CLOCKWISE);
-        $this->second_angle = $this->randomAngleGreaterThanFlat(Angle::CLOCKWISE);
+        $this->first_angle = $this->randomAngleGreaterThanFlat();
+        $this->second_angle = $this->randomAngleGreaterThanFlat();
         
         // Act
         $sum_angle = new Sum($this->first_angle, $this->second_angle);
@@ -64,8 +64,8 @@ class SumTest extends TestCase
     public function test_negative_sum()
     {
         // Arrange
-        $this->first_angle = $this->randomAngleGreaterThanFlat(Angle::COUNTER_CLOCKWISE);
-        $this->second_angle = $this->randomAngleGreaterThanFlat(Angle::COUNTER_CLOCKWISE);
+        $this->first_angle = $this->randomAngleGreaterThanFlat(negative: true);
+        $this->second_angle = $this->randomAngleGreaterThanFlat(negative: true);
 
         // Act
         $sum_angle = new Sum($this->first_angle, $this->second_angle);
@@ -87,10 +87,10 @@ class SumTest extends TestCase
      * @param integer|null $sign
      * @return void
      */
-    protected function randomAngleGreaterThanFlat(int $sign = null)
+    protected function randomAngleGreaterThanFlat(bool $negative = false)
     {
         do {
-            $angle = $this->randomAngle($sign);
+            $angle = $this->getRandomAngle($negative);
         } while (abs($angle->toDecimal()) < 180);
         return $angle;
     }

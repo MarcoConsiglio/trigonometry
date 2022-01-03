@@ -3,6 +3,9 @@ namespace MarcoConsiglio\Trigonometry\Exceptions;
 
 use Exception;
 
+/**
+ * This exception is thrown when non string angle is matched.
+ */
 class NoMatchException extends Exception
 {
     /**

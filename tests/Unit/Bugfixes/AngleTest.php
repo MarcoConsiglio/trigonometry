@@ -6,7 +6,7 @@ use MarcoConsiglio\Trigonometry\Tests\TestCase;
 
 class AngleTest extends TestCase
 {
-    public function test_60_seconds_overflow_correctly()
+    public function test_60_seconds_overflow_to_one_minute()
     {
         // Arrange
         $expected_angle = Angle::createFromValues(14, 12, 0);
@@ -18,13 +18,12 @@ class AngleTest extends TestCase
         $this->assertEquals($expected_angle, $actual_angle, "60 seconds must overflow to 1 minute.");
     }
 
-    public function test_60_minutes_overflow_correctly()
+    public function test_60_minutes_overflow_to_one_degree()
     {
         // Arrange
-        $expected_angle = Angle::createFromValues(14, 59, 59.96);
+        $expected_angle = Angle::createFromValues(14, 59, 59.99);
 
-        // Act
-        $actual_angle = Angle::createFromDecimal(14.99999);
+        $actual_angle = Angle::createFromDecimal(15);
 
         // Assert
         $this->assertEquals($expected_angle, $actual_angle, "60 minutes must overflow to 1 degree.");

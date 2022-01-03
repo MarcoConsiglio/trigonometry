@@ -55,15 +55,9 @@ class AngleTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->angle = $this->randomAngle();
-        $this->degrees = $this->faker->numberBetween(0, 360);
-        if ($this->degrees == 360) {
-            $this->minutes = 0;
-            $this->seconds = 0;
-        } else {
-            $this->minutes = $this->faker->numberBetween(0, 59);
-            $this->seconds = $this->faker->randomFloat(1, 0, 59.9);
-        }
+        $this->angle = $this->getRandomAngle($this->faker->boolean());
+        [$this->degrees, $this->minutes, $this->seconds] = $this->getRandomAngleDegrees();
+        
         $this->radiant = $this->faker->randomFloat(0, Angle::MAX_RADIANT, 8);
         $this->expected_string = $this->degrees."° ".$this->minutes."' ".$this->seconds."\"";
         try {
@@ -174,10 +168,10 @@ class AngleTest extends TestCase
 
         // Act
         $angle = Angle::createFromValues($this->degrees, $this->minutes, $this->seconds);
-        $radian = $angle->toRadiant();
+        $radiant = $angle->toRadiant();
 
         // Assert
-        $this->assertEquals(deg2rad($angle->toDecimal()), $radian, "Something is wrong when casting to radiant.");
+        $this->assertEquals(deg2rad($angle->toDecimal()), $radiant, "Something is wrong when casting to radiant.");
     }
 
     /**
@@ -329,7 +323,7 @@ class AngleTest extends TestCase
         // Arrange
         $expected_type = "int";
         $argument = "shabadula";
-        $angle = $this->randomAngle();
+        $angle = $this->getRandomAngle();
         $class = new ReflectionClass($angle);
         $method = $class->getMethod("throwInvalidArgumentException");
         $method->setAccessible(true);

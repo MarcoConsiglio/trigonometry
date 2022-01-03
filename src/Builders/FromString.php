@@ -57,6 +57,12 @@ class FromString extends AngleBuilder
         $this->angle_string = $angle;
     }
 
+    /**
+     * Check for overflow above/below +/-360°.
+     *
+     * @param mixed $data
+     * @return void
+     */
     public function checkOverflow($data = null)
     {
         if ($this->parsing_status === 0) {
