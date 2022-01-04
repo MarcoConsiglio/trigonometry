@@ -62,6 +62,7 @@ class FromDegrees extends AngleBuilder
      * Calc degrees.
      * 
      * @return void
+     * @codeCoverageIgnore
      */
     public function calcDegrees()
     {
@@ -72,6 +73,7 @@ class FromDegrees extends AngleBuilder
      * Calc minutes.
      *
      * @return void
+     * @codeCoverageIgnore
      */
     public function calcMinutes()
     {
@@ -82,6 +84,7 @@ class FromDegrees extends AngleBuilder
      * Calc seconds.
      *
      * @return void
+     * @codeCoverageIgnore
      */
     public function calcSeconds()
     {
@@ -93,6 +96,7 @@ class FromDegrees extends AngleBuilder
      *
      * @param mixed $data
      * @return void
+     * @codeCoverageIgnore
      */
     public function calcSign()
     {
