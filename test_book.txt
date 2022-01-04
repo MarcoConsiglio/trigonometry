@@ -45,6 +45,6 @@ Reg Ex Failure Exception (MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegE
  [x] Regex failure exception
 
 A sum operation
- [x] can sum two positive angles.
- [x] can sum two negative angles.
+ [ ] can sum two positive angles.
+ [ ] can sum two negative angles.
 

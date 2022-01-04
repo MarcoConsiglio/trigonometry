@@ -155,7 +155,7 @@ class Angle implements AngleInterface
      */
     public static function createFromRadiant(float $radiant): Angle
     {
-        return new Angle(new FromRadiant($radiant));
+         return new Angle(new FromRadiant($radiant));
     }
 
     /**

@@ -21,7 +21,7 @@ class AngleTest extends TestCase
     public function test_60_minutes_overflow_to_one_degree()
     {
         // Arrange
-        $expected_angle = Angle::createFromValues(14, 59, 59.99);
+        $expected_angle = Angle::createFromValues(14, 59, 60);
 
         $actual_angle = Angle::createFromDecimal(15);
 

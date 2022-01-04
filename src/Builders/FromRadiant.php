@@ -7,29 +7,25 @@ use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 /**
  *  Builds an angle starting from a radiant value.
  */
-class FromRadiant extends AngleBuilder
+class FromRadiant extends FromDecimal
 {
-
     /**
-     * Another builder.
+     * The radiant value used to build an Angle.
      *
-     * @var \MarcoConsiglio\Trigonometry\Builders\FromDecimal
+     * @var float
      */
-    protected \MarcoConsiglio\Trigonometry\Builders\FromDecimal $builder;
+    protected float $radiant;
 
     /**
-     * Builder constructor
+     * Constructs an AngleBuilder with a decimal value.
      *
-     * @param integer $degrees
-     * @param integer $minutes
-     * @param integer $seconds
-     * @param integer $sign
-     * @return void
+     * @param float $radiant
      */
     public function __construct(float $radiant)
     {
+        $this->radiant = $radiant;
         $this->checkOverflow($radiant);
-        $this->builder = new FromDecimal(rad2deg($radiant));
+        parent::__construct(rad2deg($radiant));
     }
 
     /**
@@ -38,9 +34,9 @@ class FromRadiant extends AngleBuilder
      * @param mixed $data
      * @return void
      */
-    public function checkOverflow($data)
+    public function checkOverflow()
     {
-        if ($this->exceedsRoundAngle($data)) {
+        if ($this->exceedsRoundAngle($this->radiant)) {
             throw new AngleOverflowException;
         }
     }
@@ -58,64 +54,5 @@ class FromRadiant extends AngleBuilder
             return true;
         }
         return false;
-    }
-
-    /**
-     * Calc degrees.
-     *
-     * @param mixed $data
-     * @return void
-     * @codeCoverageIgnore
-     * 
-     */
-    public function calcDegrees($data)
-    {
-        
-    }
-
-    /**
-     * Calc minutes.
-     *
-     * @param mixed $data
-     * @return void
-     * @codeCoverageIgnore
-     */
-    public function calcMinutes($data)
-    {
-        
-    }
-
-    /**
-     * Calc seconds.
-     *
-     * @param mixed $data
-     * @return void
-     * @codeCoverageIgnore
-     */
-    public function calcSeconds($data)
-    {
-       
-    }
-
-    /**
-     * Calc sign.
-     *
-     * @param mixed $data
-     * @return void
-     * @codeCoverageIgnore
-     */
-    public function calcSign($data)
-    {
-        
-    }
-
-    /**
-     * Fetch data to build.
-     *
-     * @return array
-     */
-    public function fetchData(): array
-    {
-        return $this->builder->fetchData();
     }
 }

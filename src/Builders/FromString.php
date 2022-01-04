@@ -11,6 +11,13 @@ use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
 class FromString extends AngleBuilder
 {
     /**
+     * The string measure of an Angle.
+     *
+     * @var string
+     */
+    protected string $measure;
+
+    /**
      * The parsing status.
      *
      * @var mixed
@@ -25,52 +32,40 @@ class FromString extends AngleBuilder
     protected array $matches = [];
 
     /**
-     * The measure to beign parsed.
-     *
-     * @var string
-     */
-    protected string $angle_string;
-
-    /**
-     * Builder constructor
+     * Builds an AngleBuilder with a string value.
      *
      * @param string $measure
      * @return void
      */
     public function __construct(string $measure)
     {    
-        $this->parseDegreesString($measure);
+        $this->measure = $measure;
+        $this->parseDegreesString($this->measure);
         $this->checkOverflow();
-        $this->calcSign($this->matches);
-        $this->calcDegrees($this->matches);
-        $this->calcMinutes($this->matches);
-        $this->calcSeconds($this->matches);
     }
 
     /**
      * Parse an angle measure string and break down the values.
      *
      * @param string $angle
-     * @return array
+     * @return void
      * @throws \MarcoConsiglio\Trigonometry\Exceptions\NoMatchException No angle measure is found.
      * @throws \MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException Error while parsing with a regular expression.
      */
     protected function parseDegreesString(string $angle)
     {
         $this->parsing_status = preg_match(Angle::ANGLE_REGEX, $angle, $this->matches);
-        $this->angle_string = $angle;
     }
 
     /**
      * Check for overflow above/below +/-360°.
      *
-     * @param mixed $data
      * @return void
      */
-    public function checkOverflow($data = null)
+    public function checkOverflow()
     {
         if ($this->parsing_status === 0) {
-            throw new NoMatchException($this->angle_string);
+            throw new NoMatchException($this->measure);
         }
         if ($this->parsing_status === false) {
             throw new RegExFailureException(preg_last_error_msg());
@@ -80,34 +75,31 @@ class FromString extends AngleBuilder
     /**
      * Calc degrees.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcDegrees($data)
+    public function calcDegrees()
     {
-        $this->degrees = abs((int) $data[2]);
+        $this->degrees = abs((int) $this->matches[2]);
     }
 
     /**
      * Calc minutes.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcMinutes($data)
+    public function calcMinutes()
     {
-        $this->minutes = (int) $data[3];
+        $this->minutes = (int) $this->matches[3];
     }
 
     /**
      * Calc seconds.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcSeconds($data)
+    public function calcSeconds()
     {
-        $this->seconds = $data[4];
+        $this->seconds = $this->matches[4];
     }
 
     /**
@@ -116,8 +108,22 @@ class FromString extends AngleBuilder
      * @param mixed $data
      * @return void
      */
-    public function calcSign($data)
+    public function calcSign()
     {
-        $this->sign = strpos($data[2], '-') === 0 ? Angle::COUNTER_CLOCKWISE : Angle::CLOCKWISE;
+        $this->sign = strpos($this->matches[2], '-') === 0 ? Angle::COUNTER_CLOCKWISE : Angle::CLOCKWISE;
+    }
+
+    /**
+     * Fetches the data to build an Angle.
+     *
+     * @return array
+     */
+    public function fetchData(): array
+    {
+        $this->calcDegrees();
+        $this->calcMinutes();
+        $this->calcSeconds();
+        $this->calcSign();
+        return parent::fetchData();
     }
 }

@@ -11,8 +11,9 @@ use MarcoConsiglio\Trigonometry\Traits\WithRounding;
  */
 class FromDegrees extends AngleBuilder
 {
+    protected $data;
     /**
-     * Builder constructor
+     * Constructs and AngleBuilder with degrees, minutes, seconds and direction.
      *
      * @param integer $degrees
      * @param integer $minutes
@@ -22,20 +23,20 @@ class FromDegrees extends AngleBuilder
      */
     public function __construct(int $degrees, int $minutes, float $seconds, int $sign = Angle::CLOCKWISE)
     {
-        $this->calcDegrees($degrees);
-        $this->calcMinutes($minutes);
-        $this->calcSeconds($seconds);
-        $this->calcSign($sign);
+        $this->degrees = $degrees;
+        $this->minutes = $minutes;
+        $this->seconds = $seconds;
+        $this->sign = $sign;
         $this->checkOverflow();
+        $this->overflow();
     }
 
     /**
      * Check for overflow above/below +/-360°.
      *
-     * @param mixed $data
      * @return void
      */
-    public function checkOverflow($data = null)
+    public function checkOverflow()
     {
         $seconds = $this->degrees * 60 * 60 + $this->minutes * 60 + $this->seconds;
         if ($this->exceedsRoundAngle($seconds)) {
@@ -44,12 +45,12 @@ class FromDegrees extends AngleBuilder
     }
 
     /**
-     * Tells if the sum of seconds is more than 360°.
+     * Tells if the sum of total seconds is more than 360°.
      *
      * @param float $data
      * @return boolean
      */
-    protected final function exceedsRoundAngle(float $data): bool
+    protected function exceedsRoundAngle(float $data): bool
     {
         if (abs($data) > Angle::MAX_SECONDS) {
             return true;
@@ -59,36 +60,32 @@ class FromDegrees extends AngleBuilder
 
     /**
      * Calc degrees.
-     *
-     * @param mixed $data
+     * 
      * @return void
      */
-    public function calcDegrees($data)
+    public function calcDegrees()
     {
-        $this->degrees = $data;
+
     }
 
     /**
      * Calc minutes.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcMinutes($data)
+    public function calcMinutes()
     {
-        $this->minutes = $data;
+
     }
 
     /**
      * Calc seconds.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcSeconds($data)
+    public function calcSeconds()
     {
-       $this->seconds = $data; 
-       $this->overflow();
+
     }
 
     /**
@@ -97,8 +94,8 @@ class FromDegrees extends AngleBuilder
      * @param mixed $data
      * @return void
      */
-    public function calcSign($data)
+    public function calcSign()
     {
-        $this->sign = $data >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
+
     }
 }

@@ -9,41 +9,36 @@ interface AngleBuilder
     /**
      * Check for overflow above/below +/-360°.
      *
-     * @param mixed $data
      * @return void
      */
-    public function checkOverflow($data);
+    public function checkOverflow();
 
     /**
      * Calc degrees.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcDegrees($data);
+    public function calcDegrees();
 
     /**
      * Calc minutes.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcMinutes($data);
+    public function calcMinutes();
 
     /**
      * Calc seconds.
-     * @param mixed $data
      * @return void
      */
-    public function calcSeconds($data);
+    public function calcSeconds();
 
     /**
      * Calc sign.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcSign($data);
+    public function calcSign();
 
     /**
      * Fetch the data that will bee used for an angle.

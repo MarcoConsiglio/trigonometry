@@ -39,42 +39,37 @@ abstract class AngleBuilder implements AngleBuilderInterface
     /**
      * Check for overflow above/below +/-360°.
      *
-     * @param mixed $data
      * @return void
      */
-    abstract public function checkOverflow($data);
+    abstract public function checkOverflow();
 
     /**
      * Calc degrees.
      *
-     * @param mixed $data
      * @return void
      */
-    abstract public function calcDegrees($data);
+    abstract public function calcDegrees();
 
     /**
      * Calc minutes.    
      *
-     * @param string $data
      * @return void
      */
-    abstract public function calcMinutes($data);
+    abstract public function calcMinutes();
 
     /**
      * Calc seconds.
      *
-     * @param mixed $data
      * @return void
      */
-    abstract public function calcSeconds($data);
+    abstract public function calcSeconds();
 
     /**
      * Calc sign.
      *
-     * @param mixed $data
      * @return void
      */
-    abstract public function calcSign($data);
+    abstract public function calcSign();
 
     /**
      * Fetch data to build.
