@@ -187,7 +187,7 @@ class Angle implements AngleInterface
      *
      * @return boolean
      */
-    public final function isClockwise(): bool
+    public function isClockwise(): bool
     {
         return $this->direction == self::CLOCKWISE;
     }
@@ -207,7 +207,7 @@ class Angle implements AngleInterface
      *
      * @return Angle
      */
-    public final function toggleDirection(): Angle
+    public function toggleDirection(): Angle
     {
         $this->direction *= self::COUNTER_CLOCKWISE;
         return $this;
@@ -218,7 +218,7 @@ class Angle implements AngleInterface
      *
      * @return float
      */
-    public final function toDecimal(): float
+    public function toDecimal(): float
     {
         $decimal = $this->degrees + $this->minutes / 60 + $this->seconds / 3600;
         $decimal *= $this->direction;
@@ -273,19 +273,10 @@ class Angle implements AngleInterface
      */
     public function isGreaterThanOrEqual($angle): bool
     {
-        if (is_numeric($angle)) {
-            if ($this->toDecimal() == $angle) {
-                return true;
-            }
-            return $this->isGreaterThan($angle);
-        } 
-        if ($angle instanceof AngleInterface) {
-            if ($this->toDecimal() == $angle->toDecimal()) {
-                return true;
-            }
-            return $this->isGreaterThan($angle);
+        if ($this->isEqual($angle)) {
+            return true;
         }
-        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+        return $this->isGreaterThan($angle);
     }
 
     /**
@@ -338,21 +329,13 @@ class Angle implements AngleInterface
      */
     public function isLessThanOrEqual($angle): bool
     {
-        if (is_numeric($angle)) {
-            if ($this->toDecimal() == $angle) {
-                return true;
-            }
-            return $this->isLessThan($angle);
+        if ($this->isEqual($angle)) {
+            return true;
         }
-        if ($angle instanceof AngleInterface) {
-            if ($this->toDecimal() == $angle->toDecimal()) {
-                return true;
-            }
-            return $this->isLessThan($angle);
-        }
-        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+        return $this->isLessThan($angle);
     }
 
+    
     /**
      * Alias of isLessThanOrEqual method.
      *
@@ -363,6 +346,34 @@ class Angle implements AngleInterface
     public function lte($angle): bool
     {
         return $this->isLessThanOrEqual($angle);
+    }
+
+    /**
+     * Check if this angle is equal to $angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function isEqual($angle): bool
+    {
+        if (is_numeric($angle)) {
+            return $this->toDecimal() == $angle;
+        }
+        if ($angle instanceof AngleInterface) {
+            return $this->toDecimal() == $angle->toDecimal();
+        }
+        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+    }
+
+    /**
+     * Alias of isEqual method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function eq($angle): bool
+    {
+        return $this->isEqual($angle);
     }
 
     /**

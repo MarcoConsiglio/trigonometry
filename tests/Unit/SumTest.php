@@ -28,7 +28,7 @@ class SumTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->markTestSkipped("Angle comparison is not working.");
+        // $this->markTestSkipped("Angle::toDecimal method is not working.");
     }
     
 
@@ -96,5 +96,6 @@ class SumTest extends TestCase
         if ($not_found) {
             return new Angle(new FromDecimal(181));
         }
+        return $angle;
     }
 }

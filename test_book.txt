@@ -7,9 +7,13 @@ An angle
  [x] can be casted to radiant.
  [x] can be reversed from clockwise to counterclockwise.
  [x] can be reversed from counterclockwise to clockwise.
+ [x] can be equal or not to another angle.
+ [x] Equal comparison exception
  [x] can be or not greater than another.
+ [x] can throw an exception if greater than comparison has an unexpected type argument.
  [x] can be or not greater than or equal another angle.
  [x] can be or not less than another angle.
+ [x] can throw an exception if less than comparison has an unexpected type argument.
  [x] can be or not greater than or equal another angle.
  [x] can throw InvalidArgumentException.
 
@@ -45,6 +49,6 @@ Reg Ex Failure Exception (MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegE
  [x] Regex failure exception
 
 A sum operation
- [ ] can sum two positive angles.
- [ ] can sum two negative angles.
+ [x] can sum two positive angles.
+ [x] can sum two negative angles.
 

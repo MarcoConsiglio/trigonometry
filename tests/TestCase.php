@@ -37,6 +37,11 @@ class TestCase extends PHPUnitTestCase
     protected function getRandomAngle(bool $negative = false): \MarcoConsiglio\Trigonometry\Angle
     {
         [$degrees, $minutes, $seconds] = $this->getAngleValue(FromDegrees::class, $negative);
+        if ($negative) {
+            $negative = Angle::COUNTER_CLOCKWISE;
+        } else {
+            $negative = Angle::CLOCKWISE;
+        }
         return Angle::createFromValues($degrees, $minutes, $seconds, $negative);
     }
 

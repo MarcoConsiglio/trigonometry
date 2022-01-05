@@ -145,4 +145,20 @@ interface Angle
      * @return boolean
      */
     public function lte($angle): bool;
+
+    /**
+     * Check if this angle is equal to $angle.
+     *
+     * @param mixed $angle
+     * @return boolean
+     */
+    public function isEqual($angle): bool;
+
+    /**
+     * Alias of isEqual method.
+     *
+     * @param [type] $angle
+     * @return boolean
+     */
+    public function eq($angle): bool;
 }
