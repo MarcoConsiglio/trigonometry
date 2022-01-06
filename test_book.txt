@@ -25,7 +25,7 @@ Angle (MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\Angle)
  [x] 60 minutes overflow to one degree
 
 The FromDecimal builder
- [x] can create a positive angle from a decimal value.
+ [ ] can create a positive angle from a decimal value.
  [x] can create a negative angle from a decimal value.
  [x] cannot create an angle with more than +360°.
  [x] cannot create an angle with less than -360°.
@@ -36,15 +36,15 @@ The FromDegrees builder
  [x] cannot create an angle with more than +360°.
  [x] cannot create an angle with less than -360°.
 
-From Radiant (MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromRadiant)
+The FromRadiant builder
  [x] can create a positive angle from a radiant value.
  [x] can create a negative angle from a radiant value.
  [x] cannot create an angle with more than +360°.
  [x] cannot create an angle with less than -360°.
 
-From String (MarcoConsiglio\Trigonometry\Tests\Unit\Builders\FromString)
- [x] can create a positive angle from a decimal value.
- [x] can create a negative angle from a decimal value.
+The FromString builder
+ [ ] can create a positive angle from a string value.
+ [x] can create a negative angle from a string value.
  [x] cannot create an angle with more than +360°.
  [x] cannot create an angle with less than -360°.
 

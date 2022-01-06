@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641468446">
-  <project timestamp="1641468446">
+<coverage generated="1641469769">
+  <project timestamp="1641469769">
     <file name="/home/vagrant/code/packages/trigonometry/src/Angle.php">
       <class name="MarcoConsiglio\Trigonometry\Angle" namespace="global">
         <metrics complexity="36" methods="24" coveredmethods="24" conditionals="49" coveredconditionals="49" statements="62" coveredstatements="59" elements="135" coveredelements="132"/>
       </class>
-      <line num="92" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
-      <line num="94" type="stmt" count="12"/>
-      <line num="95" type="stmt" count="12"/>
+      <line num="92" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="94" type="stmt" count="10"/>
+      <line num="95" type="stmt" count="10"/>
       <line num="103" type="method" name="__get" visibility="public" complexity="2" crap="2" count="5"/>
       <line num="105" type="stmt" count="5"/>
       <line num="106" type="stmt" count="5"/>
       <line num="108" type="stmt" count="1"/>
       <line num="119" type="method" name="createFromValues" visibility="public" complexity="1" crap="1" count="8"/>
       <line num="121" type="stmt" count="8"/>
-      <line num="132" type="method" name="createFromString" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="134" type="stmt" count="4"/>
-      <line num="144" type="method" name="createFromDecimal" visibility="public" complexity="1" crap="1" count="6"/>
-      <line num="146" type="stmt" count="6"/>
+      <line num="132" type="method" name="createFromString" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="134" type="stmt" count="3"/>
+      <line num="144" type="method" name="createFromDecimal" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="146" type="stmt" count="5"/>
       <line num="156" type="method" name="createFromRadiant" visibility="public" complexity="1" crap="1" count="4"/>
       <line num="158" type="stmt" count="4"/>
       <line num="168" type="method" name="getDegrees" visibility="public" complexity="2" crap="2" count="2"/>
@@ -30,15 +30,15 @@
       <line num="180" type="stmt" count="1"/>
       <line num="190" type="method" name="isClockwise" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="192" type="stmt" count="2"/>
-      <line num="200" type="method" name="isCounterClockwise" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="202" type="stmt" count="4"/>
+      <line num="200" type="method" name="isCounterClockwise" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="202" type="stmt" count="3"/>
       <line num="210" type="method" name="toggleDirection" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="212" type="stmt" count="2"/>
       <line num="213" type="stmt" count="2"/>
-      <line num="221" type="method" name="toDecimal" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="223" type="stmt" count="7"/>
-      <line num="224" type="stmt" count="7"/>
-      <line num="225" type="stmt" count="7"/>
+      <line num="221" type="method" name="toDecimal" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="223" type="stmt" count="6"/>
+      <line num="224" type="stmt" count="6"/>
+      <line num="225" type="stmt" count="6"/>
       <line num="233" type="method" name="toRadiant" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="235" type="stmt" count="3"/>
       <line num="245" type="method" name="isGreaterThan" visibility="public" complexity="3" crap="3" count="2"/>
@@ -80,9 +80,9 @@
       <line num="366" type="stmt" count="0"/>
       <line num="374" type="method" name="eq" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="376" type="stmt" count="2"/>
-      <line num="384" type="method" name="__toString" visibility="public" complexity="2" crap="2" count="6"/>
-      <line num="386" type="stmt" count="6"/>
-      <line num="387" type="stmt" count="6"/>
+      <line num="384" type="method" name="__toString" visibility="public" complexity="2" crap="2" count="5"/>
+      <line num="386" type="stmt" count="5"/>
+      <line num="387" type="stmt" count="5"/>
       <line num="401" type="method" name="throwInvalidArgumentException" visibility="private" complexity="2" crap="2.50" count="4"/>
       <line num="403" type="stmt" count="4"/>
       <line num="404" type="stmt" count="4"/>
@@ -98,19 +98,19 @@
       <class name="MarcoConsiglio\Trigonometry\Builders\AngleBuilder" namespace="global">
         <metrics complexity="4" methods="2" coveredmethods="2" conditionals="6" coveredconditionals="6" statements="11" coveredstatements="11" elements="19" coveredelements="19"/>
       </class>
-      <line num="79" type="method" name="fetchData" visibility="public" complexity="1" crap="1" count="12"/>
-      <line num="82" type="stmt" count="12"/>
-      <line num="83" type="stmt" count="12"/>
-      <line num="84" type="stmt" count="12"/>
-      <line num="85" type="stmt" count="12"/>
-      <line num="94" type="method" name="overflow" visibility="protected" complexity="3" crap="3.14" count="10"/>
-      <line num="96" type="stmt" count="10"/>
-      <line num="97" type="stmt" count="1"/>
-      <line num="98" type="stmt" count="1"/>
-      <line num="100" type="stmt" count="10"/>
-      <line num="101" type="stmt" count="2"/>
-      <line num="102" type="stmt" count="2"/>
-      <line num="104" type="stmt" count="10"/>
+      <line num="79" type="method" name="fetchData" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="82" type="stmt" count="10"/>
+      <line num="83" type="stmt" count="10"/>
+      <line num="84" type="stmt" count="10"/>
+      <line num="85" type="stmt" count="10"/>
+      <line num="94" type="method" name="overflow" visibility="protected" complexity="3" crap="3.14" count="9"/>
+      <line num="96" type="stmt" count="9"/>
+      <line num="97" type="stmt" count="2"/>
+      <line num="98" type="stmt" count="2"/>
+      <line num="100" type="stmt" count="9"/>
+      <line num="101" type="stmt" count="1"/>
+      <line num="102" type="stmt" count="1"/>
+      <line num="104" type="stmt" count="9"/>
       <line num="105" type="stmt" count="1"/>
       <metrics loc="104" ncloc="46" classes="1" methods="2" coveredmethods="2" conditionals="6" coveredconditionals="6" statements="11" coveredstatements="11" elements="19" coveredelements="19"/>
     </file>
@@ -118,37 +118,37 @@
       <class name="MarcoConsiglio\Trigonometry\Builders\FromDecimal" namespace="global">
         <metrics complexity="11" methods="8" coveredmethods="8" conditionals="15" coveredconditionals="15" statements="23" coveredstatements="23" elements="46" coveredelements="46"/>
       </class>
-      <line num="24" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
-      <line num="26" type="stmt" count="9"/>
-      <line num="27" type="stmt" count="9"/>
-      <line num="28" type="stmt" count="7"/>
-      <line num="35" type="method" name="checkOverflow" visibility="public" complexity="2" crap="2" count="7"/>
-      <line num="37" type="stmt" count="7"/>
+      <line num="24" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="26" type="stmt" count="7"/>
+      <line num="27" type="stmt" count="7"/>
+      <line num="28" type="stmt" count="5"/>
+      <line num="35" type="method" name="checkOverflow" visibility="public" complexity="2" crap="2" count="5"/>
+      <line num="37" type="stmt" count="5"/>
       <line num="38" type="stmt" count="2"/>
-      <line num="40" type="stmt" count="5"/>
-      <line num="48" type="method" name="exceedsRoundAngle" visibility="protected" complexity="2" crap="2" count="7"/>
-      <line num="50" type="stmt" count="7"/>
+      <line num="40" type="stmt" count="3"/>
+      <line num="48" type="method" name="exceedsRoundAngle" visibility="protected" complexity="2" crap="2" count="5"/>
+      <line num="50" type="stmt" count="5"/>
       <line num="51" type="stmt" count="2"/>
-      <line num="53" type="stmt" count="5"/>
-      <line num="61" type="method" name="calcDegrees" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="63" type="stmt" count="7"/>
-      <line num="64" type="stmt" count="7"/>
-      <line num="71" type="method" name="calcMinutes" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="73" type="stmt" count="7"/>
-      <line num="74" type="stmt" count="7"/>
-      <line num="81" type="method" name="calcSeconds" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="83" type="stmt" count="7"/>
-      <line num="84" type="stmt" count="7"/>
-      <line num="85" type="stmt" count="7"/>
-      <line num="92" type="method" name="calcSign" visibility="public" complexity="2" crap="2" count="7"/>
-      <line num="94" type="stmt" count="7"/>
-      <line num="95" type="stmt" count="7"/>
-      <line num="102" type="method" name="fetchData" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="104" type="stmt" count="7"/>
-      <line num="105" type="stmt" count="7"/>
-      <line num="106" type="stmt" count="7"/>
-      <line num="107" type="stmt" count="7"/>
-      <line num="108" type="stmt" count="7"/>
+      <line num="53" type="stmt" count="3"/>
+      <line num="61" type="method" name="calcDegrees" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="63" type="stmt" count="5"/>
+      <line num="64" type="stmt" count="5"/>
+      <line num="71" type="method" name="calcMinutes" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="73" type="stmt" count="5"/>
+      <line num="74" type="stmt" count="5"/>
+      <line num="81" type="method" name="calcSeconds" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="83" type="stmt" count="5"/>
+      <line num="84" type="stmt" count="5"/>
+      <line num="85" type="stmt" count="5"/>
+      <line num="92" type="method" name="calcSign" visibility="public" complexity="2" crap="2" count="5"/>
+      <line num="94" type="stmt" count="5"/>
+      <line num="95" type="stmt" count="5"/>
+      <line num="102" type="method" name="fetchData" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="104" type="stmt" count="5"/>
+      <line num="105" type="stmt" count="5"/>
+      <line num="106" type="stmt" count="5"/>
+      <line num="107" type="stmt" count="5"/>
+      <line num="108" type="stmt" count="5"/>
       <line num="110" type="stmt" count="1"/>
       <metrics loc="109" ncloc="59" classes="1" methods="8" coveredmethods="8" conditionals="15" coveredconditionals="15" statements="23" coveredstatements="23" elements="46" coveredelements="46"/>
     </file>
@@ -198,42 +198,42 @@
     </file>
     <file name="/home/vagrant/code/packages/trigonometry/src/Builders/FromString.php">
       <class name="MarcoConsiglio\Trigonometry\Builders\FromString" namespace="global">
-        <metrics complexity="11" methods="8" coveredmethods="7" conditionals="15" coveredconditionals="14" statements="24" coveredstatements="23" elements="47" coveredelements="44"/>
+        <metrics complexity="11" methods="8" coveredmethods="6" conditionals="15" coveredconditionals="13" statements="24" coveredstatements="23" elements="47" coveredelements="42"/>
       </class>
-      <line num="40" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="42" type="stmt" count="4"/>
-      <line num="43" type="stmt" count="4"/>
-      <line num="44" type="stmt" count="4"/>
-      <line num="45" type="stmt" count="2"/>
-      <line num="55" type="method" name="parseDegreesString" visibility="protected" complexity="1" crap="1" count="4"/>
-      <line num="57" type="stmt" count="4"/>
-      <line num="58" type="stmt" count="4"/>
-      <line num="65" type="method" name="checkOverflow" visibility="public" complexity="3" crap="3.33" count="4"/>
-      <line num="67" type="stmt" count="4"/>
+      <line num="40" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="42" type="stmt" count="3"/>
+      <line num="43" type="stmt" count="3"/>
+      <line num="44" type="stmt" count="3"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="55" type="method" name="parseDegreesString" visibility="protected" complexity="1" crap="1" count="3"/>
+      <line num="57" type="stmt" count="3"/>
+      <line num="58" type="stmt" count="3"/>
+      <line num="65" type="method" name="checkOverflow" visibility="public" complexity="3" crap="3.33" count="3"/>
+      <line num="67" type="stmt" count="3"/>
       <line num="68" type="stmt" count="2"/>
-      <line num="70" type="stmt" count="2"/>
+      <line num="70" type="stmt" count="1"/>
       <line num="71" type="stmt" count="0"/>
-      <line num="73" type="stmt" count="2"/>
-      <line num="80" type="method" name="calcDegrees" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="82" type="stmt" count="2"/>
-      <line num="83" type="stmt" count="2"/>
-      <line num="90" type="method" name="calcMinutes" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="92" type="stmt" count="2"/>
-      <line num="93" type="stmt" count="2"/>
-      <line num="100" type="method" name="calcSeconds" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="102" type="stmt" count="2"/>
-      <line num="103" type="stmt" count="2"/>
-      <line num="111" type="method" name="calcSign" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="113" type="stmt" count="2"/>
-      <line num="114" type="stmt" count="2"/>
-      <line num="121" type="method" name="fetchData" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="123" type="stmt" count="2"/>
-      <line num="124" type="stmt" count="2"/>
-      <line num="125" type="stmt" count="2"/>
-      <line num="126" type="stmt" count="2"/>
-      <line num="127" type="stmt" count="2"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="80" type="method" name="calcDegrees" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="82" type="stmt" count="1"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="90" type="method" name="calcMinutes" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="92" type="stmt" count="1"/>
+      <line num="93" type="stmt" count="1"/>
+      <line num="100" type="method" name="calcSeconds" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="102" type="stmt" count="1"/>
+      <line num="103" type="stmt" count="1"/>
+      <line num="111" type="method" name="calcSign" visibility="public" complexity="2" crap="2.50" count="1"/>
+      <line num="113" type="stmt" count="1"/>
+      <line num="114" type="stmt" count="1"/>
+      <line num="121" type="method" name="fetchData" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="123" type="stmt" count="1"/>
+      <line num="124" type="stmt" count="1"/>
+      <line num="125" type="stmt" count="1"/>
+      <line num="126" type="stmt" count="1"/>
+      <line num="127" type="stmt" count="1"/>
       <line num="129" type="stmt" count="1"/>
-      <metrics loc="128" ncloc="65" classes="1" methods="8" coveredmethods="7" conditionals="15" coveredconditionals="14" statements="24" coveredstatements="23" elements="47" coveredelements="44"/>
+      <metrics loc="128" ncloc="65" classes="1" methods="8" coveredmethods="6" conditionals="15" coveredconditionals="13" statements="24" coveredstatements="23" elements="47" coveredelements="42"/>
     </file>
     <file name="/home/vagrant/code/packages/trigonometry/src/Exceptions/AngleOverflowException.php">
       <class name="MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException" namespace="global">
@@ -313,6 +313,6 @@
       <line num="122" type="stmt" count="1"/>
       <metrics loc="121" ncloc="65" classes="1" methods="7" coveredmethods="5" conditionals="14" coveredconditionals="11" statements="26" coveredstatements="24" elements="47" coveredelements="40"/>
     </file>
-    <metrics files="12" loc="1304" ncloc="617" classes="10" methods="58" coveredmethods="55" conditionals="116" coveredconditionals="112" statements="176" coveredstatements="170" elements="350" coveredelements="337"/>
+    <metrics files="12" loc="1304" ncloc="617" classes="10" methods="58" coveredmethods="54" conditionals="116" coveredconditionals="111" statements="176" coveredstatements="170" elements="350" coveredelements="335"/>
   </project>
 </coverage>

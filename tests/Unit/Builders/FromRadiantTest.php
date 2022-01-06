@@ -5,6 +5,9 @@ use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 
+/**
+ * @testdox The FromRadiant builder
+ */
 class FromRadiantTest extends BuilderTestCase
 {
     /**
