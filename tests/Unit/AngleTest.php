@@ -81,15 +81,26 @@ class AngleTest extends TestCase
     {
         parent::setUp();
         $this->expected = $this->getRandomAngleDegrees();
-        // $this->angle = $this->getRandomAngle($this->faker->boolean());
-        // [$this->degrees, $this->minutes, $this->seconds] = $this->getRandomAngleDegrees();
-        // $this->radiant = $this->getRandomAngleRadiant();
-        // $this->expected_string = $this->degrees."° ".$this->minutes."' ".$this->seconds."\"";
-        // try {
-        //     $this->angle = Angle::createFromValues($this->degrees, $this->minutes, $this->seconds);
-        // } catch (AngleOverflowException $e){
-        //     $this->markTestSkipped($e->getMessage());
-        // }
+    }
+
+    /**
+     * @testdox has read-only properties "degrees", "minutes", "seconds", "direction".
+     */
+    public function test_getters()
+    {
+        // Arrange
+        $failure_message = function (string $property) {
+            return "$property property is not working correctly.";
+        };
+        $alfa = $this->getMockedAngle();
+        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+
+        // Act & Assert
+        $this->assertEquals(1, $alfa->degrees, $failure_message("degrees"));
+        $this->assertEquals(2, $alfa->minutes, $failure_message("minutes"));
+        $this->assertEquals(3.4, $alfa->seconds, $failure_message("seconds"));
+        $this->assertEquals(Angle::CLOCKWISE, $alfa->direction, $failure_message("direction"));
+        $this->assertNull($alfa->asganway);
     }
 
     /**
@@ -98,17 +109,18 @@ class AngleTest extends TestCase
     public function test_get_angle_values_in_simple_array()
     {
         // Arrange
-        $this->expected[] = $this->faker->randomElement([Angle::CLOCKWISE, Angle::COUNTER_CLOCKWISE]);
-        $angle = $this->createRandomAngleWithStubBuilder(FromDegrees::class, $this->expected);
+        $alfa = $this->getMockedAngle();
+        $angle_class = new ReflectionClass($alfa);
+        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
 
         // Act
-        $actual_values = $angle->getDegrees();
+        $result = $alfa->getDegrees();
 
         // Assert
         $failure_message = "Can't get angle values as a simple array.";
-        $this->assertEquals($this->expected[0], $actual_values[0], $failure_message);
-        $this->assertEquals($this->expected[1], $actual_values[1], $failure_message);
-        $this->assertEquals($this->expected[2], $actual_values[2], $failure_message);
+        $this->assertEquals(1,   $result[0], $failure_message);
+        $this->assertEquals(2,   $result[1], $failure_message);
+        $this->assertEquals(3.4, $result[2], $failure_message);
     }
 
     /**
@@ -117,17 +129,17 @@ class AngleTest extends TestCase
     public function test_get_angle_values_in_assoc_array()
     {
         // Arrange
-        $this->expected[] = $this->faker->randomElement([Angle::CLOCKWISE, Angle::COUNTER_CLOCKWISE]);
-        $angle = $this->createRandomAngleWithStubBuilder(FromDegrees::class, $this->expected);
+        $alfa = $this->getMockedAngle();
+        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
 
         // Act
-        $actual_values = $angle->getDegrees(associative: true);
+        $result = $alfa->getDegrees(associative: true);
 
         // Assert
         $failure_message = "Can't get angle values as a simple array.";
-        $this->assertEquals($this->expected[0], $actual_values["degrees"], $failure_message);
-        $this->assertEquals($this->expected[1], $actual_values["minutes"], $failure_message);
-        $this->assertEquals($this->expected[2], $actual_values["seconds"], $failure_message);
+        $this->assertEquals(1,   $result["degrees"], $failure_message);
+        $this->assertEquals(2,   $result["minutes"], $failure_message);
+        $this->assertEquals(3.4, $result["seconds"], $failure_message);
     }
 
     /**
@@ -136,12 +148,14 @@ class AngleTest extends TestCase
     public function test_can_cast_positive_angle_to_string()
     {
         // Arrange
-        $this->expected[] = Angle::CLOCKWISE;
-        $expected_string = "{$this->expected[0]}° {$this->expected[1]}' {$this->expected[2]}\"";
-        $angle = $this->createRandomAngleWithStubBuilder(FromDegrees::class, $this->expected);
+        $alfa = $this->getMockedAngle(["isCounterClockwise"]);
+        $alfa->expects($this->anyTime())->method("isCounterClockwise")->willReturn(false);
+
+        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $expected_string = "1° 2' 3.4\"";
 
         // Act & Assert
-        $this->assertEquals($expected_string, (string) $angle, $this->getCastError("string"));
+        $this->assertEquals($expected_string, (string) $alfa, $this->getCastError("string"));
     }
 
     /**
@@ -150,12 +164,13 @@ class AngleTest extends TestCase
     public function test_can_cast_negative_angle_to_string()
     {
         // Arrange
-        $this->expected[] = Angle::COUNTER_CLOCKWISE;
-        $expected_string = "-{$this->expected[0]}° {$this->expected[1]}' {$this->expected[2]}\"";
-        $angle = $this->createRandomAngleWithStubBuilder(FromDegrees::class, $this->expected);
+        $alfa = $this->getMockedAngle(["isCounterClockwise"]);
+        $alfa->expects($this->anyTime())->method("isCounterClockwise")->willReturn(true);
+        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $expected_string = "-1° 2' 3.4\"";
 
         // Act & Assert
-        $this->assertEquals($expected_string, (string) $angle, $this->getCastError("string"));
+        $this->assertEquals($expected_string, (string) $alfa, $this->getCastError("string"));
     }
 
     /**
@@ -164,20 +179,15 @@ class AngleTest extends TestCase
     public function test_can_cast_to_decimal()
     {
         // Arrange
-        $this->expected[] = $this->faker->randomElement([Angle::CLOCKWISE, Angle::COUNTER_CLOCKWISE]);
-        $angle = $this->createRandomAngleWithStubBuilder(FromDegrees::class, $this->expected);
+        $alfa = $this->getMockedAngle();
+        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
 
         // Act
-        $decimal = $angle->toDecimal();
+        $decimal = $alfa->toDecimal();
 
         // Assert
         $this->assertIsFloat($decimal);
-        [$degrees, $minutes, $seconds, $sign] = $this->expected;
-        $this->assertEquals(
-            ($degrees + $minutes / 60 + $seconds / 3600) * $sign, 
-            $decimal, 
-            $this->getCastError("decimal")
-        );
+        $this->assertEquals(round($decimal, 6, PHP_ROUND_HALF_DOWN), 1.034278);
     }
 
     /**
@@ -186,16 +196,39 @@ class AngleTest extends TestCase
     public function test_cast_to_radiant()
     {
         // Arrange
-        $this->expected[] = $this->faker->randomElement([Angle::CLOCKWISE, Angle::COUNTER_CLOCKWISE]);
-        [$degrees, $minutes, $seconds, $sign] = $this->expected;
-        $expected_radiant = deg2rad(($degrees + $minutes / 60 + $seconds / 3600) * $sign);
-        $angle = $this->createRandomAngleWithStubBuilder(FromDegrees::class, $this->expected);
+        $alfa = $this->getMockedAngle(["toDecimal"]);
+        $alfa->expects($this->once())->method("toDecimal")->willReturn(1.0342777777778);
+        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
 
         // Act
-        $radiant = $angle->toRadiant();
+        $radiant = $alfa->toRadiant();
 
         // Assert
-        $this->assertEquals($expected_radiant, $radiant, $this->getCastError("radiant"));
+        $this->assertEquals(0.018051552602, round($radiant, 12, PHP_ROUND_HALF_DOWN), $this->getCastError("radiant"));
+    }
+
+    /**
+     * @testdox can be clockwise or positive.
+     */
+    public function test_angle_is_clockwise()
+    {
+        // Arrange
+        $alfa = $this->getMockedAngle();
+
+        // Act & assert
+        $this->assertTrue($alfa->isClockwise(), "The angle is clockwise but found the opposite.");
+    }
+
+    /**
+     * @testdox can be counterclockwise or negative.
+     */
+    public function test_angle_is_counterclockwise()
+    {
+        // Arrange
+        $alfa = $this->getMockedAngle();
+
+        // Act & assert
+        $this->assertTrue($alfa->isClockwise(), "The angle is clockwise but found the opposite.");
     }
 
     /**
@@ -204,16 +237,15 @@ class AngleTest extends TestCase
     public function test_can_toggle_rotation_from_clockwise_to_counterclockwise()
     {
         // Arrange
-        $this->expected[] = Angle::CLOCKWISE;
-        $angle = $this->createRandomAngleWithStubBuilder(FromDegrees::class, $this->expected);
+        $alfa = $this->getMockedAngle([]);
+        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
 
         // Act
-        $angle->toggleDirection();
+        $alfa->toggleDirection();
 
         // Assert
         $failure_message = "The angle should be counterclockwise but found the opposite";
-        $this->assertTrue($angle->isCounterClockwise(), $failure_message);
-        $this->assertFalse($angle->isClockwise(), $failure_message);
+        $this->assertEquals(Angle::COUNTER_CLOCKWISE, $alfa->direction, $failure_message);
     }
 
     /**
@@ -222,16 +254,15 @@ class AngleTest extends TestCase
     public function test_can_toggle_rotation_from_counterclockwise_to_clockwise()
     {
         // Arrange
-        $this->expected[] = Angle::COUNTER_CLOCKWISE;
-        $angle = $this->createRandomAngleWithStubBuilder(FromDegrees::class, $this->expected);
+        $alfa = $this->getMockedAngle();
+        $this->setDegreesProperties($alfa, [1, 2, 3.4, Angle::COUNTER_CLOCKWISE]);
 
         // Act
-        $angle->toggleDirection();
+        $alfa->toggleDirection();
 
         // Assert
         $failure_message = "The angle should be clockwise but found the opposite.";
-        $this->assertTrue($angle->isClockwise(), $failure_message);
-        $this->assertFalse($angle->isCounterClockwise(), $failure_message);
+        $this->assertEquals(Angle::CLOCKWISE, $alfa->direction, $failure_message);
     }
 
     /**
@@ -249,6 +280,9 @@ class AngleTest extends TestCase
         $this->assertAngleEqual($alfa, $beta);
     }
 
+    /**
+     * @testdox can throw an exception if equal comparison has an unexpected type argument.
+     */
     public function test_equal_comparison_exception()
     {
         // Arrange
@@ -382,15 +416,15 @@ class AngleTest extends TestCase
         // Arrange
         $expected_type = ["int", "string"];
         $argument = "shabadula";
-        $angle = $this->createRandomAngleWithStubBuilder(FromDecimal::class, [90, 0, 0, Angle::CLOCKWISE]);
-        $class = new ReflectionClass($angle);
+        $alfa = $this->getMockedAngle();
+        $class = new ReflectionClass($alfa);
         $method = $class->getMethod("throwInvalidArgumentException");
         $method->setAccessible(true);
         
         // Act & Assert
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($this->getInvalidArgumentMessage($argument, $expected_type, "<the_method>", 1));
-        $method->invoke($angle, $argument, $expected_type, "<the_method>", 1);
+        $method->invoke($alfa, $argument, $expected_type, "<the_method>", 1);
     }
 
     /**
@@ -422,33 +456,6 @@ class AngleTest extends TestCase
     protected function getCastError(string $type): string
     {
         return "Something is not working when casting to $type.";
-    }
-
-    /**
-     * Sets the builder expectation.
-     *
-     * @param string $builder The builder class
-     * @param array  $data The data expected to be fetched from the builder.
-     * @return \MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder
-     */
-    protected function expectBuilderFetchData(string $builder, array $data)
-    {
-        if (class_exists($builder) && is_subclass_of($builder, AngleBuilder::class)) {
-            return $this->prophesize($builder)->fetchData()->willReturn($data)->getObjectProphecy()->reveal();
-        }
-        return null;
-    }
-
-    /**
-     * Creates a random angle with a stub builder.
-     *
-     * @param string $builder
-     * @param mixed $expected_data
-     * @return \MarcoConsiglio\Trigonometry\Angle
-     */
-    protected function createRandomAngleWithStubBuilder(string $builder, mixed $expected_data): Angle
-    {
-        return new Angle($this->expectBuilderFetchData($builder, $expected_data));
     }
 
     /**
@@ -555,32 +562,12 @@ class AngleTest extends TestCase
      * @param array $mocked_methods
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockedAngle(array $mocked_methods): MockObject
+    protected function getMockedAngle(array $mocked_methods = []): MockObject
     {
         return $this->getMockBuilder(Angle::class)
             ->onlyMethods($mocked_methods)
             ->disableOriginalConstructor()
             ->getMock();
-    }
-
-    /**
-     * Gets a stub AngleBuilder.
-     *
-     * @param string $builder_class The builder class.
-     * @param array  $builder_values The values returned by the builder.
-     * @return \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getStubBuilder(/*string $builder_class,*/ array $builder_values): MockObject
-    {
-        // if (! class_exists($builder_class) && ! class_implements(AngleBuilder::class)) {
-        //     throw new InvalidArgumentException(
-        //         __METHOD__ . " method expects parameter 1 to be class that implements the ". AngleBuilder::class ." interface."
-        //     );
-        // }
-        $builder_class = FromDegrees::class;
-        $builder = $this->getMockBuilder($builder_class)->disableOriginalConstructor()->onlyMethods(["fetchData"])->getMock();
-        $builder->method("fetchData")->willReturn($builder_values);
-        return $builder;
     }
 
     /**
@@ -591,5 +578,27 @@ class AngleTest extends TestCase
     public static function anyTime(): AnyInvokedCount
     {
         return self::any();
+    }
+
+    /**
+     * Set read-only properties with the aid of Reflection.
+     *
+     * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @param array                                         $values
+     * @return void
+     */
+    protected function setDegreesProperties(AngleInterface $angle, array $values)
+    {
+        $angle_class = new ReflectionClass($angle);
+        $degrees_property = $angle_class->getProperty("degrees");
+        $minutes_property = $angle_class->getProperty("minutes");
+        $seconds_property = $angle_class->getProperty("seconds");
+        $sign_property    = $angle_class->getProperty("direction");
+        $degrees_property->setValue($angle, $values[0]);       
+        $minutes_property->setValue($angle, $values[1]);       
+        $seconds_property->setValue($angle, $values[2]);  
+        if (isset($values[3])) {
+             $sign_property->setValue($angle, $values[3]);
+        }
     }
 }

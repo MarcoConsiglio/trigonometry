@@ -31,7 +31,7 @@ This is possible thank to the regular expression
 ```php
 Angle::ANGLE_REGEX;
 ```
-The regex treat degrees and minutes as integer numbers, but seconds are treated as one digit precision float number.
+The regex treat degrees and minutes as integer numbers, but seconds are treated as a float number.
 
 ### Decimal
 This create an angle from its decimal representation:
@@ -61,6 +61,12 @@ echo $value['degrees'];
 echo $value['minutes'];
 echo $value['seconds'];
 ```
+There is read-only properties too:
+```php
+$alfa->degrees; // 180
+$alfa->minutes; // 12
+$alfa->seconds; // 43
+```
 
 You can cast the angle to decimal:
 ```php
@@ -82,37 +88,39 @@ $delta = Angle::createFromRadiant(-3.1452910063);
 ```
 
 ## Comparison
-You can compare an angle with a float decimal or another `Angle` object.
-### $\alpha > \beta$
+You can compare an angle with a numeric value, numeric string or another `Angle` object.
+### $\alpha > \beta$ (greater than)
 ```php
 $alfa = Angle::createFromDecimal(180);
 $beta = Angle::createFromDecimal(90);
-$alfa->isGreaterThan(90);       // true
-$alfa->gt(90);                  // true
-$alfa->isGreaterThan($beta);    // true
-$alfa->gt($beta);               // true
+$gamma = Angle::createFromDecimal(360);
+$alfa->isGreaterThan(90);       // true     180 >  90
+$alfa->gt("90");                // true     180 >  90
+$alfa->isGreaterThan($gamma);   // false    180 > 360
+$alfa->gt($gamma);              // false    180 > 360
 ```
 
-### $\alpha \ge \beta$
+### $\alpha \ge \beta$ (greater than or equal)
 ```php
 $alfa = Angle::createFromDecimal(180);
 $beta = Angle::createFromDecimal(90);
-$alfa->isGreaterThanOrEqual(90);        // true
-$alfa->gte(180);                        // true
-$alfa->isGreaterThanOrEqual($beta);     // true
-$alfa->gte($beta);                      // true
+$gamma = Angle::createFromDecimal(90);
+$alfa->isGreaterThanOrEqual(90);        // true 180 >=  90
+$alfa->gte("180");                      // true 180 >= 180
+$beta->isGreaterThanOrEqual($gamma);    // true  90 >=  90
+$beta->gte(90);                         // true  90 >=  90
 ```
 
-### $\alpha < \beta$
+### $\alpha < \beta$ (less than)
 ```php
 $alfa = Angle::createFromDecimal(90);
 $beta = Angle::createFromDecimal(180);
-$alfa->isLessThan(180);     // true
-$alfa->lt(180);             // true
-$alfa->isLessThan($beta);   // true
-$alfa->lt($beta);           // true
+$alfa->isLessThan(180);     // true  90 < 180
+$alfa->lt(180);             // true  90 < 180
+$alfa->isLessThan($beta);   // true  90 < 180
+$beta->lt($alfa);           // true 180 < 90
 ```
-### $\alpha \le \beta$
+### $\alpha \le \beta$ (less than or equal)
 ```php
 $alfa = Angle::createFromDecimal(90);
 $beta = Angle::createFromDecimal(180);

@@ -81,7 +81,7 @@ class Angle implements AngleInterface
      * self::CLOCKWISE means positive angle,
      * self::COUNTERCLOCKWISE means negative angle.
      */
-    protected int $direction;
+    protected int $direction = Angle::CLOCKWISE;
 
     /**
      * Construct an angle.

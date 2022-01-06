@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641411685">
-  <project timestamp="1641411685">
+<coverage generated="1641468446">
+  <project timestamp="1641468446">
     <file name="/home/vagrant/code/packages/trigonometry/src/Angle.php">
       <class name="MarcoConsiglio\Trigonometry\Angle" namespace="global">
-        <metrics complexity="36" methods="24" coveredmethods="23" conditionals="49" coveredconditionals="48" statements="62" coveredstatements="58" elements="135" coveredelements="129"/>
+        <metrics complexity="36" methods="24" coveredmethods="24" conditionals="49" coveredconditionals="49" statements="62" coveredstatements="59" elements="135" coveredelements="132"/>
       </class>
-      <line num="92" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="21"/>
-      <line num="94" type="stmt" count="21"/>
-      <line num="95" type="stmt" count="21"/>
-      <line num="103" type="method" name="__get" visibility="public" complexity="2" crap="2.50" count="2"/>
-      <line num="105" type="stmt" count="2"/>
-      <line num="106" type="stmt" count="2"/>
-      <line num="108" type="stmt" count="0"/>
+      <line num="92" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="94" type="stmt" count="12"/>
+      <line num="95" type="stmt" count="12"/>
+      <line num="103" type="method" name="__get" visibility="public" complexity="2" crap="2" count="5"/>
+      <line num="105" type="stmt" count="5"/>
+      <line num="106" type="stmt" count="5"/>
+      <line num="108" type="stmt" count="1"/>
       <line num="119" type="method" name="createFromValues" visibility="public" complexity="1" crap="1" count="8"/>
       <line num="121" type="stmt" count="8"/>
       <line num="132" type="method" name="createFromString" visibility="public" complexity="1" crap="1" count="4"/>
@@ -30,15 +30,15 @@
       <line num="180" type="stmt" count="1"/>
       <line num="190" type="method" name="isClockwise" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="192" type="stmt" count="2"/>
-      <line num="200" type="method" name="isCounterClockwise" visibility="public" complexity="1" crap="1" count="8"/>
-      <line num="202" type="stmt" count="8"/>
+      <line num="200" type="method" name="isCounterClockwise" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="202" type="stmt" count="4"/>
       <line num="210" type="method" name="toggleDirection" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="212" type="stmt" count="2"/>
       <line num="213" type="stmt" count="2"/>
-      <line num="221" type="method" name="toDecimal" visibility="public" complexity="1" crap="1" count="8"/>
-      <line num="223" type="stmt" count="8"/>
-      <line num="224" type="stmt" count="8"/>
-      <line num="225" type="stmt" count="8"/>
+      <line num="221" type="method" name="toDecimal" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="223" type="stmt" count="7"/>
+      <line num="224" type="stmt" count="7"/>
+      <line num="225" type="stmt" count="7"/>
       <line num="233" type="method" name="toRadiant" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="235" type="stmt" count="3"/>
       <line num="245" type="method" name="isGreaterThan" visibility="public" complexity="3" crap="3" count="2"/>
@@ -92,7 +92,7 @@
       <line num="409" type="stmt" count="4"/>
       <line num="410" type="stmt" count="4"/>
       <line num="412" type="stmt" count="1"/>
-      <metrics loc="411" ncloc="202" classes="1" methods="24" coveredmethods="23" conditionals="49" coveredconditionals="48" statements="62" coveredstatements="58" elements="135" coveredelements="129"/>
+      <metrics loc="411" ncloc="202" classes="1" methods="24" coveredmethods="24" conditionals="49" coveredconditionals="49" statements="62" coveredstatements="59" elements="135" coveredelements="132"/>
     </file>
     <file name="/home/vagrant/code/packages/trigonometry/src/Builders/AngleBuilder.php">
       <class name="MarcoConsiglio\Trigonometry\Builders\AngleBuilder" namespace="global">
@@ -103,13 +103,13 @@
       <line num="83" type="stmt" count="12"/>
       <line num="84" type="stmt" count="12"/>
       <line num="85" type="stmt" count="12"/>
-      <line num="94" type="method" name="overflow" visibility="protected" complexity="3" crap="4.12" count="10"/>
+      <line num="94" type="method" name="overflow" visibility="protected" complexity="3" crap="3.14" count="10"/>
       <line num="96" type="stmt" count="10"/>
       <line num="97" type="stmt" count="1"/>
       <line num="98" type="stmt" count="1"/>
       <line num="100" type="stmt" count="10"/>
-      <line num="101" type="stmt" count="1"/>
-      <line num="102" type="stmt" count="1"/>
+      <line num="101" type="stmt" count="2"/>
+      <line num="102" type="stmt" count="2"/>
       <line num="104" type="stmt" count="10"/>
       <line num="105" type="stmt" count="1"/>
       <metrics loc="104" ncloc="46" classes="1" methods="2" coveredmethods="2" conditionals="6" coveredconditionals="6" statements="11" coveredstatements="11" elements="19" coveredelements="19"/>
@@ -313,6 +313,6 @@
       <line num="122" type="stmt" count="1"/>
       <metrics loc="121" ncloc="65" classes="1" methods="7" coveredmethods="5" conditionals="14" coveredconditionals="11" statements="26" coveredstatements="24" elements="47" coveredelements="40"/>
     </file>
-    <metrics files="12" loc="1304" ncloc="617" classes="10" methods="58" coveredmethods="54" conditionals="116" coveredconditionals="111" statements="176" coveredstatements="169" elements="350" coveredelements="334"/>
+    <metrics files="12" loc="1304" ncloc="617" classes="10" methods="58" coveredmethods="55" conditionals="116" coveredconditionals="112" statements="176" coveredstatements="170" elements="350" coveredelements="337"/>
   </project>
 </coverage>
