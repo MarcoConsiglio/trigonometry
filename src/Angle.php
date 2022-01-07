@@ -36,19 +36,19 @@ class Angle implements AngleInterface
     public const COUNTER_CLOCKWISE = -1;
 
     /**
-     * The degrees of a round angle.
+     * The max degrees an angle can have.
      */
     public const MAX_DEGREES = 360;
 
     /**
-     * The minutes of a round angle.
+     * The max minutes an angle can have.
      */
-    public const MAX_MINUTES = self::MAX_DEGREES * 60;
+    public const MAX_MINUTES = 60;
 
     /**
-     * The seconds of a round angle.
+     * The max seconds an angle can have.
      */
-    public const MAX_SECONDS = self::MAX_MINUTES * 60;
+    public const MAX_SECONDS = 60;
 
     /**
      * Radiant measure of a round angle.

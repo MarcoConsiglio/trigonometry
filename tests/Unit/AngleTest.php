@@ -3,35 +3,17 @@ namespace MarcoConsiglio\Trigonometry\Tests\Unit;
 
 use InvalidArgumentException;
 use MarcoConsiglio\Trigonometry\Angle;
-use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
-use MarcoConsiglio\Trigonometry\Tests\TestCase;
-use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
-use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
-use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
-use PHPUnit\Framework\MockObject\Builder\InvocationStubber;
+use MarcoConsiglio\Trigonometry\Tests\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Rule\AnyInvokedCount;
-use PHPUnit\Framework\MockObject\Stub\Stub;
 use ReflectionClass;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\MethodProphecy;
-use Prophecy\Prophecy\ObjectProphecy;
 
 /**
  * @testdox An angle
  */
 class AngleTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /**
-     * A mocked builder.
-     *
-     * @var \Prophecy\Prophecy\ObjectProphecy
-     */
-    protected ObjectProphecy $builder;
-
     /**
      * The expected degrees, minutes, seconds e angle direction.
      *
@@ -92,6 +74,7 @@ class AngleTest extends TestCase
         $failure_message = function (string $property) {
             return "$property property is not working correctly.";
         };
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle();
         $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
@@ -109,8 +92,8 @@ class AngleTest extends TestCase
     public function test_get_angle_values_in_simple_array()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle();
-        $angle_class = new ReflectionClass($alfa);
         $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
         // Act
@@ -129,6 +112,7 @@ class AngleTest extends TestCase
     public function test_get_angle_values_in_assoc_array()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle();
         $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
@@ -148,6 +132,7 @@ class AngleTest extends TestCase
     public function test_can_cast_positive_angle_to_string()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle(["isCounterClockwise"]);
         $alfa->expects($this->anyTime())->method("isCounterClockwise")->willReturn(false);
 
@@ -164,6 +149,7 @@ class AngleTest extends TestCase
     public function test_can_cast_negative_angle_to_string()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle(["isCounterClockwise"]);
         $alfa->expects($this->anyTime())->method("isCounterClockwise")->willReturn(true);
         $this->setAngleProperties($alfa, [1, 2, 3.4]);
@@ -179,6 +165,7 @@ class AngleTest extends TestCase
     public function test_can_cast_to_decimal()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle();
         $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
@@ -198,6 +185,7 @@ class AngleTest extends TestCase
         // Arrange
         $alfa = $this->getMockedAngle(["toDecimal"]);
         $alfa->expects($this->once())->method("toDecimal")->willReturn(1.0342777777778);
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
         // Act
@@ -213,6 +201,7 @@ class AngleTest extends TestCase
     public function test_angle_is_clockwise()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle();
 
         // Act & assert
@@ -225,6 +214,7 @@ class AngleTest extends TestCase
     public function test_angle_is_counterclockwise()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle();
 
         // Act & assert
@@ -237,6 +227,7 @@ class AngleTest extends TestCase
     public function test_can_toggle_rotation_from_clockwise_to_counterclockwise()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle([]);
         $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
@@ -254,6 +245,7 @@ class AngleTest extends TestCase
     public function test_can_toggle_rotation_from_counterclockwise_to_clockwise()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle();
         $this->setAngleProperties($alfa, [1, 2, 3.4, Angle::COUNTER_CLOCKWISE]);
 
@@ -275,8 +267,12 @@ class AngleTest extends TestCase
         $beta = $this->getMockedAngle(["toDecimal"]);
         $alfa->expects($this->anyTime())->method("toDecimal")->willReturn(180.0);
         $beta->expects($this->anyTime())->method("toDecimal")->willReturn(180.0);
-
+        
         // Act & Assert
+        /** 
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa 
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $beta 
+         */
         $this->assertAngleEqual($alfa, $beta);
     }
 
@@ -286,6 +282,7 @@ class AngleTest extends TestCase
     public function test_equal_comparison_exception()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa  */
         $alfa = $this->getMockedAngle(["toDecimal"]);
         $alfa->expects($this->never())->method("toDecimal");
 
@@ -307,8 +304,12 @@ class AngleTest extends TestCase
         $beta = $this->getMockedAngle(["toDecimal"]);
         $alfa->expects($this->atLeastOnce())->method("toDecimal")->willReturn(180.0);;
         $beta->expects($this->atLeastOnce())->method("toDecimal")->willReturn(90.0);;
-
+        
         // Act & Assert
+        /** 
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa 
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $beta 
+         */
         $this->assertAngleGreaterThan($alfa, $beta);
     }
 
@@ -318,6 +319,7 @@ class AngleTest extends TestCase
     public function test_greater_than_comparison_exception()
     {
         // Arrange
+        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa  */
         $alfa = $this->getMockedAngle(["toDecimal"]);
         $alfa->expects($this->never())->method("toDecimal");
 
@@ -346,8 +348,14 @@ class AngleTest extends TestCase
         $gamma->expects($this->anyTime())->method("isEqual")->willReturn(false);
         $gamma->expects($this->anyTime())->method("isGreaterThan")->withConsecutive(["-90"], [-90.0], [$delta])->willReturn(true);
         $delta->expects($this->anyTime())->method("toDecimal")->willReturn(-90.0);
-
+        
         // Act & Assert
+        /** 
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $beta
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $gamma
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $delta
+         */
         $this->assertAngleGreaterThanOrEqual($alfa, $beta);
         $this->assertAngleGreaterThanOrEqual($gamma, $delta);
     }
@@ -360,11 +368,19 @@ class AngleTest extends TestCase
         // Arrange
         $alfa = $this->getMockedAngle(["toDecimal"]);
         $beta = $this->getMockedAngle(["toDecimal"]);
+        $gamma = $this->getMockedAngle(["toDecimal"]);
         $alfa->expects($this->anyTime())->method("toDecimal")->willReturn(180.0);
         $beta->expects($this->anyTime())->method("toDecimal")->willReturn(360.0);
-
+        $gamma->expects($this->anyTime())->method("toDecimal")->willReturn(360.0);
+        
         // Act & Assert
+        /** 
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $beta
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $gamma
+         */
         $this->assertAngleLessThan($alfa, $beta);
+        $this->assertAngleNotLessThan($beta, $gamma);
     }
 
     /**
@@ -403,7 +419,12 @@ class AngleTest extends TestCase
         $gamma->expects($this->anyTime())->method("isEqual")->willReturn(true);
         $gamma->expects($this->never())->method("isLessThan");
         $delta->expects($this->anyTime())->method("toDecimal")->willReturn(-360.0);
-
+        /** 
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $beta
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $gamma
+         * @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $delta
+         */
         $this->assertAngleLessThanOrEqual($alfa, $beta);
         $this->assertAngleLessThanOrEqual($gamma, $delta);
     }
@@ -530,12 +551,30 @@ class AngleTest extends TestCase
     protected function assertAngleLessThan(AngleInterface $first_angle, AngleInterface $second_angle)
     {
         $failure_message = $first_angle->toDecimal() . " < " . $second_angle->toDecimal();           
-        $this->assertTrue($first_angle->isLessThan((string) $second_angle->toDecimal()));
-        $this->assertTrue($first_angle->isLessThan($second_angle->toDecimal()));
-        $this->assertTrue($first_angle->isLessThan($second_angle));
-        $this->assertTrue($first_angle->lt((string) $second_angle->toDecimal()));
-        $this->assertTrue($first_angle->lt($second_angle->toDecimal()));
-        $this->assertTrue($first_angle->lt($second_angle));
+        $this->assertTrue($first_angle->isLessThan((string) $second_angle->toDecimal()), $failure_message);
+        $this->assertTrue($first_angle->isLessThan($second_angle->toDecimal()),          $failure_message);
+        $this->assertTrue($first_angle->isLessThan($second_angle),                       $failure_message);
+        $this->assertTrue($first_angle->lt((string) $second_angle->toDecimal()),         $failure_message);
+        $this->assertTrue($first_angle->lt($second_angle->toDecimal()),                  $failure_message);
+        $this->assertTrue($first_angle->lt($second_angle),                               $failure_message);
+    }
+
+    /**
+     * Asserts that $first_angle is NOT less than $second_angle.
+     *
+     * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $first_angle
+     * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $second_angle
+     * @return void
+     */
+    protected function assertAngleNotLessThan(AngleInterface $first_angle, AngleInterface $second_angle)
+    {
+        $failure_message = $first_angle->toDecimal() . " >= " . $second_angle->toDecimal();           
+        $this->assertFalse($first_angle->isLessThan((string) $second_angle->toDecimal()), $failure_message);
+        $this->assertFalse($first_angle->isLessThan($second_angle->toDecimal()),          $failure_message);
+        $this->assertFalse($first_angle->isLessThan($second_angle),                       $failure_message);
+        $this->assertFalse($first_angle->lt((string) $second_angle->toDecimal()),         $failure_message);
+        $this->assertFalse($first_angle->lt($second_angle->toDecimal()),                  $failure_message);
+        $this->assertFalse($first_angle->lt($second_angle),                               $failure_message);
     }
 
     /**

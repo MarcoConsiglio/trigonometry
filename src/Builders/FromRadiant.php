@@ -7,7 +7,7 @@ use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 /**
  *  Builds an angle starting from a radiant value.
  */
-class FromRadiant extends FromDecimal
+class FromRadiant extends AngleBuilder
 {
     /**
      * The radiant value used to build an Angle.
@@ -25,11 +25,50 @@ class FromRadiant extends FromDecimal
     {
         $this->radiant = $radiant;
         $this->checkOverflow($radiant);
-        parent::__construct(rad2deg($radiant));
     }
 
     /**
-     * Check for overflow above/below +/-360°.
+     * Calcs degrees.
+     *
+     * @return void
+     */
+    public function calcDegrees()
+    {
+        
+    }
+
+    /**
+     * Calcs minutes.
+     *
+     * @return void
+     */
+    public function calcMinutes()
+    {
+        
+    }
+
+    /**
+     * Calcs seconds.
+     *
+     * @return void
+     */
+    public function calcSeconds()
+    {
+        
+    }
+
+    /**
+     * Calcs sign.
+     *
+     * @return void
+     */
+    public function calcSign()
+    {
+        
+    }
+
+    /**
+     * Checks for overflow above/below +/-360°.
      *
      * @param mixed $data
      * @return void
@@ -44,12 +83,21 @@ class FromRadiant extends FromDecimal
      *
      * @param float $data
      * @return void
-     * 
      */
     protected function validate(float $data)
     {
         if (abs($data) > Angle::MAX_RADIANT) {
             throw new AngleOverflowException("The angle can't be greater than 360°.");
         }
+    }
+
+    /**
+     * Fetches the data to build an Angle.
+     *
+     * @return array
+     */
+    public function fetchData(): array
+    {
+        return (new FromDecimal(rad2deg($this->radiant)))->fetchData();
     }
 }

@@ -1,7 +1,6 @@
 <?php
 namespace MarcoConsiglio\Trigonometry\Tests\Unit\Builders;
 
-use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 
@@ -23,32 +22,24 @@ class FromDegreesTest extends BuilderTestCase
      */
     public function test_exception_if_more_than_360_degrees()
     {
-        // Arrange
-        /** @var \MarcoConsiglio\Trigonometry\Builders\FromDegrees */
-        $builder = $this->getMockedAngleBuilder();
-        $this->setAngleBuilderProperties($builder, [361, 0, 0]);
-
-        // Act & Assert
+        // Assert
         $this->expectException(AngleOverflowException::class);
         $this->expectExceptionMessage("The angle degrees can't be greater than 360°.");
-        $builder->checkOverflow();
+        
+        // Arrange & Act
+        new FromDegrees(361, 0, 0);
     }
     /**
      * @testdox cannot build an angle with more than 59'.
      */
     public function test_exception_if_more_than_59_minutes()
     {
-        // Arrange
-        /** @var \MarcoConsiglio\Trigonometry\Builders\FromDegrees */
-        $builder = $this->getMockedAngleBuilder();
-        $this->setAngleBuilderProperties($builder, [0, 60, 0]);
-
         // Assert
         $this->expectException(AngleOverflowException::class);
         $this->expectExceptionMessage("The angle minutes can't be greater than 59'.");
 
-        // Act
-        $builder->checkOverflow();
+        // Arrange & Act
+        new FromDegrees(0, 60, 0);
     }
 
     /**
@@ -58,15 +49,25 @@ class FromDegreesTest extends BuilderTestCase
     {
         // Arrange
         /** @var \MarcoConsiglio\Trigonometry\Builders\FromDegrees */
-        $builder = $this->getMockedAngleBuilder();
-        $this->setAngleBuilderProperties($builder, [0, 0, 60]);
         
         // Assert
         $this->expectException(AngleOverflowException::class);
         $this->expectExceptionMessage("The angle seconds can't be greater than or equal to 60\".");
         
         // Act
-        $builder->checkOverflow();
+        new FromDegrees(0, 0, 60);
+    }
+    
+    /**
+     * @testdox can kill x2 GreaterThan mutants in the validate method.
+     */
+    public function test_missing_exception_if_equal_to_360_degrees()
+    {
+        // Arrange & Act
+        new FromDegrees(360, 0, 0);
+        
+        // Assert missing exception
+        $this->addToAssertionCount(1);
     }
 
     /**

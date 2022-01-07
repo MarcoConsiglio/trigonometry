@@ -24,17 +24,20 @@ The FromDecimal builder
  [x] can create a positive angle from a decimal value.
  [x] can create a negative angle from a decimal value.
  [x] cannot create an angle with more than +/-360°.
+ [x] can kill a GreaterThan mutant in the validate method.
 
 The FromDegrees builder
  [x] can create an angle from a degrees values.
  [x] cannot build an angle with more than 360°.
  [x] cannot build an angle with more than 59'.
  [x] cannot build an angle with 60" or more.
+ [x] can kill x2 GreaterThan mutants in the validate method.
 
 The FromRadiant builder
  [x] can create a positive angle from a radiant value.
  [x] can create a negative angle from a radiant value.
  [x] cannot create an angle with more than +/-360°.
+ [x] can kill a GreaterThan mutant in the validate method.
 
 The FromString builder
  [x] can create a positive angle from a string value.

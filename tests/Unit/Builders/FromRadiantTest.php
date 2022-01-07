@@ -29,19 +29,26 @@ class FromRadiantTest extends BuilderTestCase
     /**
      * @testdox cannot create an angle with more than +/-360°.
      */
-    public function test_cannot_create_with_excess_degrees()
+    public function test_exception_if_more_than_360_degrees()
     {
-        // Arrange
-        /** @var \MarcoConsiglio\Trigonometry\Builders\FromRadiant */
-        $builder = $this->getMockedAngleBuilder();
-        $this->setAngleBuilderProperties($builder, round(Angle::MAX_RADIANT + 0.00001, 5, PHP_ROUND_HALF_DOWN));
-
         // Assert
         $this->expectException(AngleOverflowException::class);
         $this->expectExceptionMessage("The angle can't be greater than 360°.");
 
-        // Act
-        $builder->checkOverflow();
+        // Arrange & Act
+        new FromRadiant(Angle::MAX_RADIANT + 0.00001);
+    }
+
+    /**
+     * @testdox can kill a GreaterThan mutant in the validate method.
+     */
+    public function test_missing_exception_if_equal_360_degrees()
+    {
+        // Arrange & Act
+        new FromRadiant(Angle::MAX_RADIANT);
+
+        // Assert
+        $this->addToAssertionCount(1);
     }
 
     /**

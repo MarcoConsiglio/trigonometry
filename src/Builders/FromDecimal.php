@@ -68,7 +68,7 @@ class FromDecimal extends AngleBuilder
      */
     public function calcMinutes()
     {
-        $this->minutes = intval(round((abs($this->decimal) - $this->degrees) * 60, 1, PHP_ROUND_HALF_DOWN));
+        $this->minutes = intval(round((abs($this->decimal) - $this->degrees) * Angle::MAX_MINUTES, 0, PHP_ROUND_HALF_DOWN));
     }
 
     /**
@@ -78,8 +78,13 @@ class FromDecimal extends AngleBuilder
      */
     public function calcSeconds()
     {
-        $this->seconds = abs(round((abs($this->decimal) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
-        // $this->overflow();
+        $this->seconds = round(
+            (abs($this->decimal) - 
+             $this->degrees - 
+             $this->minutes / Angle::MAX_MINUTES) * 
+             Angle::MAX_MINUTES * Angle::MAX_SECONDS, 
+            1, PHP_ROUND_HALF_DOWN
+        );
     }
 
     /**
