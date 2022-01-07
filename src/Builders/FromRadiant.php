@@ -36,23 +36,20 @@ class FromRadiant extends FromDecimal
      */
     public function checkOverflow()
     {
-        if ($this->exceedsRoundAngle($this->radiant)) {
-            throw new AngleOverflowException;
-        }
+        $this->validate($this->radiant);
     }
 
     /**
      * Tells if the radiant is more than 2 * PI.
      *
      * @param float $data
-     * @return boolean
+     * @return void
      * 
      */
-    protected final function exceedsRoundAngle(float $data): bool
+    protected function validate(float $data)
     {
         if (abs($data) > Angle::MAX_RADIANT) {
-            return true;
+            throw new AngleOverflowException("The angle can't be greater than 360°.");
         }
-        return false;
     }
 }

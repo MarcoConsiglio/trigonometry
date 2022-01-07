@@ -2,6 +2,7 @@
 namespace MarcoConsiglio\Trigonometry\Builders;
 
 use MarcoConsiglio\Trigonometry\Angle;
+use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 use MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException;
 use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
 
@@ -64,11 +65,17 @@ class FromString extends AngleBuilder
      */
     public function checkOverflow()
     {
-        if ($this->parsing_status === 0) {
-            throw new NoMatchException($this->measure);
-        }
+        // @codeCoverageIgnoreStart
         if ($this->parsing_status === false) {
             throw new RegExFailureException(preg_last_error_msg());
+        }
+        // @codeCoverageIgnoreEnd
+        if ($this->parsing_status === 0) {
+            throw new NoMatchException("Can't recognize the string $this->measure.");
+        }
+        // The Angle::REGEX is a bit buggy. It accepts degrees greater than 360°.
+        if ($this->matches[2] > 360) {
+            throw new AngleOverflowException("The angle degrees can't be greater than 360°.");
         }
     }
 

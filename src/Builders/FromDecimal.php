@@ -15,6 +15,7 @@ class FromDecimal extends AngleBuilder
      * @var float
      */
     protected float $decimal;
+
     /**
      * Constructs an AngleBuilder with a decimal value.
      *
@@ -34,23 +35,20 @@ class FromDecimal extends AngleBuilder
      */
     public function checkOverflow()
     {
-        if ($this->exceedsRoundAngle($this->decimal)) {
-            throw new AngleOverflowException;
-        }
+        $this->validate($this->decimal);
     }
 
     /**
-     * Tells if decimal is more than 360.
+     * Check if values are valid.
      *
      * @param float $data
-     * @return boolean
+     * @return void
      */
-    protected function exceedsRoundAngle(float $data): bool
+    protected function validate(float $data)
     {
         if (abs($data) > Angle::MAX_DEGREES) {
-            return true;
+            throw new AngleOverflowException("The angle can't be greather than 360°.");
         }
-        return false;
     }
 
     /**
@@ -81,7 +79,7 @@ class FromDecimal extends AngleBuilder
     public function calcSeconds()
     {
         $this->seconds = abs(round((abs($this->decimal) - $this->degrees - $this->minutes / 60) * 3600, 1, PHP_ROUND_HALF_DOWN));
-        $this->overflow();
+        // $this->overflow();
     }
 
     /**
@@ -91,7 +89,9 @@ class FromDecimal extends AngleBuilder
      */
     public function calcSign()
     {
-        $this->sign = $this->decimal >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
+        if ($this->decimal < 0) {
+            $this->sign = Angle::COUNTER_CLOCKWISE;
+        }
     }
 
     /**

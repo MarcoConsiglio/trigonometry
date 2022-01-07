@@ -93,7 +93,7 @@ class AngleTest extends TestCase
             return "$property property is not working correctly.";
         };
         $alfa = $this->getMockedAngle();
-        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
         // Act & Assert
         $this->assertEquals(1, $alfa->degrees, $failure_message("degrees"));
@@ -111,7 +111,7 @@ class AngleTest extends TestCase
         // Arrange
         $alfa = $this->getMockedAngle();
         $angle_class = new ReflectionClass($alfa);
-        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
         // Act
         $result = $alfa->getDegrees();
@@ -130,7 +130,7 @@ class AngleTest extends TestCase
     {
         // Arrange
         $alfa = $this->getMockedAngle();
-        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
         // Act
         $result = $alfa->getDegrees(associative: true);
@@ -151,7 +151,7 @@ class AngleTest extends TestCase
         $alfa = $this->getMockedAngle(["isCounterClockwise"]);
         $alfa->expects($this->anyTime())->method("isCounterClockwise")->willReturn(false);
 
-        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4]);
         $expected_string = "1° 2' 3.4\"";
 
         // Act & Assert
@@ -166,7 +166,7 @@ class AngleTest extends TestCase
         // Arrange
         $alfa = $this->getMockedAngle(["isCounterClockwise"]);
         $alfa->expects($this->anyTime())->method("isCounterClockwise")->willReturn(true);
-        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4]);
         $expected_string = "-1° 2' 3.4\"";
 
         // Act & Assert
@@ -180,7 +180,7 @@ class AngleTest extends TestCase
     {
         // Arrange
         $alfa = $this->getMockedAngle();
-        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
         // Act
         $decimal = $alfa->toDecimal();
@@ -198,7 +198,7 @@ class AngleTest extends TestCase
         // Arrange
         $alfa = $this->getMockedAngle(["toDecimal"]);
         $alfa->expects($this->once())->method("toDecimal")->willReturn(1.0342777777778);
-        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
         // Act
         $radiant = $alfa->toRadiant();
@@ -238,7 +238,7 @@ class AngleTest extends TestCase
     {
         // Arrange
         $alfa = $this->getMockedAngle([]);
-        $this->setDegreesProperties($alfa, [1, 2, 3.4]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4]);
 
         // Act
         $alfa->toggleDirection();
@@ -255,7 +255,7 @@ class AngleTest extends TestCase
     {
         // Arrange
         $alfa = $this->getMockedAngle();
-        $this->setDegreesProperties($alfa, [1, 2, 3.4, Angle::COUNTER_CLOCKWISE]);
+        $this->setAngleProperties($alfa, [1, 2, 3.4, Angle::COUNTER_CLOCKWISE]);
 
         // Act
         $alfa->toggleDirection();
@@ -578,27 +578,5 @@ class AngleTest extends TestCase
     public static function anyTime(): AnyInvokedCount
     {
         return self::any();
-    }
-
-    /**
-     * Set read-only properties with the aid of Reflection.
-     *
-     * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
-     * @param array                                         $values
-     * @return void
-     */
-    protected function setDegreesProperties(AngleInterface $angle, array $values)
-    {
-        $angle_class = new ReflectionClass($angle);
-        $degrees_property = $angle_class->getProperty("degrees");
-        $minutes_property = $angle_class->getProperty("minutes");
-        $seconds_property = $angle_class->getProperty("seconds");
-        $sign_property    = $angle_class->getProperty("direction");
-        $degrees_property->setValue($angle, $values[0]);       
-        $minutes_property->setValue($angle, $values[1]);       
-        $seconds_property->setValue($angle, $values[2]);  
-        if (isset($values[3])) {
-             $sign_property->setValue($angle, $values[3]);
-        }
     }
 }

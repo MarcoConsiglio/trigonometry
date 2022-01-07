@@ -16,6 +16,6 @@ class NoMatchException extends Exception
      */
     public function __construct(string $angle)
     {
-        parent::__construct("The string '$angle' does not match an angle measure.", 0, $this->getPrevious());
+        parent::__construct("$angle does not match an angle measure.", 0, $this->getPrevious());
     }
 }

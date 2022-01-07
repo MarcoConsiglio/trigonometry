@@ -1,6 +1,7 @@
 <?php
 namespace MarcoConsiglio\Trigonometry\Builders;
 
+use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder as AngleBuilderInterface;
 
 /**
@@ -34,7 +35,7 @@ abstract class AngleBuilder implements AngleBuilderInterface
      *
      * @var integer
      */
-    protected int $sign;  
+    protected int $sign = Angle::CLOCKWISE;  
 
     /**
      * Check for overflow above/below +/-360°.
@@ -84,22 +85,5 @@ abstract class AngleBuilder implements AngleBuilderInterface
             $this->seconds,
             $this->sign
         ];
-    }
-
-    /**
-     * Correct the properties overflow.
-     *
-     * @return void
-     */
-    protected function overflow()
-    {
-        if (round($this->seconds, 0) >= 60) {
-            $this->seconds = 0;
-            $this->minutes += 1;
-        }
-        if (round($this->minutes, 0) >= 60) {
-            $this->minutes = 0;
-            $this->degrees += 1;
-        }
     }
 }

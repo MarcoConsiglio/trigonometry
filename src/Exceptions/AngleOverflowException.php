@@ -13,8 +13,8 @@ class AngleOverflowException extends Exception
      * Default constructor.
      * @return void
      */
-    public function __construct()
+    public function __construct(string $message)
     {
-        parent::__construct("The angle can't be major than 360°.", 0, $this->getPrevious());
+        parent::__construct($message, 0, $this->getPrevious());
     }
 }

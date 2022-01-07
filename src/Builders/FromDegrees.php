@@ -3,8 +3,6 @@ namespace MarcoConsiglio\Trigonometry\Builders;
 
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
-use MarcoConsiglio\Trigonometry\Tests\TestCase;
-use MarcoConsiglio\Trigonometry\Traits\WithRounding;
 
 /**
  *  Builds an angle starting from degrees, minutes and seconds.
@@ -28,34 +26,44 @@ class FromDegrees extends AngleBuilder
         $this->seconds = $seconds;
         $this->sign = $sign;
         $this->checkOverflow();
-        $this->overflow();
     }
 
     /**
      * Check for overflow above/below +/-360°.
      *
      * @return void
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException when angle values exceeds.
      */
     public function checkOverflow()
     {
-        $seconds = $this->degrees * 60 * 60 + $this->minutes * 60 + $this->seconds;
-        if ($this->exceedsRoundAngle($seconds)) {
-            throw new AngleOverflowException;
-        }
+        $this->validate(
+            $this->degrees,
+            $this->minutes,
+            $this->seconds,
+            $this->sign
+        );
     }
 
     /**
-     * Tells if the sum of total seconds is more than 360°.
+     * Check if values are valid.
      *
-     * @param float $data
+     * @param integer $degrees
+     * @param integer $minutes
+     * @param float   $seconds
+     * @param int  $sing
      * @return boolean
      */
-    protected function exceedsRoundAngle(float $data): bool
+    protected function validate(int $degrees, int $minutes, float $seconds, int $sing = Angle::CLOCKWISE)
     {
-        if (abs($data) > Angle::MAX_SECONDS) {
-            return true;
+        if ($degrees > 360) {
+            throw new AngleOverflowException("The angle degrees can't be greater than 360°.");
         }
-        return false;
+        if ($minutes > 59) {
+            throw new AngleOverflowException("The angle minutes can't be greater than 59'.");
+        }
+        if ($seconds >= 60) {
+            throw new AngleOverflowException("The angle seconds can't be greater than or equal to 60\".");
+        }
     }
 
     /**

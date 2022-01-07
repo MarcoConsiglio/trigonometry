@@ -20,33 +20,28 @@ An angle
  [x] can be or not greater than or equal another angle.
  [x] can throw InvalidArgumentException.
 
-Angle (MarcoConsiglio\Trigonometry\Tests\Unit\Bugfixes\Angle)
- [x] 60 seconds overflow to one minute
- [x] 60 minutes overflow to one degree
-
 The FromDecimal builder
- [ ] can create a positive angle from a decimal value.
+ [x] can create a positive angle from a decimal value.
  [x] can create a negative angle from a decimal value.
- [x] cannot create an angle with more than +360°.
- [x] cannot create an angle with less than -360°.
+ [x] cannot create an angle with more than +/-360°.
 
 The FromDegrees builder
- [x] can create a positive angle from a degrees values.
- [x] can create a negative angle from a degrees values.
- [x] cannot create an angle with more than +360°.
- [x] cannot create an angle with less than -360°.
+ [x] can create an angle from a degrees values.
+ [x] cannot build an angle with more than 360°.
+ [x] cannot build an angle with more than 59'.
+ [x] cannot build an angle with 60" or more.
 
 The FromRadiant builder
  [x] can create a positive angle from a radiant value.
  [x] can create a negative angle from a radiant value.
- [x] cannot create an angle with more than +360°.
- [x] cannot create an angle with less than -360°.
+ [x] cannot create an angle with more than +/-360°.
 
 The FromString builder
- [ ] can create a positive angle from a string value.
+ [x] can create a positive angle from a string value.
  [x] can create a negative angle from a string value.
- [x] cannot create an angle with more than +360°.
- [x] cannot create an angle with less than -360°.
+ [x] cannot create an angle with more than 360°.
+ [x] cannot create an angle with more than 59'.
+ [x] cannot create an angle with more than 60".
 
 Reg Ex Failure Exception (MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegExFailureException)
  [x] Regex failure exception

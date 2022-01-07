@@ -1,6 +1,9 @@
 # trigonometry
 <img alt="GitHub" src="https://img.shields.io/github/license/marcoconsiglio/trigonometry">
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/marcoconsiglio/trigonometry">
+<a href="https://codecov.io/gh/MarcoConsiglio/trigonometry">
+  <img src="https://codecov.io/gh/MarcoConsiglio/trigonometry/branch/dev/graph/badge.svg?token=SYS9COU0XZ"/>
+</a>
 <br>
 A PHP support for angles and trigonometric functions.
 

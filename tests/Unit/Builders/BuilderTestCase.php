@@ -10,8 +10,9 @@ use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
 use MarcoConsiglio\Trigonometry\Builders\FromString;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 use MarcoConsiglio\Trigonometry\Tests\Traits\WithFailureMessage;
+use PHPUnit\Framework\MockObject\MockObject;
 
-class BuilderTestCase extends TestCase
+abstract class BuilderTestCase extends TestCase
 {
     use WithFailureMessage;
 
@@ -58,37 +59,20 @@ class BuilderTestCase extends TestCase
     }
 
     /**
-     * Test the AngleOverflowException is thrown if values exceed the round angle.
+     * Expects an $exception with a $message.
      *
-     * @param boolean $negative Specifies to test a positive or negative overflow.
-     * @param string  $builder The class builder to test.
-     * @param bool  $negative Specifies tif to test a negative angle.
+     * @param string $exception
+     * @param string $message
      * @return void
      */
-    protected function testAngleCreationException(string $builder, string $exception, bool $negative = false)
+    protected function expectExceptionWithMessage(string $exception, string $message): void
     {
-        if (class_exists($builder) && is_subclass_of($builder, AngleBuilder::class)) {
-            $value = $this->getExcessValues($builder, $negative);
-            $this->expectException($exception);
-            switch ($builder) {
-                case FromDegrees::class:
-                    Angle::createFromValues($value[0], $value[1], $value[2]);
-                    break;
-                case FromDecimal::class:
-                    Angle::createFromDecimal($value);
-                    break;
-                case FromRadiant::class:
-                    Angle::createFromRadiant($value);
-                    break;
-                case FromString::class:
-                    Angle::createFromString($value);
-                    break;
-            }         
-        }
+        $this->expectException($exception);
+        $this->expectExceptionMessage($message);
     }
 
     /**
-     * Test the Angle creation with a specified AngleBuilder.
+     * Test the Angle creation with a specified AngleBuilder. This is a Parameterized Test.
      *
      * @param mixed   $value   The value used to create the angle.
      * @param string  $builder The builder that extends AngleBuilder.
@@ -225,4 +209,28 @@ class BuilderTestCase extends TestCase
                 break;
         }
     }
+
+    /**
+     * Constructs a mocked AngleBuilder.
+     *
+     * @param array $mocked_methods
+     * @return \PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function getMockedAngleBuilder(array $mocked_methods = [], $original_constructor = false, mixed $constructor_arguments = null): MockObject
+    {
+        $builder = $this->getMockBuilder($this->getBuilderClass())
+            ->onlyMethods($mocked_methods)
+            ->disableOriginalConstructor();
+        if ($original_constructor) {
+            $builder->enableOriginalConstructor()
+                    ->setConstructorArgs(is_array($constructor_arguments) ? $constructor_arguments : [$constructor_arguments]);
+        }
+        return $builder->getMock();
+    }
+
+    /**
+     * Implemented in a concrete BuilderTestCase, returns the
+     * concrete AngleBuilder to test.
+     */
+    protected abstract function getBuilderClass(): string;
 }

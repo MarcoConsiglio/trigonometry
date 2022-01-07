@@ -16,7 +16,6 @@ class FromStringTest extends BuilderTestCase
      */
     public function test_can_create_positive_angle()
     {
-        $this->markTestSkipped("This is an Erratic Test.");
         $this->testAngleCreation(FromString::class);
     }
 
@@ -29,19 +28,59 @@ class FromStringTest extends BuilderTestCase
     }
     
     /**
-     * @testdox cannot create an angle with more than +360°.
+     * @testdox cannot create an angle with more than 360°.
      */
-    public function test_cannot_create_with_positive_excess_degrees()
+    public function test_exception_if_more_than_360_degrees()
     {
-        $this->testAngleCreationException(FromString::class, NoMatchException::class);
+        // Arrange
+        $angle_string = "361° 0' 0\"";
+
+        // Assert
+        $this->expectException(AngleOverflowException::class);
+        $this->expectExceptionMessage("The angle degrees can't be greater than 360°.");
+
+        // Act
+        new FromString($angle_string);
     }
 
     /**
-     * @testdox cannot create an angle with less than -360°.
+     * @testdox cannot create an angle with more than 59'.
      */
-    public function test_cannot_create_with_negative_excess_degrees()
+    public function test_exception_if_more_than_59_minutes()
     {
-        $this->testAngleCreationException(FromString::class, NoMatchException::class, negative: true);
+        // Arrange
+        $angle_string = "0° 60' 0\"";
 
+        // Assert
+        $this->expectException(NoMatchException::class);
+        $this->expectExceptionMessage("Can't recognize the string $angle_string.");
+
+        // Act
+        new FromString($angle_string);
+    }
+
+    /**
+     * @testdox cannot create an angle with more than 60".
+     */
+    public function test_exception_if_more_than_60_seconds()
+    {
+        // Arrange
+        $angle_string = "0° 0' 60\"";
+
+        // Assert
+        $this->expectException(NoMatchException::class);
+        $this->expectExceptionMessage("Can't recognize the string $angle_string");
+
+        // Act
+        new FromString($angle_string);
+    }
+
+    /**
+     * Returns the FromString builder class.
+     * @return string
+     */
+    protected function getBuilderClass(): string
+    {
+        return FromString::class;
     }
 }

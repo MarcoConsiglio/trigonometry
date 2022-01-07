@@ -9,6 +9,9 @@ use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
 use MarcoConsiglio\Trigonometry\Builders\FromString;
+use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
+use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder as AngleBuilderInterface;
+use ReflectionClass;
 
 class TestCase extends PHPUnitTestCase
 {
@@ -74,11 +77,17 @@ class TestCase extends PHPUnitTestCase
         return null;
     }
 
+    /**
+     * Gets random angle degrees values.
+     *
+     * @param boolean $negative
+     * @return void
+     */
     protected function getRandomAngleDegrees($negative = false)
     {
         $degrees = $this->faker->numberBetween(0, 360);
-        $minutes = $this->faker->numberBetween(0, 60);
-        $seconds = $this->faker->randomFloat(1, 0, 60);
+        $minutes = $this->faker->numberBetween(0, 59);
+        $seconds = $this->faker->randomFloat(1, 0, 59.9);
         if ($seconds == 60) {
             $minutes++;
         }
@@ -92,6 +101,12 @@ class TestCase extends PHPUnitTestCase
         return [$negative ? -$degrees : $degrees, $minutes, $seconds];
     }
 
+    /**
+     * Gets a 
+     *
+     * @param boolean $negative
+     * @return void
+     */
     protected function getRandomAngleDecimal($negative = false)
     {
         return $negative ? 
@@ -110,5 +125,58 @@ class TestCase extends PHPUnitTestCase
     {
         [$degrees, $minutes, $seconds] = $this->getRandomAngleDegrees($negative);
         return "{$degrees}° {$minutes}' {$seconds}\"";
+    }
+
+    /**
+     * Set read-only properties with the aid of Reflection.
+     *
+     * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @param array                                         $values
+     * @return void
+     */
+    protected function setAngleProperties(AngleInterface $angle, array $values)
+    {
+        $angle_class = new ReflectionClass($angle);
+        $degrees_property = $angle_class->getProperty("degrees");
+        $minutes_property = $angle_class->getProperty("minutes");
+        $seconds_property = $angle_class->getProperty("seconds");
+        $sign_property    = $angle_class->getProperty("direction");
+        $degrees_property->setValue($angle, $values[0]);       
+        $minutes_property->setValue($angle, $values[1]);       
+        $seconds_property->setValue($angle, $values[2]);  
+        if (isset($values[3])) {
+             $sign_property->setValue($angle, $values[3]);
+        }
+    }
+
+    protected function setAngleBuilderProperties(AngleBuilderInterface $builder, mixed $values)
+    {
+        $builder_class = new ReflectionClass($builder);
+        if (is_subclass_of($builder, FromDegrees::class)) {
+            $degrees_property = $builder_class->getProperty("degrees");
+            $minutes_property = $builder_class->getProperty("minutes");
+            $seconds_property = $builder_class->getProperty("seconds");
+            $sign_property    = $builder_class->getProperty("sign");
+            $degrees_property->setValue($builder, $values[0]);       
+            $minutes_property->setValue($builder, $values[1]);       
+            $seconds_property->setValue($builder, $values[2]);  
+            if (isset($values[3])) {
+                 $sign_property->setValue($builder, $values[3]);
+            }
+        }
+        if (is_subclass_of($builder, FromDecimal::class)) {
+            $decimal_property = $builder_class->getProperty("decimal");
+            $decimal_property->setValue($builder, $values);
+        }
+        if (is_subclass_of($builder, FromRadiant::class)) {
+            $radiant_property = $builder_class->getProperty("radiant");
+            $radiant_property->setValue($builder, $values);
+        }
+        if (is_subclass_of($builder, FromString::class)) {
+            $measure_property = $builder_class->getProperty("measure");
+            $parsing_status_property = $builder_class->getProperty("parsing_status");
+            $measure_property->setValue($builder, $values[0]);
+            $parsing_status_property->setValue($builder, $values[1]);
+        }
     }
 }
