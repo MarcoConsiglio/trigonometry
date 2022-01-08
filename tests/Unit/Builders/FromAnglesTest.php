@@ -65,8 +65,8 @@ class FromAnglesTest extends BuilderTestCase
         $second_angle = $this->getMockedAngle(
             mocked_methods: ["toDecimal"]
         );
-        $first_decimal = $this->faker->randomFloat(1, 180, 360);
-        $second_decimal = $this->faker->randomFloat(1, 180, 360);
+        $first_decimal = $this->faker->randomFloat(1, 180.1, 360);
+        $second_decimal = $this->faker->randomFloat(1, 180.1, 360);
         $first_angle->expects($this->anyTime())->method("toDecimal")->willReturn($first_decimal);
         $second_angle->expects($this->anyTime())->method("toDecimal")->willReturn($second_decimal);
         $builder = $this->getMockedAngleBuilder(
@@ -103,8 +103,8 @@ class FromAnglesTest extends BuilderTestCase
         $second_angle = $this->getMockedAngle(
             mocked_methods: ["toDecimal"]
         );
-        $first_decimal = $this->faker->randomFloat(1, -360, -180);
-        $second_decimal = $this->faker->randomFloat(1, -360, -180);
+        $first_decimal = $this->faker->randomFloat(1, -360, -180.1);
+        $second_decimal = $this->faker->randomFloat(1, -360, -180.1);
         $first_angle->expects($this->anyTime())->method("toDecimal")->willReturn($first_decimal);
         $second_angle->expects($this->anyTime())->method("toDecimal")->willReturn($second_decimal);
         $builder = $this->getMockedAngleBuilder(

@@ -162,13 +162,8 @@ $gamma = new Sum($alfa, $beta);
 ```
 You can sum negative angles to.
 
-# For developers
-## Tests
-By launching this command you can produce a testbook in `/TESTS.md`, a coverage report in `/tests/coverage_report/index.html` and output tests results on the command line:
-```bash
-vendor/bin/phpunit --testdox
-```
+# For contributors
 ## UML Diagrams
-Whenever it is possible, it will be placed in every source folder a `classes.jpg` file to show an UML class diagram.
+You can find a class diagram at `docs/classes.png`.
 ## phpDoc
 You can read the code documentation at `docs/index.html`.

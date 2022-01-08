@@ -1,5 +1,59 @@
+An angle
+ [x] has read-only properties "degrees", "minutes", "seconds", "direction".
+ [x] can give degrees, minutes and seconds wrapped in a simple array.
+ [x] can give degrees, minutes and seconds wrapped in an associative array.
+ [x] can be printed in a positive textual representation.
+ [x] can be printed in a negative textual representation.
+ [x] can be casted to decimal.
+ [x] can be casted to radiant.
+ [x] can be clockwise or positive.
+ [x] can be counterclockwise or negative.
+ [x] can be reversed from clockwise to counterclockwise.
+ [x] can be reversed from counterclockwise to clockwise.
+ [x] can be equal or not to another angle.
+ [x] can throw an exception if equal comparison has an unexpected type argument.
+ [x] can be or not greater than another.
+ [x] can throw an exception if greater than comparison has an unexpected type argument.
+ [x] can be or not greater than or equal another angle.
+ [x] can be or not less than another angle.
+ [x] can throw an exception if less than comparison has an unexpected type argument.
+ [x] can be or not greater than or equal another angle.
+ [x] can throw InvalidArgumentException.
+
 The FromAngles builder
  [x] can sums two angles.
  [x] corrects positive excess if the sum is greater than 360°.
  [x] corrects negative excess if the sum is less than -360°.
+
+The FromDecimal builder
+ [x] can create a positive angle from a decimal value.
+ [x] can create a negative angle from a decimal value.
+ [x] cannot create an angle with more than +/-360°.
+ [x] can kill a GreaterThan mutant in the validate method.
+
+The FromDegrees builder
+ [x] can create an angle from a degrees values.
+ [x] cannot build an angle with more than 360°.
+ [x] cannot build an angle with more than 59'.
+ [x] cannot build an angle with 60" or more.
+ [x] can kill x2 GreaterThan mutants in the validate method.
+
+The FromRadiant builder
+ [x] can create a positive angle from a radiant value.
+ [x] can create a negative angle from a radiant value.
+ [x] cannot create an angle with more than +/-360°.
+ [x] can kill a GreaterThan mutant in the validate method.
+
+The FromString builder
+ [x] can create a positive angle from a string value.
+ [x] can create a negative angle from a string value.
+ [x] cannot create an angle with more than 360°.
+ [x] cannot create an angle with more than 59'.
+ [x] cannot create an angle with more than 60".
+
+Reg Ex Failure Exception (MarcoConsiglio\Trigonometry\Tests\Unit\Exceptions\RegExFailureException)
+ [x] Regex failure exception
+
+A sum operation
+ [x] can be performed with a SumBuilder.
 
