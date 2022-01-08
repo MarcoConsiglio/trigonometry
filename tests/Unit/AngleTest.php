@@ -594,28 +594,4 @@ class AngleTest extends TestCase
         $this->assertTrue($first_angle->lte($second_angle->toDecimal()),                         $failure_message);
         $this->assertTrue($first_angle->lte($second_angle),                                      $failure_message);
     }
-
-    /**
-     * Constructs a mocked Angle.
-     *
-     * @param array $mocked_methods
-     * @return \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getMockedAngle(array $mocked_methods = []): MockObject
-    {
-        return $this->getMockBuilder(Angle::class)
-            ->onlyMethods($mocked_methods)
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * Alias of any method.
-     *
-     * @return \PHPUnit\Framework\MockObject\Rule\AnyInvokedCount
-     */
-    public static function anyTime(): AnyInvokedCount
-    {
-        return self::any();
-    }
 }

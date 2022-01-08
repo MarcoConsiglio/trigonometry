@@ -73,7 +73,7 @@ abstract class AngleBuilder implements AngleBuilderInterface
     abstract public function calcSign();
 
     /**
-     * Fetch data to build.
+     * Fetch data to build an Angle class.
      *
      * @return array
      */

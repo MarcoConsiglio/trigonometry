@@ -5,12 +5,15 @@ use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Faker\Factory;
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Builders\AngleBuilder;
+use MarcoConsiglio\Trigonometry\Builders\FromAngles;
 use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
 use MarcoConsiglio\Trigonometry\Builders\FromString;
 use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
 use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder as AngleBuilderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Rule\AnyInvokedCount;
 use ReflectionClass;
 
 class TestCase extends PHPUnitTestCase
@@ -22,9 +25,11 @@ class TestCase extends PHPUnitTestCase
      */
     protected $faker;
 
-    /*
-        * This method is called before each test.
-        */
+    /**
+     * This method is called before each test.
+     *
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -81,7 +86,7 @@ class TestCase extends PHPUnitTestCase
      * Gets random angle degrees values.
      *
      * @param boolean $negative
-     * @return void
+     * @return array
      */
     protected function getRandomAngleDegrees($negative = false)
     {
@@ -178,5 +183,45 @@ class TestCase extends PHPUnitTestCase
             $measure_property->setValue($builder, $values[0]);
             $parsing_status_property->setValue($builder, $values[1]);
         }
+        if (is_subclass_of($builder, FromAngles::class)) {
+            $first_angle_property = $builder_class->getProperty("first_angle");
+            $second_angle_property = $builder_class->getProperty("second_angle");
+            $first_angle_property->setValue($builder, $values[0]);
+            $second_angle_property->setValue($builder, $values[1]);
+        }
+    }
+
+    /**
+     * Constructs a mocked Angle.
+     *
+     * @param array $mocked_methods
+     * @return \PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function getMockedAngle(
+        array $mocked_methods = [], 
+        bool $original_constructor = false, 
+        mixed $constructor_arguments = []
+    ): MockObject
+    {
+        $angle = $this->getMockBuilder(Angle::class)
+            ->onlyMethods($mocked_methods)
+            ->disableOriginalConstructor();
+            if ($original_constructor) {
+                $angle->enableOriginalConstructor()
+                        ->setConstructorArgs(
+                            is_array($constructor_arguments) ? $constructor_arguments : [$constructor_arguments]
+                        );
+            }
+        return $angle->getMock();
+    }
+
+    /**
+     * Alias of any method.
+     *
+     * @return \PHPUnit\Framework\MockObject\Rule\AnyInvokedCount
+     */
+    public static function anyTime(): AnyInvokedCount
+    {
+        return self::any();
     }
 }

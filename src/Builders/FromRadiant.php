@@ -31,6 +31,7 @@ class FromRadiant extends AngleBuilder
      * Calcs degrees.
      *
      * @return void
+     * @codeCoverageIgnore
      */
     public function calcDegrees()
     {
@@ -41,6 +42,7 @@ class FromRadiant extends AngleBuilder
      * Calcs minutes.
      *
      * @return void
+     * @codeCoverageIgnore
      */
     public function calcMinutes()
     {
@@ -51,6 +53,7 @@ class FromRadiant extends AngleBuilder
      * Calcs seconds.
      *
      * @return void
+     * @codeCoverageIgnore
      */
     public function calcSeconds()
     {
@@ -61,6 +64,7 @@ class FromRadiant extends AngleBuilder
      * Calcs sign.
      *
      * @return void
+     * @codeCoverageIgnore
      */
     public function calcSign()
     {

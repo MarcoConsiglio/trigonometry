@@ -211,12 +211,14 @@ abstract class BuilderTestCase extends TestCase
     }
 
     /**
-     * Constructs a mocked AngleBuilder.
+     * Constructs a mocked AngleBuilder based on the getBuilderClass method.
      *
-     * @param array $mocked_methods
+     * @param array $mocked_methods The methods you want to hide or mock.
+     * @param boolean $original_constructor Wheater you want to enable the original class constructor or a mocked one.
+     * @param mixed $constructor_arguments If $oroginal_constructor = true pass here the constructor arguments.
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockedAngleBuilder(array $mocked_methods = [], $original_constructor = false, mixed $constructor_arguments = null): MockObject
+    protected function getMockedAngleBuilder(array $mocked_methods = [], $original_constructor = false, mixed $constructor_arguments = []): MockObject
     {
         $builder = $this->getMockBuilder($this->getBuilderClass())
             ->onlyMethods($mocked_methods)
@@ -231,6 +233,8 @@ abstract class BuilderTestCase extends TestCase
     /**
      * Implemented in a concrete BuilderTestCase, returns the
      * concrete AngleBuilder to test.
+     * 
+     * @return string
      */
     protected abstract function getBuilderClass(): string;
 }
