@@ -4,110 +4,112 @@ namespace MarcoConsiglio\Trigonometry\Builders;
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 
+/**
+ * Builds an angle starting from a decimal value.
+ */
 class FromDecimal extends AngleBuilder
 {
     /**
-     * Builder constructor.
+     * The decimal value used to build an angle.
+     *
+     * @var float
+     */
+    protected float $decimal;
+
+    /**
+     * Constructs an AngleBuilder with a decimal value.
      *
      * @param float $decimal
+     * @return void
      */
     public function __construct(float $decimal)
     {
-        $this->checkOverflow($decimal);
-        $this->calcDegrees($decimal);
-        $this->calcMinutes($decimal);
-        $this->calcSeconds($decimal);
-        $this->calcSign($decimal);
+        $this->decimal = $decimal;
+        $this->checkOverflow();
     }
 
     /**
-     * Check for overflow above 360°.
+     * Check for overflow above/below +/-360°.
      *
-     * @param mixed $data
      * @return void
      */
-    public function checkOverflow($data)
+    public function checkOverflow()
     {
-        if ($this->exceedsRoundAngle($data)) {
-            throw new AngleOverflowException;
-        }
+        $this->validate($this->decimal);
     }
 
     /**
-     * Tells if decimal is more than 360.
+     * Check if values are valid.
      *
      * @param float $data
-     * @return boolean
+     * @return void
      */
-    protected final function exceedsRoundAngle(float $data): bool
+    protected function validate(float $data)
     {
         if (abs($data) > Angle::MAX_DEGREES) {
-            return true;
+            throw new AngleOverflowException("The angle can't be greather than 360°.");
         }
-        return false;
     }
 
     /**
      * Calc degrees.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcDegrees($data)
+    public function calcDegrees()
     {
-        $this->degrees = intval(abs($data),);
+        $this->degrees = intval(abs($this->decimal));
     }
 
     /**
      * Calc minutes.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcMinutes($data)
+    public function calcMinutes()
     {
-        $this->minutes = intval((abs($data) - $this->degrees) * 60);
+        $this->minutes = intval(round((abs($this->decimal) - $this->degrees) * Angle::MAX_MINUTES, 0, PHP_ROUND_HALF_DOWN));
     }
 
     /**
      * Calc seconds.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcSeconds($data)
+    public function calcSeconds()
     {
         $this->seconds = round(
-            (abs($data) - $this->degrees - $this->minutes / 60) * 3600, 
-            1,
-            PHP_ROUND_HALF_DOWN
+            (abs($this->decimal) - 
+             $this->degrees - 
+             $this->minutes / Angle::MAX_MINUTES) * 
+             Angle::MAX_MINUTES * Angle::MAX_SECONDS, 
+            1, PHP_ROUND_HALF_DOWN
         );
-        $this->overflow();
     }
 
     /**
      * Calc sign.
      *
-     * @param mixed $data
      * @return void
      */
-    public function calcSign($data)
+    public function calcSign()
     {
-        $this->sign = $data >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
+        if ($this->decimal < 0) {
+            $this->sign = Angle::COUNTER_CLOCKWISE;
+        }
     }
 
     /**
-     * Fetch data for building.
+     * Fetches the data to build an Angle.
      *
      * @return array
      */
     public function fetchData(): array
     {
-        return [
-            $this->degrees,
-            $this->minutes,
-            $this->seconds,
-            $this->sign
-        ];
+        $this->calcDegrees();
+        $this->calcMinutes();
+        $this->calcSeconds();
+        $this->calcSign();
+        return parent::fetchData();
     }
 }

@@ -6,14 +6,16 @@ use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
 use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
 use MarcoConsiglio\Trigonometry\Builders\FromString;
-use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
-use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
-use MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException;
 use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
 use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder;
 
 /**
  * Represents an angle.
+ * 
+ * @property-read int $degrees
+ * @property-read int $minutes
+ * @property-read float $seconds
+ * @property-read int $direction
  */
 class Angle implements AngleInterface
 {
@@ -34,19 +36,19 @@ class Angle implements AngleInterface
     public const COUNTER_CLOCKWISE = -1;
 
     /**
-     * The degrees of a round angle.
+     * The max degrees an angle can have.
      */
     public const MAX_DEGREES = 360;
 
     /**
-     * The minutes of a round angle.
+     * The max minutes an angle can have.
      */
-    public const MAX_MINUTES = self::MAX_DEGREES * 60;
+    public const MAX_MINUTES = 60;
 
     /**
-     * The seconds of a round angle.
+     * The max seconds an angle can have.
      */
-    public const MAX_SECONDS = self::MAX_MINUTES * 60;
+    public const MAX_SECONDS = 60;
 
     /**
      * Radiant measure of a round angle.
@@ -75,24 +77,39 @@ class Angle implements AngleInterface
     protected float $seconds;
 
     /** 
-     * The angle direction. 
+     * The angle direction.
+     *  
      * self::CLOCKWISE means positive angle,
      * self::COUNTERCLOCKWISE means negative angle.
      */
-    protected int $direction;
+    protected int $direction = Angle::CLOCKWISE;
 
     /**
      * Construct an angle.
      *
-     * @param \MarcoConsiglio\Trigonometry\Builders\AngleBuilder $builder
+     * @param \MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder $builder
+     * @return void
      */
-    protected function __construct(AngleBuilder $builder)
+    public function __construct(AngleBuilder $builder)
     {
         [$this->degrees, $this->minutes, $this->seconds, $this->direction] = $builder->fetchData();
     }
 
     /**
-     * Creates an angle from its values in degrees.
+     * Getters.
+     *
+     * @param string $property
+     * @return mixed
+     */
+    public function __get(string $property)
+    {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+
+    /**
+     * Creates an angle from its values.
      *
      * @param integer $degrees
      * @param integer $minutes
@@ -139,7 +156,7 @@ class Angle implements AngleInterface
      */
     public static function createFromRadiant(float $radiant): Angle
     {
-        return new Angle(new FromRadiant($radiant));
+         return new Angle(new FromRadiant($radiant));
     }
 
     /**
@@ -153,13 +170,13 @@ class Angle implements AngleInterface
     {
         if ($associative) {
             return [
-                "degrees" => $this->degrees,
+                "degrees" => $this->degrees * $this->direction,
                 "minutes" => $this->minutes,
                 "seconds" => $this->seconds
             ];
         } else {
             return [
-                $this->degrees,
+                $this->degrees * $this->direction,
                 $this->minutes,
                 $this->seconds
             ];
@@ -171,7 +188,7 @@ class Angle implements AngleInterface
      *
      * @return boolean
      */
-    public final function isClockwise(): bool
+    public function isClockwise(): bool
     {
         return $this->direction == self::CLOCKWISE;
     }
@@ -191,18 +208,18 @@ class Angle implements AngleInterface
      *
      * @return Angle
      */
-    public final function toggleDirection(): Angle
+    public function toggleDirection(): Angle
     {
         $this->direction *= self::COUNTER_CLOCKWISE;
         return $this;
     }
 
     /**
-     * Get the decimal degrees representation of this angle.
+     * Gets the decimal degrees representation of this angle.
      *
      * @return float
      */
-    public final function toDecimal(): float
+    public function toDecimal(): float
     {
         $decimal = $this->degrees + $this->minutes / 60 + $this->seconds / 3600;
         $decimal *= $this->direction;
@@ -210,7 +227,7 @@ class Angle implements AngleInterface
     }
 
     /**
-     * Get the radiant representation of this angle.
+     * Gets the radiant representation of this angle.
      *
      * @return float
      */
@@ -233,7 +250,7 @@ class Angle implements AngleInterface
         } elseif ($angle instanceof AngleInterface) {
             return $this->toDecimal() > $angle->toDecimal();
         }
-        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
     }
 
     /**
@@ -257,18 +274,10 @@ class Angle implements AngleInterface
      */
     public function isGreaterThanOrEqual($angle): bool
     {
-        if (is_numeric($angle)) {
-            if ($this->toDecimal() == $angle) {
-                return true;
-            }
-            return $this->isGreaterThan($angle);
-        } elseif ($angle instanceof AngleInterface) {
-            if ($this->toDecimal() == $angle->toDecimal()) {
-                return true;
-            }
-            return $this->isGreaterThan($angle);
+        if ($this->isEqual($angle)) {
+            return true;
         }
-        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+        return $this->isGreaterThan($angle);
     }
 
     /**
@@ -297,7 +306,7 @@ class Angle implements AngleInterface
         } elseif ($angle instanceof AngleInterface) {
             return $this->toDecimal() < $angle->toDecimal();
         }
-        throw new InvalidArgumentException("Expected an int, float or Angle object, but received ".gettype($angle));
+        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
     }
 
     /**
@@ -321,20 +330,13 @@ class Angle implements AngleInterface
      */
     public function isLessThanOrEqual($angle): bool
     {
-        if (is_numeric($angle)) {
-            if ($this->toDecimal() == $angle) {
-                return true;
-            }
-            return $this->isLessThan($angle);
-        } elseif ($angle instanceof AngleInterface) {
-            if ($this->toDecimal() == $angle->toDecimal()) {
-                return true;
-            }
-            return $this->isLessThan($angle);
+        if ($this->isEqual($angle)) {
+            return true;
         }
-        throw new InvalidArgumentException("");
+        return $this->isLessThan($angle);
     }
 
+    
     /**
      * Alias of isLessThanOrEqual method.
      *
@@ -348,6 +350,34 @@ class Angle implements AngleInterface
     }
 
     /**
+     * Check if this angle is equal to $angle.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function isEqual($angle): bool
+    {
+        if (is_numeric($angle)) {
+            return $this->toDecimal() == $angle;
+        }
+        if ($angle instanceof AngleInterface) {
+            return $this->toDecimal() == $angle->toDecimal();
+        }
+        $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+    }
+
+    /**
+     * Alias of isEqual method.
+     *
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @return boolean
+     */
+    public function eq($angle): bool
+    {
+        return $this->isEqual($angle);
+    }
+
+    /**
      * Get a textual representation of this angle in degrees.
      *
      * @return string
@@ -356,5 +386,28 @@ class Angle implements AngleInterface
     {
         $sign = $this->isCounterClockwise() ? "-" : "";
         return $sign.$this->degrees."° ".$this->minutes."' ".$this->seconds."\"";
+    }
+
+    /**
+     * Throws an InvalidArgumentException specifing the expected argument types and
+     * the actual argument type.
+     *
+     * @param mixed   $argument The actual argument throwing the exception.
+     * @param array   $expected_types A list of expected types.
+     * @param string  $method The method throwing the exception. Use __METHOD__ constant as argument.
+     * @param integer $parameter_position The parameter position.
+     * @return void
+     * @throws \InvalidArgumentException when calling this method.
+     */
+    private function throwInvalidArgumentException(mixed $argument, array $expected_types, string $method, int $parameter_position)
+    {
+        $last_type = "";
+        $total_types = count($expected_types);
+        if ($total_types >= 2) {
+            $last_type = " or ".$expected_types[$total_types - 1];
+            unset($expected_types[$total_types - 1]);
+        }
+        $message = "$method method expects parameter $parameter_position to be ".implode(", ", $expected_types).$last_type.", but found ".gettype($argument);
+        throw new InvalidArgumentException($message);
     }
 }

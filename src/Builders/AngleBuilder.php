@@ -1,10 +1,11 @@
 <?php
 namespace MarcoConsiglio\Trigonometry\Builders;
 
+use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder as AngleBuilderInterface;
 
 /**
- * Represents the concept of an angle builder.
+ * Represents an angle builder.
  */
 abstract class AngleBuilder implements AngleBuilderInterface
 {
@@ -34,34 +35,55 @@ abstract class AngleBuilder implements AngleBuilderInterface
      *
      * @var integer
      */
-    protected int $sign;  
-
-    abstract public function checkOverflow($data);
-
-    abstract public function calcDegrees($data);
-
-    abstract public function calcMinutes($data);
-
-    abstract public function calcSeconds($data);
-
-    abstract public function calcSign($data);
-
-    abstract public function fetchData(): array;
+    protected int $sign = Angle::CLOCKWISE;  
 
     /**
-     * Correct the properties overflow.
+     * Check for overflow above/below +/-360°.
      *
      * @return void
      */
-    protected function overflow()
+    abstract public function checkOverflow();
+
+    /**
+     * Calc degrees.
+     *
+     * @return void
+     */
+    abstract public function calcDegrees();
+
+    /**
+     * Calc minutes.    
+     *
+     * @return void
+     */
+    abstract public function calcMinutes();
+
+    /**
+     * Calc seconds.
+     *
+     * @return void
+     */
+    abstract public function calcSeconds();
+
+    /**
+     * Calc sign.
+     *
+     * @return void
+     */
+    abstract public function calcSign();
+
+    /**
+     * Fetch data to build an Angle class.
+     *
+     * @return array
+     */
+    public function fetchData(): array
     {
-        if ($this->seconds >= 60) {
-            $this->seconds = 0;
-            $this->minutes += 1;
-        }
-        if ($this->minutes >= 60) {
-            $this->minutes = 0;
-            $this->degrees += 1;
-        }
+        return [
+            $this->degrees,
+            $this->minutes,
+            $this->seconds,
+            $this->sign
+        ];
     }
 }

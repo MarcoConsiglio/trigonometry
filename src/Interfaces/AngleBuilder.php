@@ -6,15 +6,44 @@ namespace MarcoConsiglio\Trigonometry\Interfaces;
  */
 interface AngleBuilder
 {
-    public function checkOverflow($data);
+    /**
+     * Check for overflow above/below +/-360°.
+     *
+     * @return void
+     */
+    public function checkOverflow();
 
-    public function calcDegrees($data);
+    /**
+     * Calc degrees.
+     *
+     * @return void
+     */
+    public function calcDegrees();
 
-    public function calcMinutes($data);
+    /**
+     * Calc minutes.
+     *
+     * @return void
+     */
+    public function calcMinutes();
 
-    public function calcSeconds($data);
+    /**
+     * Calc seconds.
+     * @return void
+     */
+    public function calcSeconds();
 
-    public function calcSign($data);
+    /**
+     * Calc sign.
+     *
+     * @return void
+     */
+    public function calcSign();
 
+    /**
+     * Fetch the data that will bee used for an angle.
+     *
+     * @return array
+     */
     public function fetchData(): array;
 }

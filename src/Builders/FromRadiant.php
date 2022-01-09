@@ -5,116 +5,103 @@ use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 
 /**
- * Can build Angle objects from degrees values.
+ *  Builds an angle starting from a radiant value.
  */
 class FromRadiant extends AngleBuilder
 {
-
     /**
-     * Another builder.
+     * The radiant value used to build an Angle.
      *
-     * @var \MarcoConsiglio\Trigonometry\Builders\FromDecimal
+     * @var float
      */
-    protected \MarcoConsiglio\Trigonometry\Builders\FromDecimal $builder;
+    protected float $radiant;
 
     /**
-     * Builder constructor
+     * Constructs an AngleBuilder with a decimal value.
      *
-     * @param integer $degrees
-     * @param integer $minutes
-     * @param integer $seconds
-     * @param integer $sign
+     * @param float $radiant
      */
     public function __construct(float $radiant)
     {
+        $this->radiant = $radiant;
         $this->checkOverflow($radiant);
-        $this->builder = new FromDecimal(rad2deg($radiant));
     }
 
     /**
-     * Check for overflow above 360°.
+     * Calcs degrees.
+     *
+     * @return void
+     * @codeCoverageIgnore
+     */
+    public function calcDegrees()
+    {
+        
+    }
+
+    /**
+     * Calcs minutes.
+     *
+     * @return void
+     * @codeCoverageIgnore
+     */
+    public function calcMinutes()
+    {
+        
+    }
+
+    /**
+     * Calcs seconds.
+     *
+     * @return void
+     * @codeCoverageIgnore
+     */
+    public function calcSeconds()
+    {
+        
+    }
+
+    /**
+     * Calcs sign.
+     *
+     * @return void
+     * @codeCoverageIgnore
+     */
+    public function calcSign()
+    {
+        
+    }
+
+    /**
+     * Checks for overflow above/below +/-360°.
      *
      * @param mixed $data
      * @return void
      */
-    public function checkOverflow($data)
+    public function checkOverflow()
     {
-        if ($this->exceedsRoundAngle($data)) {
-            throw new AngleOverflowException;
-        }
+        $this->validate($this->radiant);
     }
 
     /**
      * Tells if the radiant is more than 2 * PI.
      *
      * @param float $data
-     * @return boolean
-     * 
+     * @return void
      */
-    protected final function exceedsRoundAngle(float $data): bool
+    protected function validate(float $data)
     {
         if (abs($data) > Angle::MAX_RADIANT) {
-            return true;
+            throw new AngleOverflowException("The angle can't be greater than 360°.");
         }
-        return false;
     }
 
     /**
-     * Calc degrees.
-     *
-     * @param mixed $data
-     * @return void
-     * @codeCoverageIgnore
-     * 
-     */
-    public function calcDegrees($data)
-    {
-        
-    }
-
-    /**
-     * Calc minutes.
-     *
-     * @param mixed $data
-     * @return void
-     * @codeCoverageIgnore
-     */
-    public function calcMinutes($data)
-    {
-        
-    }
-
-    /**
-     * Calc seconds.
-     *
-     * @param mixed $data
-     * @return void
-     * @codeCoverageIgnore
-     */
-    public function calcSeconds($data)
-    {
-       
-    }
-
-    /**
-     * Calc sign.
-     *
-     * @param mixed $data
-     * @return void
-     * @codeCoverageIgnore
-     */
-    public function calcSign($data)
-    {
-        
-    }
-
-    /**
-     * Fetch data for building.
+     * Fetches the data to build an Angle.
      *
      * @return array
      */
     public function fetchData(): array
     {
-        return $this->builder->fetchData();
+        return (new FromDecimal(rad2deg($this->radiant)))->fetchData();
     }
 }

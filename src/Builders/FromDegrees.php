@@ -3,91 +3,100 @@ namespace MarcoConsiglio\Trigonometry\Builders;
 
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
-use MarcoConsiglio\Trigonometry\Tests\TestCase;
-use MarcoConsiglio\Trigonometry\Traits\WithRounding;
 
 /**
- * Can build Angle objects from degrees values.
+ *  Builds an angle starting from degrees, minutes and seconds.
  */
 class FromDegrees extends AngleBuilder
 {
+    protected $data;
     /**
-     * Builder constructor
+     * Constructs and AngleBuilder with degrees, minutes, seconds and direction.
      *
      * @param integer $degrees
      * @param integer $minutes
      * @param float $seconds
      * @param integer $sign
+     * @return void
      */
     public function __construct(int $degrees, int $minutes, float $seconds, int $sign = Angle::CLOCKWISE)
     {
-        $this->calcDegrees($degrees);
-        $this->calcMinutes($minutes);
-        $this->calcSeconds($seconds);
-        $this->calcSign($sign);
+        $this->degrees = $degrees;
+        $this->minutes = $minutes;
+        $this->seconds = $seconds;
+        $this->sign = $sign;
         $this->checkOverflow();
     }
 
     /**
-     * Check for overflow above 360°.
+     * Check for overflow above/below +/-360°.
      *
-     * @param mixed $data
      * @return void
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException when angle values exceeds.
      */
-    public function checkOverflow($data = null)
+    public function checkOverflow()
     {
-        $seconds = $this->degrees * 60 * 60 + $this->minutes * 60 + $this->seconds;
-        if ($this->exceedsRoundAngle($seconds)) {
-            throw new AngleOverflowException;
-        }
+        $this->validate(
+            $this->degrees,
+            $this->minutes,
+            $this->seconds,
+            $this->sign
+        );
     }
 
     /**
-     * Tells if the sum of seconds is more than 360°.
+     * Check if values are valid.
      *
-     * @param float $data
+     * @param integer $degrees
+     * @param integer $minutes
+     * @param float   $seconds
+     * @param int  $sing
      * @return boolean
      */
-    protected final function exceedsRoundAngle(float $data): bool
+    protected function validate(int $degrees, int $minutes, float $seconds, int $sing = Angle::CLOCKWISE)
     {
-        if ($data > Angle::MAX_SECONDS) {
-            return true;
+        if ($degrees > 360) {
+            throw new AngleOverflowException("The angle degrees can't be greater than 360°.");
         }
-        return false;
+        if ($minutes > 59) {
+            throw new AngleOverflowException("The angle minutes can't be greater than 59'.");
+        }
+        if ($seconds >= 60) {
+            throw new AngleOverflowException("The angle seconds can't be greater than or equal to 60\".");
+        }
     }
 
     /**
      * Calc degrees.
-     *
-     * @param mixed $data
+     * 
      * @return void
+     * @codeCoverageIgnore
      */
-    public function calcDegrees($data)
+    public function calcDegrees()
     {
-        $this->degrees = $data;
+
     }
 
     /**
      * Calc minutes.
      *
-     * @param mixed $data
      * @return void
+     * @codeCoverageIgnore
      */
-    public function calcMinutes($data)
+    public function calcMinutes()
     {
-        $this->minutes = $data;
+
     }
 
     /**
      * Calc seconds.
      *
-     * @param mixed $data
      * @return void
+     * @codeCoverageIgnore
      */
-    public function calcSeconds($data)
+    public function calcSeconds()
     {
-       $this->seconds = round($data, 1, PHP_ROUND_HALF_DOWN); 
-       $this->overflow();
+
     }
 
     /**
@@ -95,24 +104,10 @@ class FromDegrees extends AngleBuilder
      *
      * @param mixed $data
      * @return void
+     * @codeCoverageIgnore
      */
-    public function calcSign($data)
+    public function calcSign()
     {
-        $this->sign = $data >= 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
-    }
 
-    /**
-     * Fetch data for building.
-     *
-     * @return array
-     */
-    public function fetchData(): array
-    {
-        return [
-            $this->degrees,
-            $this->minutes,
-            $this->seconds,
-            $this->sign
-        ];
     }
 }
