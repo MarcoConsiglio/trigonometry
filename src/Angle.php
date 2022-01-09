@@ -77,7 +77,8 @@ class Angle implements AngleInterface
     protected float $seconds;
 
     /** 
-     * The angle direction. 
+     * The angle direction.
+     *  
      * self::CLOCKWISE means positive angle,
      * self::COUNTERCLOCKWISE means negative angle.
      */
