@@ -114,7 +114,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -172,14 +172,14 @@
     <span>
         &nbsp;= 360                            </span>
 </dt>
-<dd>The degrees of a round angle.</dd>
+<dd>The max degrees an angle can have.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#constant_MAX_MINUTES">MAX_MINUTES</a>
     <span>
-        &nbsp;= self::MAX_DEGREES * 60                            </span>
+        &nbsp;= 60                            </span>
 </dt>
-<dd>The minutes of a round angle.</dd>
+<dd>The max minutes an angle can have.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#constant_MAX_RADIANT">MAX_RADIANT</a>
@@ -191,9 +191,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#constant_MAX_SECONDS">MAX_SECONDS</a>
     <span>
-        &nbsp;= self::MAX_MINUTES * 60                            </span>
+        &nbsp;= 60                            </span>
 </dt>
-<dd>The seconds of a round angle.</dd>
+<dd>The max seconds an angle can have.</dd>
 
                     <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#property_degrees">$degrees</a>
@@ -252,6 +252,13 @@
 <dd>The seconds part.</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Construct an angle.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method___get">__get()</a>
     <span>
                                 &nbsp;: mixed    </span>
@@ -294,6 +301,13 @@
 <dd>Creates an angle from its values.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_eq">eq()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Alias of isEqual method.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_getDegrees">getDegrees()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
@@ -328,6 +342,13 @@ of degrees, minutes and seconds.</dd>
                                 &nbsp;: bool    </span>
 </dt>
 <dd>Check if this angle is counterclockwise or negative.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_isEqual">isEqual()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Check if this angle is equal to $angle.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_isGreaterThan">isGreaterThan()</a>
@@ -392,13 +413,6 @@ of degrees, minutes and seconds.</dd>
 </dt>
 <dd>Gets the radiant representation of this angle.</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method___construct">__construct()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Construct an angle.</dd>
-
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_throwInvalidArgumentException">throwInvalidArgumentException()</a>
     <span>
@@ -426,7 +440,7 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
@@ -469,7 +483,7 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -498,7 +512,7 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -527,11 +541,11 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The degrees of a round angle.</p>
+        <p class="phpdocumentor-summary">The max degrees an angle can have.</p>
 
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -556,17 +570,17 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The minutes of a round angle.</p>
+        <p class="phpdocumentor-summary">The max minutes an angle can have.</p>
 
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">MAX_MINUTES</span>
-    = <span class="phpdocumentor-signature__default-value">self::MAX_DEGREES * 60</span>
+    = <span class="phpdocumentor-signature__default-value">60</span>
 </code>
 
 
@@ -585,7 +599,7 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
@@ -614,17 +628,17 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The seconds of a round angle.</p>
+        <p class="phpdocumentor-summary">The max seconds an angle can have.</p>
 
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">MAX_SECONDS</span>
-    = <span class="phpdocumentor-signature__default-value">self::MAX_MINUTES * 60</span>
+    = <span class="phpdocumentor-signature__default-value">60</span>
 </code>
 
 
@@ -790,7 +804,7 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -823,7 +837,7 @@ the actual argument type.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -833,7 +847,7 @@ the actual argument type.</dd>
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">int</span>
     <span class="phpdocumentor-signature__name">$direction</span>
-    </code>
+     = <span class="phpdocumentor-signature__default-value">\MarcoConsiglio\Trigonometry\Angle::CLOCKWISE</span></code>
 
         <section class="phpdocumentor-description"><p>self::CLOCKWISE means positive angle,
 self::COUNTERCLOCKWISE means negative angle.</p>
@@ -860,7 +874,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -893,7 +907,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -923,6 +937,49 @@ self::COUNTERCLOCKWISE means negative angle.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">92</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Construct an angle.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder">AngleBuilder</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$builder</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$builder</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/MarcoConsiglio-Trigonometry-Interfaces-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\AngleBuilder">AngleBuilder</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method___get">
         __get()
         <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method___get" class="headerlink"><i class="fas fa-link"></i></a>
@@ -930,7 +987,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">106</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -973,7 +1030,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">376</span>
+    <span class="phpdocumentor-element-found-in__line">384</span>
 
     </aside>
 
@@ -1006,7 +1063,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">147</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -1065,7 +1122,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">159</span>
+    <span class="phpdocumentor-element-found-in__line">156</span>
 
     </aside>
 
@@ -1124,7 +1181,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 
     </aside>
 
@@ -1193,7 +1250,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">122</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -1267,6 +1324,49 @@ self::COUNTERCLOCKWISE means negative angle.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_eq">
+        eq()
+        <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_eq" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">374</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Alias of isEqual method.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">eq</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|int|float|<a href="classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\Angle">Angle</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$angle</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$angle</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|int|float|<a href="classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\Angle">Angle</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getDegrees">
         getDegrees()
         <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_getDegrees" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1274,7 +1374,7 @@ self::COUNTERCLOCKWISE means negative angle.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">168</span>
 
     </aside>
 
@@ -1320,7 +1420,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">265</span>
+    <span class="phpdocumentor-element-found-in__line">262</span>
 
     </aside>
 
@@ -1379,7 +1479,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">301</span>
+    <span class="phpdocumentor-element-found-in__line">289</span>
 
     </aside>
 
@@ -1429,7 +1529,7 @@ of degrees, minutes and seconds.</p>
         class="phpdocumentor-element
             -method
             -public
-                                                -final        "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_isClockwise">
         isClockwise()
@@ -1438,7 +1538,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">193</span>
+    <span class="phpdocumentor-element-found-in__line">190</span>
 
     </aside>
 
@@ -1446,7 +1546,7 @@ of degrees, minutes and seconds.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__final">final</span>        <span class="phpdocumentor-signature__name">isClockwise</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                <span class="phpdocumentor-signature__name">isClockwise</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     
     
@@ -1471,7 +1571,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">203</span>
+    <span class="phpdocumentor-element-found-in__line">200</span>
 
     </aside>
 
@@ -1497,6 +1597,49 @@ of degrees, minutes and seconds.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_isEqual">
+        isEqual()
+        <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_isEqual" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">357</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Check if this angle is equal to $angle.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">isEqual</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|int|float|<a href="classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\Angle">Angle</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$angle</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$angle</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|int|float|<a href="classes/MarcoConsiglio-Trigonometry-Interfaces-Angle.html"><abbr title="\MarcoConsiglio\Trigonometry\Interfaces\Angle">Angle</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_isGreaterThan">
         isGreaterThan()
         <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method_isGreaterThan" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1504,7 +1647,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">248</span>
+    <span class="phpdocumentor-element-found-in__line">245</span>
 
     </aside>
 
@@ -1563,7 +1706,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">277</span>
+    <span class="phpdocumentor-element-found-in__line">274</span>
 
     </aside>
 
@@ -1622,7 +1765,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">313</span>
+    <span class="phpdocumentor-element-found-in__line">301</span>
 
     </aside>
 
@@ -1681,7 +1824,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">342</span>
+    <span class="phpdocumentor-element-found-in__line">330</span>
 
     </aside>
 
@@ -1740,7 +1883,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">330</span>
+    <span class="phpdocumentor-element-found-in__line">318</span>
 
     </aside>
 
@@ -1799,7 +1942,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">366</span>
+    <span class="phpdocumentor-element-found-in__line">346</span>
 
     </aside>
 
@@ -1849,7 +1992,7 @@ of degrees, minutes and seconds.</p>
         class="phpdocumentor-element
             -method
             -public
-                                                -final        "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_toDecimal">
         toDecimal()
@@ -1858,7 +2001,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">224</span>
+    <span class="phpdocumentor-element-found-in__line">221</span>
 
     </aside>
 
@@ -1866,7 +2009,7 @@ of degrees, minutes and seconds.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__final">final</span>        <span class="phpdocumentor-signature__name">toDecimal</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float</span></code>
+                <span class="phpdocumentor-signature__name">toDecimal</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float</span></code>
 
     
     
@@ -1882,7 +2025,7 @@ of degrees, minutes and seconds.</p>
         class="phpdocumentor-element
             -method
             -public
-                                                -final        "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_toggleDirection">
         toggleDirection()
@@ -1891,7 +2034,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">213</span>
+    <span class="phpdocumentor-element-found-in__line">210</span>
 
     </aside>
 
@@ -1899,7 +2042,7 @@ of degrees, minutes and seconds.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__final">final</span>        <span class="phpdocumentor-signature__name">toggleDirection</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MarcoConsiglio-Trigonometry-Angle.html"><abbr title="\MarcoConsiglio\Trigonometry\Angle">Angle</abbr></a></span></code>
+                <span class="phpdocumentor-signature__name">toggleDirection</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MarcoConsiglio-Trigonometry-Angle.html"><abbr title="\MarcoConsiglio\Trigonometry\Angle">Angle</abbr></a></span></code>
 
     
     
@@ -1924,7 +2067,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">236</span>
+    <span class="phpdocumentor-element-found-in__line">233</span>
 
     </aside>
 
@@ -1947,49 +2090,6 @@ of degrees, minutes and seconds.</p>
                     <article
         class="phpdocumentor-element
             -method
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/MarcoConsiglio-Trigonometry-Angle.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">95</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Construct an angle.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Builders\AngleBuilder">AngleBuilder</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$builder</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$builder</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/MarcoConsiglio-Trigonometry-Builders-AngleBuilder.html"><abbr title="\MarcoConsiglio\Trigonometry\Builders\AngleBuilder">AngleBuilder</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
             -private
                                                         "
 >
@@ -2000,7 +2100,7 @@ of degrees, minutes and seconds.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Angle.php"><a href="files/src-angle.html"><abbr title="src/Angle.php">Angle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">393</span>
+    <span class="phpdocumentor-element-found-in__line">401</span>
 
     </aside>
 

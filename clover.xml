@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641649250">
-  <project timestamp="1641649250">
+<coverage generated="1641715721">
+  <project timestamp="1641715721">
     <file name="/home/vagrant/code/packages/trigonometry/src/Angle.php">
       <class name="MarcoConsiglio\Trigonometry\Angle" namespace="global">
         <metrics complexity="36" methods="24" coveredmethods="24" conditionals="49" coveredconditionals="49" statements="62" coveredstatements="59" elements="135" coveredelements="132"/>

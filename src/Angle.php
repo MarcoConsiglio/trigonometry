@@ -169,13 +169,13 @@ class Angle implements AngleInterface
     {
         if ($associative) {
             return [
-                "degrees" => $this->degrees,
+                "degrees" => $this->degrees * $this->direction,
                 "minutes" => $this->minutes,
                 "seconds" => $this->seconds
             ];
         } else {
             return [
-                $this->degrees,
+                $this->degrees * $this->direction,
                 $this->minutes,
                 $this->seconds
             ];

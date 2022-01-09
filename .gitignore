@@ -6,3 +6,5 @@ src/index.php
 .phpdoc
 .phive
 tools
+infection.log
+infection.summary.log

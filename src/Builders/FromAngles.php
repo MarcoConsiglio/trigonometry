@@ -31,7 +31,7 @@ class FromAngles extends SumBuilder
     protected float $decimal_sum;
 
     /**
-     * Constructs a FromAngles builder with two angles.
+     * Constructs a SumBuilder builder with two angles.
      *
      * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $first_angle
      * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $second_angle

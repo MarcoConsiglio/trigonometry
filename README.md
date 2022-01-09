@@ -5,6 +5,12 @@
   <img src="https://codecov.io/gh/MarcoConsiglio/trigonometry/branch/dev/graph/badge.svg?token=SYS9COU0XZ"/>
 </a>
 <br>
+
+Mutation testing <br>
+<img alt="MSI" src="https://img.shields.io/badge/Mutations%20Score%20Indicator-82%25-green">
+<img alt="MCC" src="https://img.shields.io/badge/Mutation%20Code%20Coverage-98%25-brightgreen">
+<img alt="CC MSI" src="https://img.shields.io/badge/Covered%20Code%20MSI-83%25-green">
+<br><br>
 A PHP support for angles and trigonometric functions.
 
 # Installation
@@ -22,12 +28,14 @@ use MarcoConsiglio\Trigonometry\Operations\Sum;
 ### Degrees, minutes and seconds
 This creates an angle from its values in degrees, minutes and seconds:
 ```php
-$alfa = Angle::createFromValues(180, 12, 43); // 180° 12' 43"
+$alfa = Angle::createFromValues(180, 12, 43, Angle::CLOCKWISE); // 180° 12' 43"
+$alfa = new Angle(new FromDegrees(180, 12, 43, Angle::CLOCKWISE))
 ```
 ### Parse a string
 This creates an angle from its textual representation:
 ```php
 $beta = Angle::createFromString("180° 12' 43\""); // Input from the user
+$beta = new Angle(new FromString("180° 12' 43\""));
 ```
 
 This is possible thank to the regular expression
@@ -40,11 +48,13 @@ The regex treat degrees and minutes as integer numbers, but seconds are treated 
 This create an angle from its decimal representation:
 ```php
 $gamma = Angle::createFromDecimal(180.2119); // 180.2119°
+$gamma = new Angle(new FromDecimal(180.2119));
 ```
 ### Radiant
 This create an angle from its radiant representation:
 ```php
-$gamma = Angle::createFromRadiant(3.1452910063); // deg2rad(180.2119°)
+$delta = Angle::createFromRadiant(3.1452910063); // deg2rad(180.2119°)
+$delta = new Angle(FromRadiant(3.1452910063));
 ```
 
 ### Exceptions when creating an angle
@@ -66,19 +76,20 @@ echo $value['seconds'];
 ```
 There is read-only properties too:
 ```php
-$alfa->degrees; // 180
-$alfa->minutes; // 12
-$alfa->seconds; // 43
+$alfa->degrees;   // 180
+$alfa->minutes;   // 12
+$alfa->seconds;   // 43
+$alfa->direction; // Angle::CLOCKWISE (1)
 ```
 
 You can cast the angle to decimal:
 ```php
-echo (string) $alfa->toDecimal(); // 180.2119
+$alfa->toDecimal(); // 180.2119
 ```
 
 You can cast the angle to radiant:
 ```php
-echo (string) $alfa->toRadiant(); // 3.1452910063
+$alfa->toRadiant(); // 3.1452910063
 ```
 
 ## Negative angles
@@ -153,17 +164,18 @@ $alfa->isCounterClockwise();    // true
 ```
 ## Algebric sum between two angles
 The `Sum` class extends the `Angle` class, so you immediately obtain the algebric sum
-between two angles.
+between two angles, passing in its constructor a FromAngles builder, which is a SumBuilder.
 ```php
 $alfa = Angle::createFromDecimal(180);
 $beta = Angle::createFromDecimal(270);
-$gamma = new Sum($alfa, $beta);
+$gamma = new Sum(new FromAngles($alfa, $beta));
 (string) $gamma; // 90° 0' 0"
 ```
-You can sum negative angles to.
+Note that if the sum is more than +360° or less than -360°, the resulting angle will be corrected to remain between these limits.
 
-# For contributors
+# Code documentation
 ## UML Diagrams
 You can find a class diagram at `docs/classes.png`.
+![UML class diagram](https://github.com/MarcoConsiglio/trigonometry/blob/dev/docs/classes.png)
 ## phpDoc
 You can read the code documentation at `docs/index.html`.
