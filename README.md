@@ -11,7 +11,7 @@ Mutation testing <br>
 <img alt="MCC" src="https://img.shields.io/badge/Mutation%20Code%20Coverage-98%25-brightgreen">
 <img alt="CC MSI" src="https://img.shields.io/badge/Covered%20Code%20MSI-83%25-green">
 <br><br>
-A PHP support for angles and trigonometric functions.
+A PHP support for angles.
 
 # Installation
 `composer require marcoconsiglio/trigonometry`
