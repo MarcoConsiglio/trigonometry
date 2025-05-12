@@ -56,7 +56,7 @@ class AngleTest extends TestCase
         $this->assertEquals(1, $alfa->degrees, $failure_message("degrees"));
         $this->assertEquals(2, $alfa->minutes, $failure_message("minutes"));
         $this->assertEquals(3.4, $alfa->seconds, $failure_message("seconds"));
-        $this->assertEquals(Angle::CLOCKWISE, $alfa->direction, $failure_message("direction"));
+        $this->assertEquals(Angle::COUNTER_CLOCKWISE, $alfa->direction, $failure_message("direction"));
         $this->assertNull($alfa->asganway);
     }
 
@@ -116,9 +116,9 @@ class AngleTest extends TestCase
     {
         // Arrange
         /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
-        $alfa = $this->getMockedAngle(["isCounterClockwise"]);
-        $alfa->expects($this->anyTime())->method("isCounterClockwise")->willReturn(true);
-        $this->setAngleProperties($alfa, [1, 2, 3.4]);
+        $alfa = $this->getMockedAngle(["isClockwise"]);
+        $alfa->expects($this->anyTime())->method("isClockwise")->willReturn(true);
+        $this->setAngleProperties($alfa, [1, 2, 3.4, Angle::CLOCKWISE]);
         $expected_string = "-1° 2' 3.4\"";
 
         // Act & Assert
@@ -157,18 +157,19 @@ class AngleTest extends TestCase
         $this->assertEquals(0.018051552602, round($radiant, 12, PHP_ROUND_HALF_DOWN), $this->getCastError("radiant"));
     }
 
-    #[TestDox("can be clockwise or positive.")]
+    #[TestDox("can be clockwise or negative.")]
     public function test_angle_is_clockwise()
     {
         // Arrange
         /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
         $alfa = $this->getMockedAngle();
+        $this->setAngleProperties($alfa, [1, 0, 0, Angle::CLOCKWISE]);
 
         // Act & assert
         $this->assertTrue($alfa->isClockwise(), "The angle is clockwise but found the opposite.");
     }
 
-    #[TestDox("can be counterclockwise or negative.")]
+    #[TestDox("can be counterclockwise or positive.")]
     public function test_angle_is_counterclockwise()
     {
         // Arrange
@@ -176,7 +177,7 @@ class AngleTest extends TestCase
         $alfa = $this->getMockedAngle();
 
         // Act & assert
-        $this->assertTrue($alfa->isClockwise(), "The angle is clockwise but found the opposite.");
+        $this->assertTrue($alfa->isCounterClockwise(), "The angle is clockwise but found the opposite.");
     }
 
     #[TestDox("can be reversed from clockwise to counterclockwise.")]
@@ -192,7 +193,7 @@ class AngleTest extends TestCase
 
         // Assert
         $failure_message = "The angle should be counterclockwise but found the opposite";
-        $this->assertEquals(Angle::COUNTER_CLOCKWISE, $alfa->direction, $failure_message);
+        $this->assertEquals(Angle::CLOCKWISE, $alfa->direction, $failure_message);
     }
 
     #[TestDox("can be reversed from counterclockwise to clockwise.")]

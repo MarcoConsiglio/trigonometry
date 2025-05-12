@@ -19,7 +19,7 @@ class FromDegrees extends AngleBuilder
      * @param integer $sign
      * @return void
      */
-    public function __construct(int $degrees, int $minutes, float $seconds, int $sign = Angle::CLOCKWISE)
+    public function __construct(int $degrees, int $minutes, float $seconds, int $sign = Angle::COUNTER_CLOCKWISE)
     {
         $this->degrees = $degrees;
         $this->minutes = $minutes;
@@ -53,7 +53,7 @@ class FromDegrees extends AngleBuilder
      * @param int  $sing
      * @return boolean
      */
-    protected function validate(int $degrees, int $minutes, float $seconds, int $sing = Angle::CLOCKWISE)
+    protected function validate(int $degrees, int $minutes, float $seconds)
     {
         if ($degrees > 360) {
             throw new AngleOverflowException("The angle degrees can't be greater than 360°.");

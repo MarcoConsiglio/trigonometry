@@ -31,7 +31,13 @@ This creates an angle from its values in degrees, minutes and seconds:
 $alfa = Angle::createFromValues(180, 12, 43, Angle::CLOCKWISE); // 180° 12' 43"
 $alfa = new Angle(new FromDegrees(180, 12, 43, Angle::CLOCKWISE))
 ```
-### Parse a string
+`Angle::CLOCKWISE` is the plus sign, `Angle::COUNTERCLOCKWISE` is the minus sign.
+
+The `MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException` is thrown when you try to create an angle:
+- with more than +/-360°
+- with more than 59'
+- with more than 60" if there are no degrees and minutes.
+### Parsing a string
 This creates an angle from its textual representation:
 ```php
 $beta = Angle::createFromString("180° 12' 43\""); // Input from the user
@@ -44,17 +50,31 @@ Angle::ANGLE_REGEX;
 ```
 The regex treat degrees and minutes as integer numbers, but seconds are treated as a float number.
 
+You can create a negative Angle if the string representation start with the minus (-) sign.
+
+The `MarcoConsiglio\Trigonometry\Exceptions\NoMatchException` is thrown when you try to create an angle:
+- with more than +/-360°
+- with more than 59'
+- with more than 60" if there are no degrees and minutes.
+
 ### Decimal
 This create an angle from its decimal representation:
 ```php
 $gamma = Angle::createFromDecimal(180.2119); // 180.2119°
 $gamma = new Angle(new FromDecimal(180.2119));
 ```
+You can create a negative Angle if the decimal is negative.
+
+The `MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException` is thrown when you try to create an angle:
+- with more than +/-360°
+- with more than 59'
+- with more than 60" if there are no degrees and minutes.
+
 ### Radiant
 This create an angle from its radiant representation:
 ```php
-$delta = Angle::createFromRadiant(3.1452910063); // deg2rad(180.2119°)
-$delta = new Angle(FromRadiant(3.1452910063));
+$delta = Angle::createFromRadiant(M_PI); // deg2rad(M_PI) = 180°
+$delta = new Angle(FromRadiant(M_PI));
 ```
 
 ### Exceptions when creating an angle
@@ -95,10 +115,29 @@ $alfa->toRadiant(); // 3.1452910063
 ## Negative angles
 You can create negative angles too!
 ```php
-$alfa = Angle::createFromValues(180, 12, 43, Angle::COUNTER_CLOCKWISE);
+$alfa = Angle::createFromValues(180, 12, 43, Angle::CLOCKWISE);
 $beta = Angle::createFromString("-180° 12' 43\"");
 $gamma = Angle::createFromDecimal(-180.2119); 
 $delta = Angle::createFromRadiant(-3.1452910063);
+```
+### Direction
+Positive angle are represented by the class constant
+```php
+Angle::COUNTER_CLOCKWISE; // 1
+```
+while negative angle are represented by the opposite class constant:
+```php
+Angle::CLOCKWISE; // -1
+```
+You can toggle direction:
+```php
+$alfa->toggleDirection();
+```
+You can check if an angle is clockwise or counterclockwise.
+```php
+// If $alfa is a positive angle
+$alfa->isClockwise();           // false
+$alfa->isCounterClockwise();    // true
 ```
 
 ## Comparison
@@ -144,24 +183,6 @@ $alfa->isLessThanOrEqual($beta);    // true
 $alfa->lte($beta);                  // true
 ```
 
-### Direction
-Positive angle are represented by the class constant
-```php
-Angle::CLOCKWISE; // 1
-```
-while negative angle are represented by the opposite class constant:
-```php
-Angle::COUNTER_CLOCKWISE; // 1
-```
-You can toggle direction:
-```php
-$alfa->toggleDirection();
-```
-You can check if an angle is clockwise or counterclockwise.
-```php
-$alfa->isClockwise();           // false
-$alfa->isCounterClockwise();    // true
-```
 ## Algebric sum between two angles
 The `Sum` class extends the `Angle` class, so you immediately obtain the algebric sum
 between two angles, passing in its constructor a FromAngles builder, which is a SumBuilder.

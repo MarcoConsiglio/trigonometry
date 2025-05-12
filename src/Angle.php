@@ -26,14 +26,14 @@ class Angle implements AngleInterface
     public const ANGLE_REGEX = '/^(?:(-?360(*ACCEPT))|(-?[1-3]?[0-9]?[0-9]?))°?\s?([0-5]?[0-9])?\'?\s?([0-5]?[0-9](?:.{1}[0-9])?)?"?$/';
    
     /**
-     * It represents a positive angle.
-     */
-    public const CLOCKWISE = 1;
-
-    /**
      * It represents a negative angle.
      */
-    public const COUNTER_CLOCKWISE = -1;
+    public const CLOCKWISE = -1;
+
+    /**
+     * It represents a positive angle.
+     */
+    public const COUNTER_CLOCKWISE = 1;
 
     /**
      * The max degrees an angle can have.
@@ -79,10 +79,10 @@ class Angle implements AngleInterface
     /** 
      * The angle direction.
      *  
-     * self::CLOCKWISE means positive angle,
-     * self::COUNTERCLOCKWISE means negative angle.
+     * self::COUNTERCLOCKWISE means positive angle.
+     * self::CLOCKWISE means negative angle,
      */
-    protected int $direction = Angle::CLOCKWISE;
+    protected int $direction = Angle::COUNTER_CLOCKWISE;
 
     /**
      * Construct an angle.
@@ -117,7 +117,7 @@ class Angle implements AngleInterface
      * @return Angle
      * @throws \MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException when creating an angle greater than 360°.
      */
-    public static function createFromValues(int $degrees, int $minutes, float $seconds, int $direction = self::CLOCKWISE): Angle
+    public static function createFromValues(int $degrees, int $minutes, float $seconds, int $direction = self::COUNTER_CLOCKWISE): Angle
     {
         return new Angle(new FromDegrees($degrees, $minutes, $seconds, $direction));
     }
@@ -184,7 +184,7 @@ class Angle implements AngleInterface
     }
 
     /**
-     * Check if this angle is clockwise or positive.
+     * Check if this angle is clockwise or negative.
      *
      * @return boolean
      */
@@ -194,7 +194,7 @@ class Angle implements AngleInterface
     }
 
     /**
-     * Check if this angle is counterclockwise or negative.
+     * Check if this angle is counterclockwise or positive.
      *
      * @return boolean
      */
@@ -210,7 +210,7 @@ class Angle implements AngleInterface
      */
     public function toggleDirection(): Angle
     {
-        $this->direction *= self::COUNTER_CLOCKWISE;
+        $this->direction *= self::CLOCKWISE;
         return $this;
     }
 
@@ -384,7 +384,7 @@ class Angle implements AngleInterface
      */
     public function __toString()
     {
-        $sign = $this->isCounterClockwise() ? "-" : "";
+        $sign = $this->isClockwise() ? "-" : "";
         return $sign.$this->degrees."° ".$this->minutes."' ".$this->seconds."\"";
     }
 

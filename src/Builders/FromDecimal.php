@@ -95,7 +95,7 @@ class FromDecimal extends AngleBuilder
     public function calcSign()
     {
         if ($this->decimal < 0) {
-            $this->sign = Angle::COUNTER_CLOCKWISE;
+            $this->sign = Angle::CLOCKWISE;
         }
     }
 

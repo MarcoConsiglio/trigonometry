@@ -98,7 +98,7 @@ class FromAngles extends SumBuilder
     public function calcSign()
     {
         if ($this->decimal_sum < 0) {
-            $this->sign = Angle::COUNTER_CLOCKWISE;
+            $this->sign = Angle::CLOCKWISE;
         }
     }
 

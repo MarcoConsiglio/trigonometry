@@ -35,7 +35,7 @@ abstract class AngleBuilder implements AngleBuilderInterface
      *
      * @var integer
      */
-    protected int $sign = Angle::CLOCKWISE;  
+    protected int $sign = Angle::COUNTER_CLOCKWISE;  
 
     /**
      * Check for overflow above/below +/-360°.
