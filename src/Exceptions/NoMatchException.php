@@ -4,7 +4,8 @@ namespace MarcoConsiglio\Trigonometry\Exceptions;
 use Exception;
 
 /**
- * This exception is thrown when non string angle is matched.
+ * This exception is thrown when a bad format string angle is matched,
+ * for example 0°0'123", instead of 0°2'3".
  */
 class NoMatchException extends Exception
 {

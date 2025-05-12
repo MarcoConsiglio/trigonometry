@@ -3,15 +3,26 @@ namespace MarcoConsiglio\Trigonometry\Tests\Unit;
 
 use InvalidArgumentException;
 use MarcoConsiglio\Trigonometry\Angle;
+use MarcoConsiglio\Trigonometry\Builders\AngleBuilder;
+use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
+use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
+use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
+use MarcoConsiglio\Trigonometry\Builders\FromString;
 use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
 use MarcoConsiglio\Trigonometry\Tests\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\Rule\AnyInvokedCount;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 use ReflectionClass;
 
-/**
- * @testdox An angle
- */
+#[TestDox("An angle")]
+#[CoversClass(Angle::class)]
+#[UsesClass(AngleBuilder::class)]
+#[UsesClass(FromString::class)]
+#[UsesClass(FromDecimal::class)]
+#[UsesClass(FromDegrees::class)]
+#[UsesClass(FromRadiant::class)]
+#[UsesClass(InvalidArgumentException::class)]
 class AngleTest extends TestCase
 {
     /**
@@ -20,41 +31,6 @@ class AngleTest extends TestCase
      * @var array
      */
     protected array $expected;
-
-    // /**
-    //  * Degrees being tested.
-    //  *
-    //  * @var int
-    //  */
-    // protected int $degrees;
-
-    // /**
-    //  * Minutes being tested.
-    //  *
-    //  * @var int
-    //  */
-    // protected int $minutes;
-
-    // /**
-    //  * Seconds being tested.
-    //  *
-    //  * @var int
-    //  */
-    // protected float $seconds;
-
-    // /**
-    //  * How would be a textual representation of an angle.
-    //  *
-    //  * @var string
-    //  */
-    // protected string $expected_string;
-
-    // /**
-    //  * The angle being tested.
-    //  *
-    //  * @var \MarcoConsiglio\Trigonometry\Angle
-    //  */
-    // protected Angle $angle;
 
     /*
      * This method is called before each test.
@@ -65,9 +41,7 @@ class AngleTest extends TestCase
         $this->expected = $this->getRandomAngleDegrees();
     }
 
-    /**
-     * @testdox has read-only properties "degrees", "minutes", "seconds", "direction".
-     */
+    #[TestDox("has read-only properties \"degrees\", \"minutes\", \"seconds\", \"direction\".")]
     public function test_getters()
     {
         // Arrange
@@ -86,9 +60,7 @@ class AngleTest extends TestCase
         $this->assertNull($alfa->asganway);
     }
 
-    /**
-     * @testdox can give degrees, minutes and seconds wrapped in a simple array.
-     */
+    #[TestDox("can output degrees, minutes and seconds wrapped in a simple array.")]
     public function test_get_angle_values_in_simple_array()
     {
         // Arrange
@@ -106,9 +78,7 @@ class AngleTest extends TestCase
         $this->assertEquals(3.4, $result[2], $failure_message);
     }
 
-    /**
-     * @testdox can give degrees, minutes and seconds wrapped in an associative array.
-     */
+    #[TestDox("can output degrees, minutes and seconds wrapped in an associative array.")]
     public function test_get_angle_values_in_assoc_array()
     {
         // Arrange
@@ -126,9 +96,7 @@ class AngleTest extends TestCase
         $this->assertEquals(3.4, $result["seconds"], $failure_message);
     }
 
-    /**
-     * @testdox can be printed in a positive textual representation.
-     */
+    #[TestDox("can be printed in a positive textual representation.")]
     public function test_can_cast_positive_angle_to_string()
     {
         // Arrange
@@ -142,10 +110,8 @@ class AngleTest extends TestCase
         // Act & Assert
         $this->assertEquals($expected_string, (string) $alfa, $this->getCastError("string"));
     }
-
-    /**
-     * @testdox can be printed in a negative textual representation.
-     */
+    
+    #[TestDox("can be printed in a negative textual representation.")]
     public function test_can_cast_negative_angle_to_string()
     {
         // Arrange
@@ -159,9 +125,7 @@ class AngleTest extends TestCase
         $this->assertEquals($expected_string, (string) $alfa, $this->getCastError("string"));
     }
 
-    /**
-     * @testdox can be casted to decimal.
-     */
+    #[TestDox("can be casted to decimal.")]
     public function test_can_cast_to_decimal()
     {
         // Arrange
@@ -177,9 +141,7 @@ class AngleTest extends TestCase
         $this->assertEquals(round($decimal, 6, PHP_ROUND_HALF_DOWN), 1.034278);
     }
 
-    /**
-     * @testdox can be casted to radiant.
-     */
+    #[TestDox("can be casted to radiant.")]
     public function test_cast_to_radiant()
     {
         // Arrange
@@ -195,9 +157,7 @@ class AngleTest extends TestCase
         $this->assertEquals(0.018051552602, round($radiant, 12, PHP_ROUND_HALF_DOWN), $this->getCastError("radiant"));
     }
 
-    /**
-     * @testdox can be clockwise or positive.
-     */
+    #[TestDox("can be clockwise or positive.")]
     public function test_angle_is_clockwise()
     {
         // Arrange
@@ -208,9 +168,7 @@ class AngleTest extends TestCase
         $this->assertTrue($alfa->isClockwise(), "The angle is clockwise but found the opposite.");
     }
 
-    /**
-     * @testdox can be counterclockwise or negative.
-     */
+    #[TestDox("can be counterclockwise or negative.")]
     public function test_angle_is_counterclockwise()
     {
         // Arrange
@@ -221,9 +179,7 @@ class AngleTest extends TestCase
         $this->assertTrue($alfa->isClockwise(), "The angle is clockwise but found the opposite.");
     }
 
-    /**
-     * @testdox can be reversed from clockwise to counterclockwise.
-     */
+    #[TestDox("can be reversed from clockwise to counterclockwise.")]
     public function test_can_toggle_rotation_from_clockwise_to_counterclockwise()
     {
         // Arrange
@@ -239,9 +195,7 @@ class AngleTest extends TestCase
         $this->assertEquals(Angle::COUNTER_CLOCKWISE, $alfa->direction, $failure_message);
     }
 
-    /**
-     * @testdox can be reversed from counterclockwise to clockwise.
-     */
+    #[TestDox("can be reversed from counterclockwise to clockwise.")]
     public function test_can_toggle_rotation_from_counterclockwise_to_clockwise()
     {
         // Arrange
@@ -257,9 +211,7 @@ class AngleTest extends TestCase
         $this->assertEquals(Angle::CLOCKWISE, $alfa->direction, $failure_message);
     }
 
-    /**
-     * @testdox can be equal or not to another angle.
-     */
+    #[TestDox("can be equal or not to another angle.")]
     public function test_equal_comparison()
     {
         // Arrange
@@ -276,9 +228,7 @@ class AngleTest extends TestCase
         $this->assertAngleEqual($alfa, $beta);
     }
 
-    /**
-     * @testdox can throw an exception if equal comparison has an unexpected type argument.
-     */
+    #[TestDox("can throw an exception if equal comparison has an unexpected type argument.")]
     public function test_equal_comparison_exception()
     {
         // Arrange
@@ -294,9 +244,7 @@ class AngleTest extends TestCase
         $alfa->eq(true);
     }
 
-    /**
-     * @testdox can be or not greater than another.
-     */
+    #[TestDox("can be or not greater than another.")]
     public function test_greater_than_comparison()
     {
         // Arrange
@@ -313,9 +261,7 @@ class AngleTest extends TestCase
         $this->assertAngleGreaterThan($alfa, $beta);
     }
 
-    /**
-     * @testdox can throw an exception if greater than comparison has an unexpected type argument.
-     */
+    #[TestDox("can throw an exception if greater than comparison has an unexpected type argument.")]
     public function test_greater_than_comparison_exception()
     {
         // Arrange
@@ -329,9 +275,7 @@ class AngleTest extends TestCase
         $alfa->gt(true); // Two birds with one stone.
     }
 
-    /**
-     * @testdox can be or not greater than or equal another angle.
-     */
+    #[TestDox("can be or not greater than or equal another angle.")]
     public function test_greater_than_or_equal_comparison()
     {
         // Arrange
@@ -341,12 +285,12 @@ class AngleTest extends TestCase
         $gamma = $this->getMockedAngle($hide_methods);
         $delta = $this->getMockedAngle($hide_methods);
         $alfa->expects($this->anyTime())->method("toDecimal")->willReturn(180.0);
-        $alfa->expects($this->anyTime())->method("isEqual")->withConsecutive(["180"], [180.0], [$beta])->willReturn(true);
+        $alfa->expects($this->anyTime())->method("isEqual")->willReturnOnConsecutiveCalls(["180"], [180.0], [$beta])->willReturn(true);
         $alfa->expects($this->never())->method("isGreaterThan");
         $beta->expects($this->anyTime())->method("toDecimal")->willReturn(180.0);
         $gamma->expects($this->anyTime())->method("toDecimal")->willReturn(360.0);
         $gamma->expects($this->anyTime())->method("isEqual")->willReturn(false);
-        $gamma->expects($this->anyTime())->method("isGreaterThan")->withConsecutive(["-90"], [-90.0], [$delta])->willReturn(true);
+        $gamma->expects($this->anyTime())->method("isGreaterThan")->willReturnOnConsecutiveCalls(["-90"], [-90.0], [$delta])->willReturn(true);
         $delta->expects($this->anyTime())->method("toDecimal")->willReturn(-90.0);
         
         // Act & Assert
@@ -360,9 +304,8 @@ class AngleTest extends TestCase
         $this->assertAngleGreaterThanOrEqual($gamma, $delta);
     }
 
-    /**
-     * @testdox can be or not less than another angle.
-     */
+
+    #[TestDox("can be or not less than another angle.")]
     public function test_less_than_comparison()
     {
         // Arrange
@@ -383,9 +326,7 @@ class AngleTest extends TestCase
         $this->assertAngleNotLessThan($beta, $gamma);
     }
 
-    /**
-     * @testdox can throw an exception if less than comparison has an unexpected type argument.
-     */
+    #[TestDox("can throw an exception if less than comparison has an unexpected type argument.")]
     public function test_less_than_comparison_exception()
     {
         // Arrange
@@ -400,9 +341,7 @@ class AngleTest extends TestCase
         $alfa->lt(true); // Two birds with one stone.
     }
 
-    /**
-     * @testdox can be or not greater than or equal another angle.
-     */
+    #[TestDox("can be or not greater than or equal another angle.")]
     public function test_less_than_or_equal_comparison()
     {
         // Arrange
@@ -429,9 +368,7 @@ class AngleTest extends TestCase
         $this->assertAngleLessThanOrEqual($gamma, $delta);
     }
 
-    /**
-     * @testdox can throw InvalidArgumentException.
-     */
+    #[TestDox("can throw InvalidArgumentException.")]
     public function test_invalid_argument_exception()
     {
         // Arrange
@@ -506,7 +443,7 @@ class AngleTest extends TestCase
     }
 
     /**
-     * Asserts $first_angle is greater than or equal to $second_angle. This is not a Custom Assertion bu a Parameterized Test.
+     * Asserts $first_angle is greater than or equal to $second_angle. This is not a Custom Assertion but a Parameterized Test.
      *
      * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $first_angle
      * @param \MarcoConsiglio\Trigonometry\Interfaces\Angle $second_angle

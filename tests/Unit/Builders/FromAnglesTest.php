@@ -1,20 +1,23 @@
 <?php
 namespace MarcoConsiglio\Trigonometry\Tests\Unit\Builders;
 
+use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Builders\AngleBuilder;
 use MarcoConsiglio\Trigonometry\Builders\SumBuilder;
 use MarcoConsiglio\Trigonometry\Builders\FromAngles;
-use MarcoConsiglio\Trigonometry\Interfaces\Angle;
+use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 use ReflectionClass;
 
-/**
- * @testdox The FromAngles builder
- */
+#[TestDox("The FromAngles builder")]
+#[CoversClass(FromAngles::class)]
+#[UsesClass(Angle::class)]
+#[UsesClass(AngleInterface::class)]
 class FromAnglesTest extends BuilderTestCase
 {
-    /**
-     * @testdox can sums two angles.
-     */
+    #[TestDox("can sums two angles.")]
     public function test_can_sum_two_angle()
     {
         // Arrange
@@ -53,9 +56,7 @@ class FromAnglesTest extends BuilderTestCase
         $this->assertGreaterThanOrEqual(-360, $degrees, $failure_message);
     }
 
-    /**
-     * @testdox corrects positive excess if the sum is greater than 360°.
-     */
+    #[TestDox("corrects positive excess if the sum is greater than 360°.")]
     public function test_correct_positive_excess()
     {
         // Arrange
@@ -91,9 +92,7 @@ class FromAnglesTest extends BuilderTestCase
         $this->assertGreaterThanOrEqual(-360, $degrees, $failure_message);
     }
 
-    /**
-     * @testdox corrects negative excess if the sum is less than -360°.
-     */
+    #[TestDox("corrects negative excess if the sum is less than -360°.")]
     public function test_correct_negative_excess()
     {
         // Arrange

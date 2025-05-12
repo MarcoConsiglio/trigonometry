@@ -1,25 +1,26 @@
 <?php
 namespace MarcoConsiglio\Trigonometry\Tests\Unit\Builders;
 
+use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Builders\FromDegrees;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @testdox The FromDegrees builder
- */
+#[TestDox("The FromDegrees builder")]
+#[CoversClass(FromDegrees::class)]
+#[UsesClass(AngleOverflowException::class)]
+#[UsesClass(Angle::class)]
 class FromDegreesTest extends BuilderTestCase
 {
-    /**
-     * @testdox can create an angle from a degrees values.
-     */
+    #[TestDox("can create an angle from a degrees values.")]
     public function test_can_create_an_angle()
     {
         $this->testAngleCreation(FromDegrees::class);
     }
 
-    /**
-     * @testdox cannot build an angle with more than 360°.
-     */
+    #[TestDox("cannot build an angle with more than 360°.")]
     public function test_exception_if_more_than_360_degrees()
     {
         // Assert
@@ -29,9 +30,8 @@ class FromDegreesTest extends BuilderTestCase
         // Arrange & Act
         new FromDegrees(361, 0, 0);
     }
-    /**
-     * @testdox cannot build an angle with more than 59'.
-     */
+
+    #[TestDox("cannot build an angle with more than 59'.")]
     public function test_exception_if_more_than_59_minutes()
     {
         // Assert
@@ -42,9 +42,7 @@ class FromDegreesTest extends BuilderTestCase
         new FromDegrees(0, 60, 0);
     }
 
-    /**
-     * @testdox cannot build an angle with 60" or more.
-     */
+    #[TestDox("cannot build an angle with 60\" or more.")]
     public function test_exception_if_equal_or_more_than_60_seconds()
     {
         // Arrange
@@ -58,9 +56,7 @@ class FromDegreesTest extends BuilderTestCase
         new FromDegrees(0, 0, 60);
     }
     
-    /**
-     * @testdox can kill x2 GreaterThan mutants in the validate method.
-     */
+    #[TestDox("can create an angle of exact 360°.")]
     public function test_missing_exception_if_equal_to_360_degrees()
     {
         // Arrange & Act

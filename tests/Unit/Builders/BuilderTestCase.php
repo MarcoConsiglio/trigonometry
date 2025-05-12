@@ -82,7 +82,10 @@ abstract class BuilderTestCase extends TestCase
     protected function testAngleCreation(string $builder, bool $negative = false)
     {
         if(class_exists($builder) && is_subclass_of($builder, AngleBuilder::class)) {
+            // Arrange
             $value = $this->getAngleValue($builder, $negative);
+            
+            // Act
             switch ($builder) {
                 case FromDegrees::class:
                     $angle = Angle::createFromValues($value[0], $value[1], $value[2]);
@@ -97,6 +100,8 @@ abstract class BuilderTestCase extends TestCase
                     $angle = Angle::createFromString($value);
                     break;
             }
+
+            // Assert
             $this->assertAngle($builder, $value, $angle);
         }
     }

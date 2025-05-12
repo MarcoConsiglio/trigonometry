@@ -5,31 +5,32 @@ use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
 use MarcoConsiglio\Trigonometry\Builders\FromString;
 use MarcoConsiglio\Trigonometry\Exceptions\NoMatchException;
+use MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @testdox The FromString builder
- */
+#[TestDox("The FromString builder")]
+#[CoversClass(FromString::class)]
+#[UsesClass(Angle::class)]
+#[UsesClass(RegExFailureException::class)]
+#[UsesClass(NoMatchException::class)]
+#[UsesClass(AngleOverflowException::class)]
 class FromStringTest extends BuilderTestCase
 {
-    /**
-     * @testdox can create a positive angle from a string value.
-     */
+    #[TestDox("can create a positive angle from a string value.")]
     public function test_can_create_positive_angle()
     {
         $this->testAngleCreation(FromString::class);
     }
 
-    /**
-     * @testdox can create a negative angle from a string value.
-     */
+    #[TestDox("can create a negative angle from a string value.")]
     public function test_can_create_negative_angle()
     {
         $this->testAngleCreation(FromString::class, negative: true);
     }
     
-    /**
-     * @testdox cannot create an angle with more than 360°.
-     */
+    #[TestDox("cannot create an angle with more than 360°.")]
     public function test_exception_if_more_than_360_degrees()
     {
         // Arrange
@@ -43,9 +44,7 @@ class FromStringTest extends BuilderTestCase
         new FromString($angle_string);
     }
 
-    /**
-     * @testdox cannot create an angle with more than 59'.
-     */
+    #[TestDox("cannot create an angle with more than 59'.")]
     public function test_exception_if_more_than_59_minutes()
     {
         // Arrange
@@ -59,9 +58,7 @@ class FromStringTest extends BuilderTestCase
         new FromString($angle_string);
     }
 
-    /**
-     * @testdox cannot create an angle with more than 60".
-     */
+    #[TestDox("cannot create an angle with more than 60\".")]
     public function test_exception_if_more_than_60_seconds()
     {
         // Arrange

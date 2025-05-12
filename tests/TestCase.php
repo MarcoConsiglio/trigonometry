@@ -220,8 +220,8 @@ class TestCase extends PHPUnitTestCase
      *
      * @return \PHPUnit\Framework\MockObject\Rule\AnyInvokedCount
      */
-    public static function anyTime(): AnyInvokedCount
+    public function anyTime(): AnyInvokedCount
     {
-        return self::any();
+        return $this->any();
     }
 }

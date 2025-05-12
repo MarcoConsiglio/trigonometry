@@ -4,19 +4,20 @@ namespace MarcoConsiglio\Trigonometry\Tests\Unit;
 use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Builders\FromAngles;
 use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
+use MarcoConsiglio\Trigonometry\Builders\SumBuilder;
 use MarcoConsiglio\Trigonometry\Interfaces\Angle as AngleInterface;
 use MarcoConsiglio\Trigonometry\Operations\Sum;
 use MarcoConsiglio\Trigonometry\Tests\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 
-/**
- * @testdox A sum operation
- */
+#[TestDox("A sum operation")]
+#[CoversClass(Sum::class)]
+#[CoversClass(SumBuilder::class)]
 class SumTest extends TestCase
 {
-    /**
-     * @testdox can be performed with a SumBuilder.
-     */
+    #[TestDox("can be performed with a SumBuilder.")]
     public function test_can_sum_two_angle()
     {
         // Arrange

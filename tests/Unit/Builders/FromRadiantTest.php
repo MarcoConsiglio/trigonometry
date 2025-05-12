@@ -2,33 +2,33 @@
 namespace MarcoConsiglio\Trigonometry\Tests\Unit\Builders;
 
 use MarcoConsiglio\Trigonometry\Angle;
+use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
 use MarcoConsiglio\Trigonometry\Builders\FromRadiant;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @testdox The FromRadiant builder
- */
+#[TestDox("The FromRadiant builder")]
+#[CoversClass(FromRadiant::class)]
+#[UsesClass(Angle::class)]
+#[UsesClass(AngleOverflowException::class)]
+#[UsesClass(FromDecimal::class)]
 class FromRadiantTest extends BuilderTestCase
 {
-    /**
-     * @testdox can create a positive angle from a radiant value.
-     */
+    #[TestDox("can create a positive angle from a radiant value.")]
     public function test_can_create_positive_angle()
     {
         $this->testAngleCreation(FromRadiant::class);
     }
 
-    /**
-     * @testdox can create a negative angle from a radiant value.
-     */
+    #[TestDox("can create a negative angle from a radiant value.")]
     public function test_can_create_negative_angle()
     {
         $this->testAngleCreation(FromRadiant::class, negative: true);
     }
 
-    /**
-     * @testdox cannot create an angle with more than +/-360°.
-     */
+    #[TestDox("cannot create an angle with more than +/-360°.")]
     public function test_exception_if_more_than_360_degrees()
     {
         // Assert
@@ -39,16 +39,14 @@ class FromRadiantTest extends BuilderTestCase
         new FromRadiant(Angle::MAX_RADIANT + 0.00001);
     }
 
-    /**
-     * @testdox can kill a GreaterThan mutant in the validate method.
-     */
+    #[TestDox("can create an angle of exact 360°.")]
     public function test_missing_exception_if_equal_360_degrees()
     {
         // Arrange & Act
         new FromRadiant(Angle::MAX_RADIANT);
 
         // Assert
-        $this->addToAssertionCount(1);
+        $this->expectNotToPerformAssertions();
     }
 
     /**

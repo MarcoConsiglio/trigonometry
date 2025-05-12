@@ -1,33 +1,32 @@
 <?php
 namespace MarcoConsiglio\Trigonometry\Tests\Unit\Builders;
 
+use MarcoConsiglio\Trigonometry\Angle;
 use MarcoConsiglio\Trigonometry\Builders\FromDecimal;
 use MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @testdox The FromDecimal builder
- */
+#[TestDox("The FromDecimal builder")]
+#[CoversClass(FromDecimal::class)]
+#[UsesClass(Angle::class)]
+#[UsesClass(AngleOverflowException::class)]
 class FromDecimalTest extends BuilderTestCase
 {
-    /**
-     * @testdox can create a positive angle from a decimal value.
-     */
+    #[TestDox("can create a positive angle from a decimal value.")]
     public function test_can_create_positive_angle()
     {
         $this->testAngleCreation(FromDecimal::class);
     }
 
-    /**
-     * @testdox can create a negative angle from a decimal value.
-     */
+    #[TestDox("can create a negative angle from a decimal value.")]
     public function test_can_create_negative_angle()
     {
         $this->testAngleCreation(FromDecimal::class, negative: true);
     }
 
-    /**
-     * @testdox cannot create an angle with more than +/-360°.
-     */
+    #[TestDox("cannot create an angle with more than +/-360°.")]
     public function test_exception_if_greater_than_360_degrees()
     {    
         // Assert
@@ -38,9 +37,7 @@ class FromDecimalTest extends BuilderTestCase
         new FromDecimal(360.00001);
     }
 
-    /**
-     * @testdox can kill a GreaterThan mutant in the validate method.
-     */
+    #[TestDox("can create an angle of exact 360°.")]
     public function test_missing_exception_if_equal_to_360_degrees()
     {
         // Arrange & Act
