@@ -1,10 +1,13 @@
 composer.phar
 /vendor/
-/public/
 .phpunit.result.cache
-src/index.php
+.phpunit.cache
+.vscode
 .phpdoc
 .phive
 tools
 infection.log
 infection.summary.log
+tests/coverage_cache
+tests/coverage_report
+docs
