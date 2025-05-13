@@ -1,11 +1,12 @@
 # trigonometry
-![Static Badge](https://img.shields.io/badge/Line_coverage-94.51%25-none?labelColor=%23ECECEC&color=rgb(40%2C%20167%2C%2069))
-
 <img alt="GitHub" src="https://img.shields.io/github/license/marcoconsiglio/trigonometry">
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/marcoconsiglio/trigonometry">
+<img alt="Static Badge" src="https://img.shields.io/badge/Version-v3.0.0-white">
+<br>
 <img alt="Static Badge" src="https://img.shields.io/badge/Line_coverage-94.51%25-none?labelColor=%23ECECEC&color=rgb(40%2C%20167%2C%2069)">
-
-Mutation testing <br>
+<img alt="Static Badge" src="https://img.shields.io/badge/Branch_coverage-97.44%25-none?labelColor=%23ECECEC&color=rgb(40%2C%20167%2C%2069)">
+<img alt="Static Badge" src="https://img.shields.io/badge/Path_coverage-95.45%25-none?labelColor=%23ECECEC&color=rgb(40%2C%20167%2C%2069)">
+<br>
 <img alt="MSI" src="https://img.shields.io/badge/Mutations%20Score%20Indicator-82%25-green">
 <img alt="MCC" src="https://img.shields.io/badge/Mutation%20Code%20Coverage-98%25-brightgreen">
 <img alt="CC MSI" src="https://img.shields.io/badge/Covered%20Code%20MSI-83%25-green">
