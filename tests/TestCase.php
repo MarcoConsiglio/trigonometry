@@ -59,9 +59,10 @@ class TestCase extends PHPUnitTestCase
      *
      * @param string  $builder The builder class you want to use to build the angle.
      * @param boolean $negative If you want a positive or negative angle.
+     * @param int     $precision The precision if the angle is created from a decimal or radiant value.
      * @return mixed
      */
-    protected function getAngleValue(string $builder, $negative = false): mixed
+    protected function getAngleValue(string $builder, $negative = false, int $precision = 0): mixed
     {
         if (class_exists($builder) && is_subclass_of($builder, AngleBuilder::class)) {
             switch ($builder) {
@@ -69,10 +70,10 @@ class TestCase extends PHPUnitTestCase
                     return $this->getRandomAngleDegrees($negative);
                     break;
                 case FromDecimal::class:
-                    return $this->getRandomAngleDecimal($negative);
+                    return $this->getRandomAngleDecimal($negative, $precision);
                     break;
                 case FromRadiant::class:
-                    return $this->getRandomAngleRadiant($negative);
+                    return $this->getRandomAngleRadiant($negative, $precision);
                     break;
                 case FromString::class:
                     return $this->getRandomAngleString($negative);
@@ -107,23 +108,31 @@ class TestCase extends PHPUnitTestCase
     }
 
     /**
-     * Gets a 
+     * Gets a random decimal to create an angle.
      *
      * @param boolean $negative
+     * @param integer $precision
      * @return void
      */
-    protected function getRandomAngleDecimal($negative = false)
+    protected function getRandomAngleDecimal($negative = false, int $precision = 0)
     {
         return $negative ? 
-            $this->faker->randomFloat(15, 0, Angle::MAX_DEGREES) : 
-            $this->faker->randomFloat(15, -Angle::MAX_DEGREES, 0);
+            $this->faker->randomFloat($precision, 0, Angle::MAX_DEGREES) : 
+            $this->faker->randomFloat($precision, -Angle::MAX_DEGREES, 0);
     }
 
-    protected function getRandomAngleRadiant($negative = false)
+    /**
+     * Gets a random radiant to create an angle.
+     *
+     * @param boolean $negative
+     * @param integer $precision
+     * @return void
+     */
+    protected function getRandomAngleRadiant($negative = false, int $precision = 0)
     {
         return $negative ? 
-            $this->faker->randomFloat(15, 0, Angle::MAX_RADIANT) : 
-            $this->faker->randomFloat(15, -Angle::MAX_RADIANT, 0);
+            $this->faker->randomFloat($precision, 0, Angle::MAX_RADIANT) : 
+            $this->faker->randomFloat($precision, -Angle::MAX_RADIANT, 0);
     }
 
     protected function getRandomAngleString($negative = false)

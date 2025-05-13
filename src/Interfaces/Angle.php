@@ -49,7 +49,7 @@ interface Angle
 
     /**
      * Return an array containing the values
-     * of degrees, minutes and seconds.
+     * of degrees, minutes, seconds.
      *
      * @return array
      */

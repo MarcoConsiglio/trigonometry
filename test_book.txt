@@ -3,6 +3,10 @@ A sum operation
 
 An angle
  [x] has read-only properties "degrees", "minutes", "seconds", "direction".
+ [x] can be created from separated values for degrees, minutes, seconds and direction.
+ [x] can be created from a text representation.
+ [x] can be created from a decimal number.
+ [x] can be created from a radiant number.
  [x] can output degrees, minutes and seconds wrapped in a simple array.
  [x] can output degrees, minutes and seconds wrapped in an associative array.
  [x] can be printed in a positive textual representation.

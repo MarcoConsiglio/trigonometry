@@ -22,7 +22,6 @@
         <testdoxText outputFile="test_book.txt"/>
     </logging>
     <coverage
-        cacheDirectory="tests/coverage_cache"
         includeUncoveredFiles="true"
         pathCoverage="true">
         <report>

@@ -14,7 +14,7 @@ use ReflectionClass;
 #[TestDox("The FromAngles builder")]
 #[CoversClass(FromAngles::class)]
 #[UsesClass(Angle::class)]
-#[UsesClass(AngleInterface::class)]
+// #[UsesClass(AngleInterface::class)]
 class FromAnglesTest extends BuilderTestCase
 {
     #[TestDox("can sums two angles.")]

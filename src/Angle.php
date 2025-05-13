@@ -217,23 +217,25 @@ class Angle implements AngleInterface
     /**
      * Gets the decimal degrees representation of this angle.
      *
-     * @return float
+     * @param integer $precision The number of decimal digits.
+     * @return float The angular value expressed as a decimal number.
      */
-    public function toDecimal(): float
+    public function toDecimal(int $precision = 0): float
     {
-        $decimal = $this->degrees + $this->minutes / 60 + $this->seconds / 3600;
+        $decimal = $this->degrees + $this->minutes / Angle::MAX_MINUTES + $this->seconds / (Angle::MAX_MINUTES * Angle::MAX_SECONDS);
         $decimal *= $this->direction;
-        return $decimal;
+        return round($decimal, $precision, PHP_ROUND_HALF_DOWN);
     }
 
     /**
      * Gets the radiant representation of this angle.
      *
-     * @return float
+     * @param integer $precision The number of decimal digits.
+     * @return float The angular value expressed as a radiant number.
      */
-    public function toRadiant(): float
+    public function toRadiant(int $precision = 0): float
     {
-        return deg2rad($this->toDecimal());
+        return round(deg2rad($this->toDecimal(15)), $precision, PHP_ROUND_HALF_DOWN);
     }
 
     /**

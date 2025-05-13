@@ -17,6 +17,13 @@ class FromDecimal extends AngleBuilder
     protected float $decimal;
 
     /**
+     * The remainder that remains during the conversion steps from decimal to sexagesimal degrees.
+     *
+     * @var float
+     */
+    private float $reminder;
+
+    /**
      * Constructs an AngleBuilder with a decimal value.
      *
      * @param float $decimal
@@ -59,6 +66,7 @@ class FromDecimal extends AngleBuilder
     public function calcDegrees()
     {
         $this->degrees = intval(abs($this->decimal));
+        $this->reminder = abs($this->decimal) - $this->degrees;
     }
 
     /**
@@ -68,7 +76,8 @@ class FromDecimal extends AngleBuilder
      */
     public function calcMinutes()
     {
-        $this->minutes = intval(round((abs($this->decimal) - $this->degrees) * Angle::MAX_MINUTES, 0, PHP_ROUND_HALF_DOWN));
+        $this->minutes = intval($this->reminder * Angle::MAX_MINUTES);
+        $this->reminder = abs($this->reminder - $this->minutes / Angle::MAX_MINUTES);
     }
 
     /**
@@ -78,13 +87,7 @@ class FromDecimal extends AngleBuilder
      */
     public function calcSeconds()
     {
-        $this->seconds = round(
-            (abs($this->decimal) - 
-             $this->degrees - 
-             $this->minutes / Angle::MAX_MINUTES) * 
-             Angle::MAX_MINUTES * Angle::MAX_SECONDS, 
-            1, PHP_ROUND_HALF_DOWN
-        );
+        $this->seconds = $this->reminder * Angle::MAX_MINUTES * Angle::MAX_SECONDS;
     }
 
     /**

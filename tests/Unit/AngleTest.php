@@ -22,7 +22,7 @@ use ReflectionClass;
 #[UsesClass(FromDecimal::class)]
 #[UsesClass(FromDegrees::class)]
 #[UsesClass(FromRadiant::class)]
-#[UsesClass(InvalidArgumentException::class)]
+// #[UsesClass(InvalidArgumentException::class)]
 class AngleTest extends TestCase
 {
     /**
@@ -58,6 +58,74 @@ class AngleTest extends TestCase
         $this->assertEquals(3.4, $alfa->seconds, $failure_message("seconds"));
         $this->assertEquals(Angle::COUNTER_CLOCKWISE, $alfa->direction, $failure_message("direction"));
         $this->assertNull($alfa->asganway);
+    }
+
+    #[TestDox("can be created from separated values for degrees, minutes, seconds and direction.")]
+    public function test_create_from_values()
+    {
+        // Arrange
+        $degrees = $this->faker->numberBetween(0, 360);
+        $minutes = $this->faker->numberBetween(0, 59);
+        $seconds = $this->faker->numberBetween(0, 59);
+        $direction = $this->faker->randomElement([Angle::COUNTER_CLOCKWISE, Angle::CLOCKWISE]);
+
+        // Act
+        $angle = Angle::createFromValues($degrees, $minutes, $seconds, $direction);
+
+        // Assert
+        $this->assertAngleHaveValues($angle, [
+            "degrees" => $degrees * $direction,
+            "minutes" => $minutes,
+            "seconds" => $seconds,
+        ]);
+    }
+
+    #[TestDox("can be created from a text representation.")]
+    public function test_create_from_string()
+    {
+        // Arrange
+        $degrees = $this->faker->numberBetween(0, 360);
+        $minutes = $this->faker->numberBetween(0, 59);
+        $seconds = $this->faker->numberBetween(0, 59);
+        $direction = $this->faker->randomElement(["-", ""]);
+        $text = "{$direction}{$degrees}° {$minutes}' {$seconds}\"";
+
+        // Act
+        $angle = Angle::createFromString($text);
+
+        // Act
+        $this->assertAngleHaveValues($angle, [
+            "degrees" => $direction == "-" ? -$degrees : $degrees,
+            "minutes" => $minutes,
+            "seconds" => $seconds,
+        ]);
+    }
+
+    #[TestDox("can be created from a decimal number.")]
+    public function test_create_from_decimal()
+    {
+        // Arrange
+        $precision = 5;
+        $decimal = $this->faker->randomFloat($precision, -360, 360);
+
+        // Act
+        $angle = Angle::createFromDecimal($decimal);
+
+        $this->assertEquals($decimal, $angle->toDecimal($precision));
+    }
+
+    #[TestDox("can be created from a radiant number.")]
+    public function test_create_from_radiant()
+    {
+        // Arrange
+        $precision = 5;
+        $radiant = $this->faker->randomFloat($precision, -Angle::MAX_RADIANT, Angle::MAX_RADIANT);
+
+        // Act
+        $angle = Angle::createFromRadiant($radiant);
+
+        // Assert
+        $this->assertEquals($radiant, $angle->toRadiant($precision));
     }
 
     #[TestDox("can output degrees, minutes and seconds wrapped in a simple array.")]
@@ -129,32 +197,26 @@ class AngleTest extends TestCase
     public function test_can_cast_to_decimal()
     {
         // Arrange
-        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
-        $alfa = $this->getMockedAngle();
-        $this->setAngleProperties($alfa, [1, 2, 3.4]);
+        $precision = 5;
+        $decimal = $this->faker->randomFloat($precision, -360, 360);
+        $angle = Angle::createFromDecimal($decimal);
 
-        // Act
-        $decimal = $alfa->toDecimal();
-
-        // Assert
-        $this->assertIsFloat($decimal);
-        $this->assertEquals(round($decimal, 6, PHP_ROUND_HALF_DOWN), 1.034278);
+        // Act & Assert
+        $result = $angle->toDecimal($precision);
+        $this->assertIsFloat($result);
+        $this->assertEquals($decimal, $result);
     }
 
     #[TestDox("can be casted to radiant.")]
     public function test_cast_to_radiant()
     {
         // Arrange
-        $alfa = $this->getMockedAngle(["toDecimal"]);
-        $alfa->expects($this->once())->method("toDecimal")->willReturn(1.0342777777778);
-        /** @var \MarcoConsiglio\Trigonometry\Angle&\PHPUnit\Framework\MockObject\MockObject $alfa */
-        $this->setAngleProperties($alfa, [1, 2, 3.4]);
+        $precision = 5;
+        $radiant = $this->faker->randomFloat($precision, -Angle::MAX_RADIANT, Angle::MAX_RADIANT);
+        $angle = Angle::createFromRadiant($radiant);
 
-        // Act
-        $radiant = $alfa->toRadiant();
-
-        // Assert
-        $this->assertEquals(0.018051552602, round($radiant, 12, PHP_ROUND_HALF_DOWN), $this->getCastError("radiant"));
+        // Act & Assert
+        $this->assertEquals($radiant, $angle->toRadiant($precision), $this->getCastError("radiant"));
     }
 
     #[TestDox("can be clockwise or negative.")]
@@ -477,6 +539,21 @@ class AngleTest extends TestCase
         $this->assertTrue($first_angle->eq((string) $second_angle->toDecimal()),        $failure_message);
         $this->assertTrue($first_angle->eq($second_angle->toDecimal()),                 $failure_message);
         $this->assertTrue($first_angle->eq($second_angle),                              $failure_message);
+    }
+
+    /**
+     * Assert the passed $values are the same of $angle. This is a Custom Assertion.
+     *
+     * @param AngleInterface $angle The angle being tested.
+     * @param array $values The expected values of the angle.
+     * @return void
+     */
+    protected function assertAngleHaveValues(AngleInterface $angle, array $values)
+    {
+        $expected_values = $angle->getDegrees(true);
+        $this->assertEquals($expected_values["degrees"], $values["degrees"]);
+        $this->assertEquals($expected_values["minutes"], $values["minutes"]);
+        $this->assertEquals($expected_values["seconds"], $values["seconds"]);
     }
 
     /**

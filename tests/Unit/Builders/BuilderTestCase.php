@@ -77,13 +77,14 @@ abstract class BuilderTestCase extends TestCase
      * @param mixed   $value   The value used to create the angle.
      * @param string  $builder The builder that extends AngleBuilder.
      * @param boolean $negative Specifies if to test a negative angle.
+     * @param int     $precision The precision if the angle is created from a decimal or radiant value.
      * @return void
      */
-    protected function testAngleCreation(string $builder, bool $negative = false)
+    protected function testAngleCreation(string $builder, bool $negative = false, int $precision = 0)
     {
         if(class_exists($builder) && is_subclass_of($builder, AngleBuilder::class)) {
             // Arrange
-            $value = $this->getAngleValue($builder, $negative);
+            $value = $this->getAngleValue($builder, $negative, $precision);
             
             // Act
             switch ($builder) {
