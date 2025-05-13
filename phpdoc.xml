@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor configVersion="3.0" title="Trigonometry v3">
+  <paths>
+    <output>docs</output>
+    <cache>.phpdoc/cache</cache>
+  </paths>
+  <version number="3.0.0">
+    <api format="php">
+      <source dsn=".">
+        <path>src</path>
+      </source>
+      <output>docs</output>
+      <ignore hidden="true" symlinks="true">
+        <path>tests/**/*</path>
+      </ignore>
+      <visibility>public</visibility>
+      <default-package-name>MarcoConsiglio\Trigonometry</default-package-name>
+    </api>
+  </version>
+  <setting name="graphs.enabled" value="true"/>
+</phpdocumentor>
