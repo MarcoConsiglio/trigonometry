@@ -10,11 +10,12 @@ use PHPUnit\Framework\Attributes\TestDox;
 #[CoversClass(RegExFailureException::class)]
 class RegExFailureExceptionTest extends TestCase
 {
-    #[TestDox("is thrown when the regular expression fails to match the input.")]
+    #[TestDox("has a message which explain the regular expression failure.")]
     public function test_regex_failure_exception()
     {
         // Arrange
-        $message = "Oh my God! Something is wrong!";
+        $message = "Oh my God! Something went wrong!";
+        
         // Act
         $exception = new RegExFailureException($message);
 

@@ -62,16 +62,11 @@ class FromString extends AngleBuilder
      * Check for overflow above/below +/-360°.
      *
      * @return void
-     * @throws \MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException when the regular expression fails.
      * @throws \MarcoConsiglio\Trigonometry\Exceptions\NoMatchException when a bad formatted angle is matched.
      * @throws \MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException when the matched angle overflows +/-360°.
      */
     public function checkOverflow()
     {
-        if ($this->parsing_status === false) {
-            throw new RegExFailureException(preg_last_error_msg());
-        }
-
         if ($this->parsing_status === 0) {
             throw new NoMatchException("Can't recognize the string $this->measure.");
         }

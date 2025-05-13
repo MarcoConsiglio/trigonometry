@@ -1,10 +1,9 @@
 # trigonometry
+![Static Badge](https://img.shields.io/badge/Line_coverage-94.51%25-none?labelColor=%23ECECEC&color=rgb(40%2C%20167%2C%2069))
+
 <img alt="GitHub" src="https://img.shields.io/github/license/marcoconsiglio/trigonometry">
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/marcoconsiglio/trigonometry">
-<a href="https://codecov.io/gh/MarcoConsiglio/trigonometry">
-  <img src="https://codecov.io/gh/MarcoConsiglio/trigonometry/branch/dev/graph/badge.svg?token=SYS9COU0XZ"/>
-</a>
-<br>
+<img alt="Static Badge" src="https://img.shields.io/badge/Line_coverage-94.51%25-none?labelColor=%23ECECEC&color=rgb(40%2C%20167%2C%2069)">
 
 Mutation testing <br>
 <img alt="MSI" src="https://img.shields.io/badge/Mutations%20Score%20Indicator-82%25-green">
@@ -36,7 +35,7 @@ $alfa = new Angle(new FromDegrees(180, 12, 43, Angle::CLOCKWISE))
 The `MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException` is thrown when you try to create an angle:
 - with more than +/-360°
 - with more than 59'
-- with more than 60" if there are no degrees and minutes.
+- with more than 59" if there are no degrees and minutes.
 ### Parsing a string
 This creates an angle from its textual representation:
 ```php
@@ -55,7 +54,7 @@ You can create a negative Angle if the string representation start with the minu
 The `MarcoConsiglio\Trigonometry\Exceptions\NoMatchException` is thrown when you try to create an angle:
 - with more than +/-360°
 - with more than 59'
-- with more than 60" if there are no degrees and minutes.
+- with more than 59" if there are no degrees and minutes.
 
 ### Decimal
 This create an angle from its decimal representation:
@@ -68,7 +67,7 @@ You can create a negative Angle if the decimal is negative.
 The `MarcoConsiglio\Trigonometry\Exceptions\AngleOverflowException` is thrown when you try to create an angle:
 - with more than +/-360°
 - with more than 59'
-- with more than 60" if there are no degrees and minutes.
+- with more than 59" if there are no degrees and minutes.
 
 ### Radiant
 This create an angle from its radiant representation:

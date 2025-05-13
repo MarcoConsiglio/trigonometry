@@ -58,7 +58,7 @@ class FromStringTest extends BuilderTestCase
         new FromString($angle_string);
     }
 
-    #[TestDox("cannot create an angle with more than 60\".")]
+    #[TestDox("cannot create an angle with more than 59\".")]
     public function test_exception_if_more_than_60_seconds()
     {
         // Arrange

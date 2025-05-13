@@ -1,3 +1,6 @@
+A NoMatchException
+ [x] tell you're trying to create an angle from a bad formatted angle string.
+
 A sum operation
  [x] can be performed with a SumBuilder.
 
@@ -25,6 +28,9 @@ An angle
  [x] can be or not less than another angle.
  [x] can throw an exception if less than comparison has an unexpected type argument.
  [x] can throw InvalidArgumentException.
+
+The AngleOverflowException
+ [x] has a message which explain you're trying to create an angle with more than 360°.
 
 The FromAngles builder
  [x] can sums two angles.
@@ -55,8 +61,8 @@ The FromString builder
  [x] can create a negative angle from a string value.
  [x] cannot create an angle with more than 360°.
  [x] cannot create an angle with more than 59'.
- [x] cannot create an angle with more than 60".
+ [x] cannot create an angle with more than 59".
 
 The RegExFailureException
- [x] is thrown when the regular expression fails to match the input.
+ [x] has a message which explain the regular expression failure.
 

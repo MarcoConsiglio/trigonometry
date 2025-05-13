@@ -244,6 +244,7 @@ class Angle implements AngleInterface
      * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
      * @return boolean
      * @throws \InvalidArgumentException when $angle has an unexpected type.
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException when there's a failure in regex parser engine
      */
     public function isGreaterThan($angle): bool
     {
@@ -251,8 +252,12 @@ class Angle implements AngleInterface
             return $this->toDecimal() > $angle;
         } elseif ($angle instanceof AngleInterface) {
             return $this->toDecimal() > $angle->toDecimal();
+        } elseif (is_string($angle)) {
+            $angle = Angle::createFromString($angle);
+            return $this->toDecimal() > $angle->toDecimal();
         }
         $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+        return false;
     }
 
     /**
@@ -307,8 +312,12 @@ class Angle implements AngleInterface
             return $this->toDecimal() < $angle;
         } elseif ($angle instanceof AngleInterface) {
             return $this->toDecimal() < $angle->toDecimal();
+        } elseif (is_string($angle)) {
+            $angle = Angle::createFromString($angle);
+            return $this->toDecimal() < $angle->toDecimal();
         }
         $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+        return false;
     }
 
     /**
@@ -364,8 +373,12 @@ class Angle implements AngleInterface
         }
         if ($angle instanceof AngleInterface) {
             return $this->toDecimal() == $angle->toDecimal();
+        } elseif (is_string($angle)) {
+            $angle = Angle::createFromString($angle);
+            return $this->toDecimal() == $angle->toDecimal();
         }
         $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
+        return false;
     }
 
     /**

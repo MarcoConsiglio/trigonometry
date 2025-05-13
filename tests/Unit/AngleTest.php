@@ -435,7 +435,7 @@ class AngleTest extends TestCase
     public function test_invalid_argument_exception()
     {
         // Arrange
-        $expected_type = ["int", "string"];
+        $expected_type = ["int", "float", "string", Angle::class];
         $argument = "shabadula";
         $alfa = $this->getMockedAngle();
         $class = new ReflectionClass($alfa);
