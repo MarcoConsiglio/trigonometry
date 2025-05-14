@@ -46,18 +46,19 @@ class TestCase extends PHPUnitTestCase
     {
         [$degrees, $minutes, $seconds] = $this->getAngleValue(FromDegrees::class, $negative);
         if ($negative) {
-            $negative = Angle::COUNTER_CLOCKWISE;
-        } else {
             $negative = Angle::CLOCKWISE;
+        } else {
+            $negative = Angle::COUNTER_CLOCKWISE;
         }
-        return Angle::createFromValues($degrees, $minutes, $seconds, $negative);
+        return Angle::createFromValues(abs($degrees), $minutes, $seconds, $negative);
     }
 
     /**
-     * Returns a random value (or an array with values) usufull to create an angle
-     * from $builder.
+     * Returns a random angle measure (or an array with degrees, minutes and seconds values) 
+     * usufull to create an angle from a specified $builder.
      *
-     * @param string  $builder The builder class you want to use to build the angle.
+     * @param string  $builder The builder class extending the MarcoConsiglio\Trigonometry\Builders\AngleBuilder
+     *  you want to use to build the angle.
      * @param boolean $negative If you want a positive or negative angle.
      * @param int     $precision The precision if the angle is created from a decimal or radiant value.
      * @return mixed
@@ -94,27 +95,17 @@ class TestCase extends PHPUnitTestCase
         $degrees = $this->faker->numberBetween(0, 360);
         $minutes = $this->faker->numberBetween(0, 59);
         $seconds = $this->faker->randomFloat(1, 0, 59.9);
-        if ($seconds == 60) {
-            $minutes++;
-        }
-        if ($minutes == 60) {
-            $degrees++;
-        }
-        if ($degrees >= 360) {
-            $minutes = 0;
-            $seconds = 0;
-        }
         return [$negative ? -$degrees : $degrees, $minutes, $seconds];
     }
 
     /**
      * Gets a random decimal to create an angle.
      *
-     * @param boolean $negative
-     * @param integer $precision
-     * @return void
+     * @param boolean $negative If negative or positive number.
+     * @param integer $precision The precision digits of the result.
+     * @return float
      */
-    protected function getRandomAngleDecimal($negative = false, int $precision = 0)
+    protected function getRandomAngleDecimal($negative = false, int $precision = 0): float
     {
         return $negative ? 
             $this->faker->randomFloat($precision, 0, Angle::MAX_DEGREES) : 

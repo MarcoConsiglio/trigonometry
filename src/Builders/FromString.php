@@ -114,7 +114,7 @@ class FromString extends AngleBuilder
      */
     public function calcSign()
     {
-        $this->sign = strpos($this->matches[2], '-') === 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
+        $this->direction = strpos($this->matches[2], '-') === 0 ? Angle::CLOCKWISE : Angle::COUNTER_CLOCKWISE;
     }
 
     /**

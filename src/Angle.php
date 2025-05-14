@@ -242,20 +242,43 @@ class Angle implements AngleInterface
      * Check if this angle is greater than $angle.
      *
      * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @param int $precision The precision digits with which to test the greater than comparison.
      * @return boolean
-     * @throws \InvalidArgumentException when $angle has an unexpected type.
-     * @throws \MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException when there's a failure in regex parser engine
+     * @throws \InvalidArgumentException when $angle has an unexpected type argument.
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException when there's a failure in regex parser engine.
      */
-    public function isGreaterThan($angle): bool
+    public function isGreaterThan($angle, int $precision = 0): bool
     {
         if (is_numeric($angle)) {
-            return $this->toDecimal() > $angle;
+            return $this->toDecimal($precision) > $angle;
         } elseif ($angle instanceof AngleInterface) {
-            return $this->toDecimal() > $angle->toDecimal();
+            return $this->toDecimal($precision) > $angle->toDecimal($precision);
         } elseif (is_string($angle)) {
             $angle = Angle::createFromString($angle);
-            return $this->toDecimal() > $angle->toDecimal();
+            if ($this->direction > $angle->direction) {
+                return true;
+            }
+            if ($this->direction < $angle->direction) {
+                return false;
+            }
+            if ($this->degrees > $angle->degrees) {
+                return true;
+            }
+            if ($this->degrees < $angle->degrees) {
+                return false;
+            }
+            if ($this->minutes > $angle->minutes) {
+                return true;
+            }
+            if ($this->minutes < $angle->minutes) {
+                return false;
+            }
+            if ($this->seconds > $angle->seconds) {
+                return true;
+            }
+            return false;
         }
+        // If the addend is of an invalid type, throws an exception.
         $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
         return false;
     }
@@ -264,12 +287,13 @@ class Angle implements AngleInterface
      * Alias of isGreaterThan method.
      *
      * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @param int $precision The precision digits with which to test the greater than comparison.
      * @return boolean
      * @throws \InvalidArgumentException when $angle has an unexpected type.
      */
-    public function gt($angle): bool
+    public function gt($angle, int $precision = 0): bool
     {
-        return $this->isGreaterThan($angle);
+        return $this->isGreaterThan($angle, $precision);
     }
 
     /**
@@ -363,19 +387,28 @@ class Angle implements AngleInterface
     /**
      * Check if this angle is equal to $angle.
      *
-     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle The angle expressed 
+     * in a string, integer, float (degree, not radian) format or an instance of Angle.
+     * @param int $precision The precision digits with which to test the equality
      * @return boolean
+     * @throws \InvalidArgumentException when $angle has an unexpected type argument.
+     * @throws \MarcoConsiglio\Trigonometry\Exceptions\RegExFailureException when there's a failure in regex parser engine.
      */
-    public function isEqual($angle): bool
+    public function isEqual($angle, int $precision = 0): bool
     {
         if (is_numeric($angle)) {
-            return $this->toDecimal() == $angle;
+            return $this->toDecimal($precision) == $angle;
         }
         if ($angle instanceof AngleInterface) {
-            return $this->toDecimal() == $angle->toDecimal();
+            /** @var \MarcoConsiglio\Trigonometry\Angle $angle */
+            $equal_degrees = $this->degrees == $angle->degrees;
+            $equal_minutes = $this->minutes == $angle->minutes;
+            $equal_seconds = $this->seconds == $angle->seconds;
+            $equal_direction = $this->direction == $angle->direction;
+            return $equal_direction && $equal_degrees && $equal_minutes && $equal_seconds;
         } elseif (is_string($angle)) {
             $angle = Angle::createFromString($angle);
-            return $this->toDecimal() == $angle->toDecimal();
+            return $this->toDecimal($precision) == $angle->toDecimal($precision);
         }
         $this->throwInvalidArgumentException($angle, ["int", "float", "string", Angle::class], __METHOD__, 1);
         return false;
@@ -385,11 +418,12 @@ class Angle implements AngleInterface
      * Alias of isEqual method.
      *
      * @param string|int|float|\MarcoConsiglio\Trigonometry\Interfaces\Angle $angle
+     * @param int $precision The precision digits with which to test the equality.
      * @return boolean
      */
-    public function eq($angle): bool
+    public function eq($angle, int $precision = 0): bool
     {
-        return $this->isEqual($angle);
+        return $this->isEqual($angle, $precision);
     }
 
     /**
@@ -400,7 +434,7 @@ class Angle implements AngleInterface
     public function __toString()
     {
         $sign = $this->isClockwise() ? "-" : "";
-        return $sign.$this->degrees."° ".$this->minutes."' ".$this->seconds."\"";
+        return "{$sign}{$this->degrees}° {$this->minutes}' {$this->seconds}\"";
     }
 
     /**

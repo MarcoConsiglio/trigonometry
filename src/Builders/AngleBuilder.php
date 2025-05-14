@@ -35,7 +35,7 @@ abstract class AngleBuilder implements AngleBuilderInterface
      *
      * @var integer
      */
-    protected int $sign = Angle::COUNTER_CLOCKWISE;  
+    protected int $direction = Angle::COUNTER_CLOCKWISE;  
 
     /**
      * Check for overflow above/below +/-360°.
@@ -66,7 +66,7 @@ abstract class AngleBuilder implements AngleBuilderInterface
     abstract public function calcSeconds();
 
     /**
-     * Calc sign.
+     * Calc direction.
      *
      * @return void
      */
@@ -83,7 +83,7 @@ abstract class AngleBuilder implements AngleBuilderInterface
             $this->degrees,
             $this->minutes,
             $this->seconds,
-            $this->sign
+            $this->direction
         ];
     }
 }
